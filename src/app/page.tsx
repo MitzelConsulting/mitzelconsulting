@@ -8,49 +8,52 @@ import Navbar from '@/components/Navbar'
 import { useCart } from '@/context/CartContext'
 import ArtistHowItWorks from '@/components/ArtistHowItWorks'
 
-type Artist = {
-  id: string
-  name: string
-  bio: string
-  image_url: string
-  spotify_url: string
-  soundcloud_url: string
-  website_url: string
-  genre?: string
-  vote_percentage?: number
-}
-
-type Song = {
+type Course = {
   id: string
   title: string
-  artist_name: string
-  genre: string
-  created_at: string
-  vote_count: number
-  target_votes: number
+  description: string
+  short_description: string
+  category: string
+  subcategory: string
+  duration_hours: number
+  price: number
+  certification_type: string
+  difficulty_level: string
+  delivery_method: string[]
+  featured_image_url: string
+  slug: string
+  enrollment_count: number
+  view_count: number
+}
+
+type TrainingSession = {
+  id: string
+  course_id: string
+  session_name: string
+  session_type: string
+  scheduled_date: string
+  max_participants: number
+  enrolled_participants: number
   status: string
 }
 
-// Force immediate deployment - urgent update
+// Mitzel Consulting - Safety Training Platform
 export default function Home() {
-  const [artists, setArtists] = useState<Artist[]>([])
-  const [recentSongs, setRecentSongs] = useState<Song[]>([])
+  const [courses, setCourses] = useState<Course[]>([])
+  const [recentSessions, setRecentSessions] = useState<TrainingSession[]>([])
   const [error, setError] = useState<string | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
   const [activeCardIndex, setActiveCardIndex] = useState(-1)
   const [formData, setFormData] = useState({
-    artistName: '',
+    companyName: '',
+    contactName: '',
     email: '',
-    password: '',
-    confirmPassword: '',
-    songName: '',
-    songFile: null as File | null,
-    bio: '',
-    soundcloudLink: '',
-    website: '',
+    phone: '',
     message: '',
-    agreeToTerms: false
+    interestedCourses: [] as string[],
+    employeeCount: '',
+    trainingType: 'digital'
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [animatedCards, setAnimatedCards] = useState<number[]>([])
@@ -58,54 +61,38 @@ export default function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      // Fetch artists
-      const { data: artistsData, error: artistsError } = await supabase
-        .from('artists')
+      // Fetch courses
+      const { data: coursesData, error: coursesError } = await supabase
+        .from('courses')
         .select('*')
-        .order('name')
+        .eq('is_active', true)
+        .order('is_featured', { ascending: false })
+        .order('title')
 
-      console.log('Fetched artists data:', artistsData)
-      console.log('Artists error:', artistsError)
+      console.log('Fetched courses data:', coursesData)
+      console.log('Courses error:', coursesError)
 
-      if (artistsError) {
-        console.error('Error fetching artists:', artistsError.message)
-        setError(artistsError.message)
-      } else if (artistsData && artistsData.length > 0) {
-        const artistsWithDummyData = artistsData.map((artist: Artist) => {
-          let genre = 'Pop • Rock' // default
-          
-          // Set specific genres for known artists
-          if (artist.name === 'Douggert') {
-            genre = 'Punk Electronica • EDM'
-          } else if (artist.name === 'Joey Hendrickson') {
-            genre = 'Alternative • Acoustic'
-          } else if (artist.name === 'Columbus Songwriters Association') {
-            genre = 'Pop • Acoustic'
-          }
-          
-          return {
-            ...artist,
-            genre,
-            vote_percentage: Math.floor(Math.random() * (85 - 40 + 1)) + 40,
-          }
-        })
-        setArtists(artistsWithDummyData)
+      if (coursesError) {
+        console.error('Error fetching courses:', coursesError.message)
+        setError(coursesError.message)
+      } else if (coursesData && coursesData.length > 0) {
+        setCourses(coursesData)
       } else {
-        console.log('No artists found in database')
-        setArtists([])
+        console.log('No courses found in database')
+        setCourses([])
       }
 
-      // Fetch recent songs
-      const { data: songsData, error: songsError } = await supabase
-        .from('songs')
+      // Fetch recent training sessions
+      const { data: sessionsData, error: sessionsError } = await supabase
+        .from('training_sessions')
         .select('*')
-        .order('created_at', { ascending: false })
+        .order('scheduled_date', { ascending: false })
         .limit(5)
       
-      if (songsError) {
-        console.error('Error fetching songs:', songsError.message)
+      if (sessionsError) {
+        console.error('Error fetching training sessions:', sessionsError.message)
       } else {
-        setRecentSongs(songsData || [])
+        setRecentSessions(sessionsData || [])
       }
     }
 
@@ -218,14 +205,14 @@ export default function Home() {
     }
   }
 
-  const triggerArtistCardAnimation = () => {
+  const triggerCourseCardAnimation = () => {
     if (isAnimating) return
     
     setIsAnimating(true)
     setActiveCardIndex(0)
     
     const animateNextCard = (index: number) => {
-      if (index >= artists.length) {
+      if (index >= courses.length) {
         // Animation complete
         setIsAnimating(false)
         setActiveCardIndex(-1)
@@ -250,30 +237,30 @@ export default function Home() {
       <div className={isModalOpen ? 'opacity-0 pointer-events-none select-none' : ''}>
         <section className="text-center py-20 sm:py-32 container mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold text-gray-900 leading-tight">
-            Support Unreleased Songs
+            Professional Safety Training
           </h1>
           <p className="text-lg md:text-xl text-gray-600 mt-6 max-w-2xl mx-auto">
-            Support what artists just wrote. Provide feedback. Make contributions.
+            Comprehensive OSHA certification courses for your team. Digital and on-site training options available.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
             <button 
               className="bg-[#E55A2B] text-white font-semibold py-3 px-8 rounded-lg hover:bg-[#D14A1B] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl w-full sm:w-auto"
-              onClick={triggerArtistCardAnimation}
+              onClick={triggerCourseCardAnimation}
             >
-              Explore Songs
+              Explore Courses
             </button>
             <Link 
-              href="/artist-signup"
+              href="/request-training"
               className="bg-white text-gray-900 border border-[#E55A2B] font-semibold py-3 px-8 rounded-lg hover:bg-gray-50 transition-colors w-full sm:w-auto text-center"
             >
-              Submit Your Song
+              Request Training
             </Link>
           </div>
         </section>
         
         <main className="container mx-auto px-4 md:px-0 pb-20">
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center sm:text-left">
-            Featured Artists
+            Featured Safety Training Courses
           </h2>
 
           {error && (
@@ -283,69 +270,62 @@ export default function Home() {
           )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {artists.length > 0 ? (
-              artists.map((artist, index) => {
-                const isColumbusCard = artist.name === 'Columbus Songwriters Association'
-                const imageContainerHeight = isColumbusCard ? 'h-48' : 'h-[32rem]'
-                const imageFitStyle = isColumbusCard ? 'object-contain' : 'object-cover'
-
-                return (
-                  <div 
-                    key={artist.id} 
-                    className={`relative bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300 cursor-pointer group ${
-                      activeCardIndex === index ? 'ring-4 ring-black ring-opacity-75 shadow-2xl' : ''
-                    }`}
-                    style={{ 
-                      height: isColumbusCard ? '400px' : '650px'
-                    }}
-                  >
-                    <Link href={`/artist/${artist.id}`} className={`relative ${imageContainerHeight} block`}>
-                      <Image
-                        src={artist.image_url}
-                        alt={artist.name}
-                        fill
-                        className={`w-full h-full group-hover:scale-105 transition-transform duration-300 ${imageFitStyle}`}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                      <div className="absolute bottom-0 left-0 p-6 text-white w-full">
-                        <h3 className="text-3xl font-bold">{artist.name}</h3>
-                        <p className="text-sm text-gray-200">{artist.genre}</p>
-                      </div>
-                    </Link>
-
-                    <div className="p-6">
-                      <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
-                        <div 
-                          className="bg-black h-3 rounded-full transition-all duration-500"
-                          style={{ width: `${artist.vote_percentage}%` }}
-                        ></div>
-                      </div>
-                      <div className="flex justify-between text-sm text-gray-600 mb-4">
-                        <span>{artist.vote_percentage}%</span>
-                        <span>Support now</span>
-                      </div>
-
-                      <Link href={`/artist/${artist.id}`} className="block w-full">
-                        <button 
-                          className="w-full bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
-                        >
-                          {artist.name === 'Douggert' ? 'Secret Tracks' :
-                           artist.name === 'Joey Hendrickson' ? 'Live Acoustic Recordings' :
-                           artist.name === 'Jack Folley' ? 'Never Released Single' :
-                           artist.name === 'Test 3' ? 'Provide Feedback' :
-                           index === 0 ? 'Collaborate' :
-                           index === 1 ? 'Support' :
-                           index === 2 ? 'Contribute' :
-                           'Listen'}
-                        </button>
-                      </Link>
+            {courses.length > 0 ? (
+              courses.map((course, index) => (
+                <div 
+                  key={course.id} 
+                  className={`relative bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300 cursor-pointer group ${
+                    activeCardIndex === index ? 'ring-4 ring-[#E55A2B] ring-opacity-75 shadow-2xl' : ''
+                  }`}
+                >
+                  <Link href={`/course/${course.slug}`} className="relative h-48 block">
+                    <Image
+                      src={course.featured_image_url || 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800'}
+                      alt={course.title}
+                      fill
+                      className="w-full h-full group-hover:scale-105 transition-transform duration-300 object-cover rounded-lg"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent rounded-lg" />
+                    <div className="absolute bottom-0 left-0 p-4 text-white w-full">
+                      <h3 className="text-xl font-bold">{course.title}</h3>
+                      <p className="text-sm text-gray-200">{course.category}</p>
                     </div>
+                  </Link>
+
+                  <div className="p-4">
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="text-sm text-gray-600">{course.duration_hours} hours</span>
+                      <span className="text-lg font-bold text-[#E55A2B]">${course.price}</span>
+                    </div>
+                    
+                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+                      {course.short_description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-1 mb-4">
+                      {course.delivery_method.map((method) => (
+                        <span 
+                          key={method}
+                          className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded-full"
+                        >
+                          {method}
+                        </span>
+                      ))}
+                    </div>
+
+                    <Link href={`/course/${course.slug}`} className="block w-full">
+                      <button 
+                        className="w-full bg-[#E55A2B] hover:bg-[#D14A1B] text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+                      >
+                        Learn More
+                      </button>
+                    </Link>
                   </div>
-                )
-              })
+                </div>
+              ))
             ) : (
               <div className="col-span-full text-center py-12">
-                <p className="text-gray-500 text-lg">Loading artists...</p>
+                <p className="text-gray-500 text-lg">Loading courses...</p>
               </div>
             )}
           </div>

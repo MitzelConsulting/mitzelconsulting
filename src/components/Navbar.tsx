@@ -19,7 +19,7 @@ const Logo = () => (
       />
     </svg>
 
-    <span className="text-xl font-bold text-gray-900">LaunchThatSong</span>
+    <span className="text-xl font-bold text-gray-900">Mitzel Consulting</span>
   </Link>
 )
 

@@ -11,8 +11,8 @@ import Chatbot from "@/components/Chatbot";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Launch That Song",
-  description: "Vote on songs you want to launch into the world!",
+  title: "Mitzel Consulting - Safety Training Platform",
+  description: "Professional OSHA safety training courses for your team. Digital and on-site training options available.",
 };
 
 export default function RootLayout({

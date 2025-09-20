@@ -3,11 +3,11 @@
 
 -- First, ensure we have blog categories
 INSERT INTO blog_categories (id, name, slug, description, color) VALUES
-('cat-osha', 'OSHA Training', 'osha-training', 'OSHA certification and safety training articles', '#E55A2B'),
-('cat-hazwoper', 'HAZWOPER', 'hazwoper', 'Hazardous waste operations and emergency response', '#DC2626'),
-('cat-construction', 'Construction Safety', 'construction-safety', 'Construction industry safety best practices', '#059669'),
-('cat-general', 'General Safety', 'general-safety', 'General workplace safety topics', '#7C3AED')
-ON CONFLICT (id) DO NOTHING;
+(gen_random_uuid(), 'OSHA Training', 'osha-training', 'OSHA certification and safety training articles', '#E55A2B'),
+(gen_random_uuid(), 'HAZWOPER', 'hazwoper', 'Hazardous waste operations and emergency response', '#DC2626'),
+(gen_random_uuid(), 'Construction Safety', 'construction-safety', 'Construction industry safety best practices', '#059669'),
+(gen_random_uuid(), 'General Safety', 'general-safety', 'General workplace safety topics', '#7C3AED')
+ON CONFLICT (slug) DO NOTHING;
 
 -- Sample Blog Posts
 INSERT INTO blog_posts (
@@ -93,7 +93,7 @@ Remember, OSHA training is not just about compliance—it''s about protecting yo
   'Certified safety professional with 15+ years of experience in OSHA training and workplace safety consulting.',
   'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400',
   NOW() - INTERVAL '5 days',
-  'cat-osha',
+  (SELECT id FROM blog_categories WHERE slug = 'osha-training'),
   ARRAY['OSHA training', 'safety certification', 'workplace safety', 'construction safety'],
   'OSHA 10 vs 30 Hour Training: Complete Certification Guide | Mitzel Consulting',
   'Learn the key differences between OSHA 10-Hour and 30-Hour training programs. Choose the right OSHA certification for your career with expert guidance.',
@@ -219,7 +219,7 @@ Choose the training level that matches your job responsibilities and exposure ri
   'Certified safety professional with specialized expertise in HAZWOPER training and hazardous materials management.',
   'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400',
   NOW() - INTERVAL '3 days',
-  'cat-hazwoper',
+  (SELECT id FROM blog_categories WHERE slug = 'hazwoper'),
   ARRAY['HAZWOPER training', 'hazardous waste', 'emergency response', 'OSHA compliance'],
   'HAZWOPER Training Guide: Levels, Requirements & Certification | Mitzel Consulting',
   'Complete guide to HAZWOPER training levels, requirements, and certification. Expert insights on hazardous waste operations and emergency response training.',
@@ -359,7 +359,7 @@ For comprehensive OSHA training and safety consulting services, contact Mitzel C
   'Construction safety expert with extensive experience in OSHA compliance and workplace safety program development.',
   'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400',
   NOW() - INTERVAL '1 day',
-  'cat-construction',
+  (SELECT id FROM blog_categories WHERE slug = 'construction-safety'),
   ARRAY['construction safety', 'OSHA compliance', 'workplace safety', 'construction training'],
   'Top 10 Construction Safety Best Practices 2024 | Mitzel Consulting',
   'Essential construction safety practices for 2024. Expert tips on OSHA compliance, fall protection, and creating a safe construction environment.',
@@ -522,7 +522,7 @@ For expert fall protection training and consultation, contact Mitzel Consulting.
   'Certified safety professional specializing in fall protection systems and construction safety training.',
   'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400',
   NOW() - INTERVAL '7 days',
-  'cat-construction',
+  (SELECT id FROM blog_categories WHERE slug = 'construction-safety'),
   ARRAY['fall protection', 'construction safety', 'OSHA training', 'safety equipment'],
   'Fall Protection Construction Safety Guide | Mitzel Consulting',
   'Complete guide to fall protection in construction. Learn about safety systems, equipment, training, and OSHA compliance requirements.',
@@ -696,7 +696,7 @@ For comprehensive electrical safety training and consultation, contact Mitzel Co
   'Electrical safety expert with extensive experience in OSHA electrical standards and workplace safety training.',
   'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400',
   NOW() - INTERVAL '10 days',
-  'cat-general',
+  (SELECT id FROM blog_categories WHERE slug = 'general-safety'),
   ARRAY['electrical safety', 'OSHA training', 'lockout tagout', 'workplace safety'],
   'Electrical Safety Workplace Guide: Preventing Electrical Accidents | Mitzel Consulting',
   'Complete guide to electrical safety in the workplace. Learn about lockout/tagout, electrical hazards, and OSHA compliance requirements.',

@@ -9,12 +9,17 @@
 -- =====================================================
 
 -- Create custom user roles for different access levels
-CREATE TYPE user_role AS ENUM (
-  'client_user',     -- HR directors, company employees purchasing courses
-  'company_admin',   -- Company administrators managing their team's training
-  'platform_admin',  -- Kris Mitzel and platform administrators
-  'partner_user'     -- Training partners with revenue sharing
-);
+DO $$ 
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'user_role') THEN
+        CREATE TYPE user_role AS ENUM (
+          'client_user',     -- HR directors, company employees purchasing courses
+          'company_admin',   -- Company administrators managing their team's training
+          'platform_admin',  -- Kris Mitzel and platform administrators
+          'partner_user'     -- Training partners with revenue sharing
+        );
+    END IF;
+END $$;
 
 -- Add user_role column to admin_users table
 ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS user_role user_role DEFAULT 'platform_admin';

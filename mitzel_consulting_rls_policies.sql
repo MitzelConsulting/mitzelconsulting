@@ -22,6 +22,10 @@ ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS user_role user_role DEFAULT 'pl
 -- Add user_role column to client_users table  
 ALTER TABLE client_users ADD COLUMN IF NOT EXISTS user_role user_role DEFAULT 'client_user';
 
+-- Add auth_user_id column to link with Supabase auth.users
+ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS auth_user_id UUID REFERENCES auth.users(id);
+ALTER TABLE client_users ADD COLUMN IF NOT EXISTS auth_user_id UUID REFERENCES auth.users(id);
+
 -- =====================================================
 -- COURSES TABLE POLICIES
 -- =====================================================
@@ -42,7 +46,7 @@ CREATE POLICY "Platform admins can manage courses" ON courses
   FOR ALL USING (
     EXISTS (
       SELECT 1 FROM admin_users 
-      WHERE admin_users.user_id = auth.uid() 
+      WHERE admin_users.auth_user_id = auth.uid() 
       AND admin_users.user_role = 'platform_admin'
       AND admin_users.is_active = true
     )
@@ -64,7 +68,7 @@ CREATE POLICY "Platform admins can manage blog posts" ON blog_posts
   FOR ALL USING (
     EXISTS (
       SELECT 1 FROM admin_users 
-      WHERE admin_users.user_id = auth.uid() 
+      WHERE admin_users.auth_user_id = auth.uid() 
       AND admin_users.user_role = 'platform_admin'
       AND admin_users.is_active = true
     )
@@ -83,7 +87,7 @@ CREATE POLICY "Company admins can manage their company" ON companies
     EXISTS (
       SELECT 1 FROM client_users 
       WHERE client_users.company_id = companies.id 
-      AND client_users.user_id = auth.uid() 
+      AND client_users.auth_user_id = auth.uid() 
       AND client_users.user_role = 'company_admin'
       AND client_users.is_active = true
     )
@@ -94,7 +98,7 @@ CREATE POLICY "Platform admins can view all companies" ON companies
   FOR SELECT USING (
     EXISTS (
       SELECT 1 FROM admin_users 
-      WHERE admin_users.user_id = auth.uid() 
+      WHERE admin_users.auth_user_id = auth.uid() 
       AND admin_users.user_role = 'platform_admin'
       AND admin_users.is_active = true
     )
@@ -105,7 +109,7 @@ CREATE POLICY "Platform admins can manage all companies" ON companies
   FOR ALL USING (
     EXISTS (
       SELECT 1 FROM admin_users 
-      WHERE admin_users.user_id = auth.uid() 
+      WHERE admin_users.auth_user_id = auth.uid() 
       AND admin_users.user_role = 'platform_admin'
       AND admin_users.is_active = true
     )
@@ -120,7 +124,7 @@ ALTER TABLE client_users ENABLE ROW LEVEL SECURITY;
 
 -- Users can view and update their own profile
 CREATE POLICY "Users can manage their own profile" ON client_users
-  FOR ALL USING (user_id = auth.uid());
+  FOR ALL USING (auth_user_id = auth.uid());
 
 -- Company admins can view users in their company
 CREATE POLICY "Company admins can view company users" ON client_users
@@ -128,7 +132,7 @@ CREATE POLICY "Company admins can view company users" ON client_users
     EXISTS (
       SELECT 1 FROM client_users admin_user
       WHERE admin_user.company_id = client_users.company_id 
-      AND admin_user.user_id = auth.uid() 
+      AND admin_user.auth_user_id = auth.uid() 
       AND admin_user.user_role = 'company_admin'
       AND admin_user.is_active = true
     )
@@ -139,7 +143,7 @@ CREATE POLICY "Platform admins can view all client users" ON client_users
   FOR SELECT USING (
     EXISTS (
       SELECT 1 FROM admin_users 
-      WHERE admin_users.user_id = auth.uid() 
+      WHERE admin_users.auth_user_id = auth.uid() 
       AND admin_users.user_role = 'platform_admin'
       AND admin_users.is_active = true
     )
@@ -154,18 +158,18 @@ ALTER TABLE course_enrollments ENABLE ROW LEVEL SECURITY;
 
 -- Users can view their own enrollments
 CREATE POLICY "Users can view their own enrollments" ON course_enrollments
-  FOR SELECT USING (user_id = auth.uid());
+  FOR SELECT USING (auth_user_id = auth.uid());
 
 -- Users can create their own enrollments
 CREATE POLICY "Users can create their own enrollments" ON course_enrollments
-  FOR INSERT WITH CHECK (user_id = auth.uid());
+  FOR INSERT WITH CHECK (auth_user_id = auth.uid());
 
 -- Company admins can view enrollments for their company users
 CREATE POLICY "Company admins can view company enrollments" ON course_enrollments
   FOR SELECT USING (
     EXISTS (
       SELECT 1 FROM client_users 
-      WHERE client_users.user_id = auth.uid() 
+      WHERE client_users.auth_user_id = auth.uid() 
       AND client_users.user_role = 'company_admin'
       AND client_users.company_id = (
         SELECT company_id FROM client_users 
@@ -180,7 +184,7 @@ CREATE POLICY "Platform admins can view all enrollments" ON course_enrollments
   FOR SELECT USING (
     EXISTS (
       SELECT 1 FROM admin_users 
-      WHERE admin_users.user_id = auth.uid() 
+      WHERE admin_users.auth_user_id = auth.uid() 
       AND admin_users.user_role = 'platform_admin'
       AND admin_users.is_active = true
     )
@@ -206,7 +210,7 @@ CREATE POLICY "Platform admins can manage training sessions" ON training_session
   FOR ALL USING (
     EXISTS (
       SELECT 1 FROM admin_users 
-      WHERE admin_users.user_id = auth.uid() 
+      WHERE admin_users.auth_user_id = auth.uid() 
       AND admin_users.user_role = 'platform_admin'
       AND admin_users.is_active = true
     )
@@ -221,14 +225,14 @@ ALTER TABLE session_bookings ENABLE ROW LEVEL SECURITY;
 
 -- Users can view and manage their own bookings
 CREATE POLICY "Users can manage their own bookings" ON session_bookings
-  FOR ALL USING (user_id = auth.uid());
+  FOR ALL USING (auth_user_id = auth.uid());
 
 -- Company admins can view bookings for their company users
 CREATE POLICY "Company admins can view company bookings" ON session_bookings
   FOR SELECT USING (
     EXISTS (
       SELECT 1 FROM client_users 
-      WHERE client_users.user_id = auth.uid() 
+      WHERE client_users.auth_user_id = auth.uid() 
       AND client_users.user_role = 'company_admin'
       AND client_users.company_id = (
         SELECT company_id FROM client_users 
@@ -243,7 +247,7 @@ CREATE POLICY "Platform admins can view all bookings" ON session_bookings
   FOR SELECT USING (
     EXISTS (
       SELECT 1 FROM admin_users 
-      WHERE admin_users.user_id = auth.uid() 
+      WHERE admin_users.auth_user_id = auth.uid() 
       AND admin_users.user_role = 'platform_admin'
       AND admin_users.is_active = true
     )
@@ -261,7 +265,7 @@ CREATE POLICY "Platform admins can view page analytics" ON page_views
   FOR SELECT USING (
     EXISTS (
       SELECT 1 FROM admin_users 
-      WHERE admin_users.user_id = auth.uid() 
+      WHERE admin_users.auth_user_id = auth.uid() 
       AND admin_users.user_role = 'platform_admin'
       AND admin_users.is_active = true
     )
@@ -275,7 +279,7 @@ CREATE POLICY "Platform admins can view course engagement" ON course_engagement
   FOR SELECT USING (
     EXISTS (
       SELECT 1 FROM admin_users 
-      WHERE admin_users.user_id = auth.uid() 
+      WHERE admin_users.auth_user_id = auth.uid() 
       AND admin_users.user_role = 'platform_admin'
       AND admin_users.is_active = true
     )
@@ -283,7 +287,7 @@ CREATE POLICY "Platform admins can view course engagement" ON course_engagement
 
 -- Users can view their own engagement data
 CREATE POLICY "Users can view their own engagement" ON course_engagement
-  FOR SELECT USING (user_id = auth.uid());
+  FOR SELECT USING (auth_user_id = auth.uid());
 
 -- =====================================================
 -- REVENUE AND PARTNERSHIP POLICIES
@@ -297,7 +301,7 @@ CREATE POLICY "Platform admins can manage partnerships" ON partnerships
   FOR ALL USING (
     EXISTS (
       SELECT 1 FROM admin_users 
-      WHERE admin_users.user_id = auth.uid() 
+      WHERE admin_users.auth_user_id = auth.uid() 
       AND admin_users.user_role = 'platform_admin'
       AND admin_users.is_active = true
     )
@@ -308,7 +312,7 @@ CREATE POLICY "Partner users can view their partnership" ON partnerships
   FOR SELECT USING (
     EXISTS (
       SELECT 1 FROM client_users 
-      WHERE client_users.user_id = auth.uid() 
+      WHERE client_users.auth_user_id = auth.uid() 
       AND client_users.user_role = 'partner_user'
       AND client_users.is_active = true
     )
@@ -322,7 +326,7 @@ CREATE POLICY "Platform admins can view all revenue" ON revenue_transactions
   FOR SELECT USING (
     EXISTS (
       SELECT 1 FROM admin_users 
-      WHERE admin_users.user_id = auth.uid() 
+      WHERE admin_users.auth_user_id = auth.uid() 
       AND admin_users.user_role = 'platform_admin'
       AND admin_users.is_active = true
     )
@@ -337,14 +341,14 @@ ALTER TABLE chatbot_conversations ENABLE ROW LEVEL SECURITY;
 
 -- Users can view their own chatbot conversations
 CREATE POLICY "Users can view their own chatbot conversations" ON chatbot_conversations
-  FOR SELECT USING (user_id = auth.uid());
+  FOR SELECT USING (auth_user_id = auth.uid());
 
 -- Platform admins can view all chatbot conversations for analytics
 CREATE POLICY "Platform admins can view all chatbot conversations" ON chatbot_conversations
   FOR SELECT USING (
     EXISTS (
       SELECT 1 FROM admin_users 
-      WHERE admin_users.user_id = auth.uid() 
+      WHERE admin_users.auth_user_id = auth.uid() 
       AND admin_users.user_role = 'platform_admin'
       AND admin_users.is_active = true
     )
@@ -374,7 +378,7 @@ BEGIN
   -- Only allow platform admins to access this function
   IF NOT EXISTS (
     SELECT 1 FROM admin_users 
-    WHERE admin_users.user_id = auth.uid() 
+    WHERE admin_users.auth_user_id = auth.uid() 
     AND admin_users.user_role = 'platform_admin'
     AND admin_users.is_active = true
   ) THEN
@@ -467,7 +471,7 @@ BEGIN
   -- Only allow platform admins to access this function
   IF NOT EXISTS (
     SELECT 1 FROM admin_users 
-    WHERE admin_users.user_id = auth.uid() 
+    WHERE admin_users.auth_user_id = auth.uid() 
     AND admin_users.user_role = 'platform_admin'
     AND admin_users.is_active = true
   ) THEN
@@ -526,8 +530,8 @@ $$;
 -- =====================================================
 
 -- Create sample platform admin user (Kris Mitzel)
+-- Note: This will be updated when the actual admin user signs up and gets linked to auth.users
 INSERT INTO admin_users (
-  user_id,
   email,
   first_name,
   last_name,
@@ -535,7 +539,6 @@ INSERT INTO admin_users (
   permissions,
   is_active
 ) VALUES (
-  auth.uid(), -- This will be set when the actual admin user signs up
   'kris@mitzelconsulting.com',
   'Kris',
   'Mitzel',

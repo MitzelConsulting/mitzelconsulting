@@ -1,0 +1,5 @@
+EMAIL_PASS=Voyetra070105!
+SMTP_USER=billling@launchthatsong.com
+SMTP_PASS=Voyetra070105!
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587

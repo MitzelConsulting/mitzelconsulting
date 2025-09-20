@@ -53,8 +53,14 @@ export default function Navbar() {
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
-          <Link href="/report-issue" className="text-gray-700 hover:text-black transition-colors">
-            Report Issue
+          <Link href="/blog" className="text-gray-700 hover:text-black transition-colors">
+            Blog
+          </Link>
+          <Link href="/courses" className="text-gray-700 hover:text-black transition-colors">
+            Courses
+          </Link>
+          <Link href="/faq" className="text-gray-700 hover:text-black transition-colors">
+            FAQ
           </Link>
           <a
             href="#how-it-works"

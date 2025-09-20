@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabaseClient'
 import Navbar from '@/components/Navbar'
 import { useCart } from '@/context/CartContext'
-import ArtistHowItWorks from '@/components/ArtistHowItWorks'
+import SafetyTrainingHowItWorks from '@/components/ArtistHowItWorks'
 
 type Course = {
   id: string
@@ -338,7 +338,7 @@ export default function Home() {
           </svg>
         </div>
         
-        <ArtistHowItWorks />
+        <SafetyTrainingHowItWorks />
       </div>
       {/* Modal */}
       {isModalOpen && (

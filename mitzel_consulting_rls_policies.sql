@@ -89,7 +89,7 @@ CREATE POLICY "Company admins can manage their company" ON companies
       WHERE client_users.company_id = companies.id 
       AND client_users.auth_user_id = auth.uid() 
       AND client_users.user_role = 'company_admin'
-      AND client_users.is_active = true
+      AND client_users.account_status = 'active'
     )
   );
 
@@ -175,7 +175,7 @@ CREATE POLICY "Company admins can view company enrollments" ON course_enrollment
         SELECT company_id FROM client_users 
         WHERE client_users.user_id = course_enrollments.user_id
       )
-      AND client_users.is_active = true
+      AND client_users.account_status = 'active'
     )
   );
 
@@ -238,7 +238,7 @@ CREATE POLICY "Company admins can view company bookings" ON session_bookings
         SELECT company_id FROM client_users 
         WHERE client_users.user_id = session_bookings.user_id
       )
-      AND client_users.is_active = true
+      AND client_users.account_status = 'active'
     )
   );
 
@@ -314,7 +314,7 @@ CREATE POLICY "Partner users can view their partnership" ON partnerships
       SELECT 1 FROM client_users 
       WHERE client_users.auth_user_id = auth.uid() 
       AND client_users.user_role = 'partner_user'
-      AND client_users.is_active = true
+      AND client_users.account_status = 'active'
     )
   );
 
@@ -447,7 +447,7 @@ BEGIN
     FROM chatbot_conversations 
     GROUP BY user_id
   ) cc ON cu.user_id = cc.user_id
-  WHERE cu.is_active = true
+  WHERE cu.account_status = 'active'
   ORDER BY enrollment_interest_score DESC, last_activity DESC;
 END;
 $$;

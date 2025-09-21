@@ -139,7 +139,7 @@ CREATE POLICY "Company admins can view company users" ON client_users
       WHERE admin_user.company_id = client_users.company_id 
       AND admin_user.auth_user_id = auth.uid() 
       AND admin_user.user_role = 'company_admin'
-      AND admin_user.is_active = true
+      AND admin_user.account_status = 'active'
     )
   );
 

@@ -30,7 +30,7 @@ const features = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
       </svg>
     ),
-    description: 'Learn from Kris Mitzel, a certified safety professional with years of experience. Get personalized guidance and real-world insights that go beyond basic compliance requirements.'
+    description: 'Learn from Kris Mizel, a certified safety professional with years of experience. Get personalized guidance and real-world insights that go beyond basic compliance requirements.'
   },
   {
     title: 'AI Safety Assistant',

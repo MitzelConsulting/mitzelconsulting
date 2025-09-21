@@ -105,7 +105,7 @@ export default function BlogPage() {
       console.log('Contact form submitted:', contactForm)
       
       // Here you would typically send the form data to your backend
-      alert('Message sent successfully! Our CEO, Kris Mitzel, will get back to you soon.')
+      alert('Message sent successfully! Our CEO, Kris Mizel, will get back to you soon.')
       
       // Reset form
       setContactForm({ name: '', email: '', message: '' })
@@ -322,7 +322,7 @@ export default function BlogPage() {
                   Get in Touch with Our Team
                 </h3>
                 <p className="text-gray-600">
-                  Complete the form with a message and our CEO, Kris Mitzel, will get back to you as soon as possible.
+                  Complete the form with a message and our CEO, Kris Mizel, will get back to you as soon as possible.
                 </p>
               </div>
               

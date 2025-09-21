@@ -91,7 +91,7 @@ export default function CoursesPage() {
       console.log('Contact form submitted:', contactForm);
       
       // Here you would typically send the form data to your backend
-      alert('Message sent successfully! Our CEO, Kris Mitzel, will get back to you soon.');
+      alert('Message sent successfully! Our CEO, Kris Mizel, will get back to you soon.');
       
       // Reset form
       setContactForm({ name: '', email: '', message: '' });
@@ -161,7 +161,7 @@ export default function CoursesPage() {
                   Get in Touch with Our Team
                 </h3>
                 <p className="text-gray-600 text-2xl">
-                  Complete the form with a message and our CEO, Kris Mitzel, will get back to you as soon as possible.
+                  Complete the form with a message and our CEO, Kris Mizel, will get back to you as soon as possible.
                 </p>
               </div>
               
@@ -583,7 +583,7 @@ export default function CoursesPage() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-5xl font-bold mb-4">Ready to Get Started?</h2>
           <p className="text-2xl mb-8 max-w-2xl mx-auto">
-            Join thousands of professionals who trust Mitzel Safety Consulting for their safety training needs.
+            Join thousands of professionals who trust Mizel Safety Consulting for their safety training needs.
           </p>
           <button
             onClick={() => setIsChatbotOpen(true)}

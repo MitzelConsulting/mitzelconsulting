@@ -140,7 +140,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     <>
       {/* SEO Meta Tags */}
       <head>
-        <title>{post.seo_title || post.title} | Mitzel Safety Consulting</title>
+        <title>{post.seo_title || post.title} | Mizel Safety Consulting</title>
         <meta name="description" content={post.seo_description || post.excerpt} />
         <meta name="keywords" content={post.seo_keywords?.join(', ') || post.tags.join(', ')} />
         <meta property="og:title" content={post.title} />
@@ -278,7 +278,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                       About {post.author_name}
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                      {post.author_bio || `Kris Mitzel is a certified safety professional with years of experience in OSHA training and workplace safety. He specializes in helping companies develop comprehensive safety programs and ensuring regulatory compliance.`}
+                      {post.author_bio || `Kris Mizel is a certified safety professional with years of experience in OSHA training and workplace safety. He specializes in helping companies develop comprehensive safety programs and ensuring regulatory compliance.`}
                     </p>
                   </div>
                 </div>

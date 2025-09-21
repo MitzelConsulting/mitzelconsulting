@@ -170,7 +170,7 @@ export default function FAQPage() {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Can't find what you're looking for? <br />
             Our AI can answer thousands of questions. <br />
-            Or, get in touch with our CEO, Kris Mitzel, below.
+            Or, get in touch with our CEO, Kris Mizel, below.
           </p>
         </div>
       </div>
@@ -413,7 +413,7 @@ export default function FAQPage() {
                     rows={6}
                     value={contactForm.message}
                     onChange={(e) => setContactForm({...contactForm, message: e.target.value})}
-                    placeholder="Complete the form with a message and our CEO, Kris Mitzel, will get back to you as soon as possible."
+                    placeholder="Complete the form with a message and our CEO, Kris Mizel, will get back to you as soon as possible."
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                   />
                 </div>
@@ -529,7 +529,7 @@ export default function FAQPage() {
             Ready to Get Started?
           </h2>
           <p className="text-xl mb-8 max-w-3xl mx-auto">
-            Join thousands of professionals who trust Mitzel Safety Consulting for their safety training needs.
+            Join thousands of professionals who trust Mizel Safety Consulting for their safety training needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 

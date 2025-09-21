@@ -14,7 +14,7 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: "Mitzel Safety Consulting - Safety Training Platform",
+  title: "Mizel Safety Consulting - Safety Training Platform",
   description: "Professional OSHA safety training courses for your team. Digital and on-site training options available.",
 };
 

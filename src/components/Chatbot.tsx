@@ -57,7 +57,7 @@ const Chatbot = () => {
   // Initialize welcome message
   useEffect(() => {
     if (isChatbotOpen && messages.length === 0) {
-      let welcomeText = "Welcome to your Mitzel Course and Safety Training Advisor! I can help you search the entire site for training courses, understand safety requirements and which courses may fit your needs best, while ensuring your team gets the proper trainings and certifications. I'm loaded up with thousands of proprietary course materials, documents, and experiences in safety situations and trainings, so how can I support?"
+      let welcomeText = "Welcome to your Mizel Course and Safety Training Advisor! I can help you search the entire site for training courses, understand safety requirements and which courses may fit your needs best, while ensuring your team gets the proper trainings and certifications. I'm loaded up with thousands of proprietary course materials, documents, and experiences in safety situations and trainings, so how can I support?"
       
       if (chatbotMode === 'manager') {
         welcomeText = "Welcome! I'm your Enterprise Training Solutions Advisor. I can help you explore our comprehensive enterprise training programs, including custom training solutions, Learning Management System integration, and bulk pricing options. What type of enterprise training solutions are you looking for? Are you interested in custom programs, LMS integration, or volume training for your organization?"
@@ -302,7 +302,7 @@ const Chatbot = () => {
         onMouseDown={handleMouseDown}
       >
         <div>
-          <h3 className="text-2xl font-bold">Mitzel AI Advisor</h3>
+          <h3 className="text-2xl font-bold">Mizel AI Advisor</h3>
         </div>
         <button
           onClick={() => setIsChatbotOpen(false)}

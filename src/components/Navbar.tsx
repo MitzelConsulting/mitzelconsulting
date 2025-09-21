@@ -17,7 +17,7 @@ const Logo = () => (
       <path d="M12 6l6 3v6H6V9l6-3z"/>
     </svg>
 
-    <span className="text-2xl font-bold text-gray-900">Mitzel Safety Consulting</span>
+    <span className="text-2xl font-bold text-gray-900">Mizel Safety Consulting</span>
   </Link>
 )
 

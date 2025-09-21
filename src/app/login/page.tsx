@@ -205,7 +205,7 @@ export default function LoginPage() {
               onClick={() => router.push('/')}
               className="text-gray-600 hover:text-gray-900 transition-colors text-sm"
             >
-              ← Back to Mitzel Safety Consulting
+              ← Back to Mizel Safety Consulting
             </button>
           </div>
         </div>
@@ -217,7 +217,7 @@ export default function LoginPage() {
     <div className="min-h-screen bg-white flex items-center justify-center p-4">
       <div className="bg-white border border-gray-200 p-8 rounded-2xl max-w-md w-full shadow-lg">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Mitzel Safety Consulting</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Mizel Safety Consulting</h1>
           <p className="text-gray-600">Client signup or login</p>
         </div>
 

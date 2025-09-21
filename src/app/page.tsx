@@ -98,7 +98,7 @@ export default function Home() {
       console.log('Contact form submitted:', contactForm)
       
       // Here you would typically send the form data to your backend
-      alert('Message sent successfully! Our CEO, Kris Mitzel, will get back to you soon.')
+      alert('Message sent successfully! Our CEO, Kris Mizel, will get back to you soon.')
       
       // Reset form
       setContactForm({ name: '', email: '', message: '' })
@@ -282,13 +282,13 @@ export default function Home() {
         {/* How It Works Section */}
         <SafetyTrainingHowItWorks />
 
-        {/* Why Choose Mitzel Safety Consulting Section */}
+        {/* Why Choose Mizel Safety Consulting Section */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Choose Mitzel Safety Consulting?</h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Choose Mizel Safety Consulting?</h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Since 2020, Mitzel Safety Consulting has helped 1,000+ professionals achieve their safety trainings. With over 50 specialized courses and certifications, we are your trusted partner for workplace safety compliance.
+                Since 2020, Mizel Safety Consulting has helped 1,000+ professionals achieve their safety trainings. With over 50 specialized courses and certifications, we are your trusted partner for workplace safety compliance.
               </p>
             </div>
             
@@ -404,7 +404,7 @@ export default function Home() {
                     Get in Touch with Our Team
                   </h3>
                   <p className="text-gray-600">
-                    Complete the form with a message and our CEO, Kris Mitzel, will get back to you as soon as possible.
+                    Complete the form with a message and our CEO, Kris Mizel, will get back to you as soon as possible.
                   </p>
                 </div>
                 
@@ -489,7 +489,7 @@ export default function Home() {
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-4xl font-bold mb-4">Ready to Get Started?</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Join thousands of professionals who trust Mitzel Safety Consulting for their safety training needs.
+              Join thousands of professionals who trust Mizel Safety Consulting for their safety training needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button

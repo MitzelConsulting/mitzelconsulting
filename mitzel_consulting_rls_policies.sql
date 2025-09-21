@@ -28,8 +28,8 @@ ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS user_role user_role DEFAULT 'pl
 ALTER TABLE client_users ADD COLUMN IF NOT EXISTS user_role user_role DEFAULT 'client_user';
 
 -- Add auth_user_id column to link with Supabase auth.users
-ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS auth_user_id UUID REFERENCES auth.users(id);
-ALTER TABLE client_users ADD COLUMN IF NOT EXISTS auth_user_id UUID REFERENCES auth.users(id);
+ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS auth_user_id UUID;
+ALTER TABLE client_users ADD COLUMN IF NOT EXISTS auth_user_id UUID;
 
 -- =====================================================
 -- COURSES TABLE POLICIES

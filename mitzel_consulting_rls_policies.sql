@@ -21,11 +21,11 @@ BEGIN
     END IF;
 END $$;
 
--- Add user_role column to admin_users table
-ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS user_role user_role DEFAULT 'platform_admin';
+-- Add user_role column to admin_users table (using VARCHAR initially)
+ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS user_role VARCHAR DEFAULT 'platform_admin';
 
--- Add user_role column to client_users table  
-ALTER TABLE client_users ADD COLUMN IF NOT EXISTS user_role user_role DEFAULT 'client_user';
+-- Add user_role column to client_users table (using VARCHAR initially)
+ALTER TABLE client_users ADD COLUMN IF NOT EXISTS user_role VARCHAR DEFAULT 'client_user';
 
 -- Add auth_user_id column to link with Supabase auth.users
 ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS auth_user_id UUID;

@@ -537,27 +537,29 @@ export default function CoursesPage() {
               <h2 className="text-6xl font-bold text-gray-900 mb-4">Enterprise Training Solutions</h2>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Custom Training Programs</h3>
-                <ul className="space-y-4 text-xl text-gray-600">
-                  <li>• Customized curriculum for your industry</li>
-                  <li>• Flexible scheduling and delivery options</li>
-                  <li>• Dedicated account management</li>
-                  <li>• Progress tracking and reporting</li>
-                  <li>• Bulk pricing and volume discounts</li>
-                </ul>
-              </div>
-              
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Learning Management System</h3>
-                <ul className="space-y-4 text-xl text-gray-600">
-                  <li>• Advanced LMS integration</li>
-                  <li>• Employee progress tracking</li>
-                  <li>• Automated compliance reporting</li>
-                  <li>• Mobile-friendly learning platform</li>
-                  <li>• 24/7 technical support</li>
-                </ul>
+            <div className="max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">Custom Training Programs</h3>
+                  <ul className="space-y-4 text-xl text-gray-600">
+                    <li>• Customized curriculum for your industry</li>
+                    <li>• Flexible scheduling and delivery options</li>
+                    <li>• Dedicated account management</li>
+                    <li>• Progress tracking and reporting</li>
+                    <li>• Bulk pricing and volume discounts</li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">Learning Management System</h3>
+                  <ul className="space-y-4 text-xl text-gray-600">
+                    <li>• Advanced LMS integration</li>
+                    <li>• Employee progress tracking</li>
+                    <li>• Automated compliance reporting</li>
+                    <li>• Mobile-friendly learning platform</li>
+                    <li>• 24/7 technical support</li>
+                  </ul>
+                </div>
               </div>
             </div>
             

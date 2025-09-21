@@ -34,6 +34,13 @@ export default function BlogPage() {
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
   const postsPerPage = 6
+  const [showContactForm, setShowContactForm] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    email: '',
+    message: ''
+  })
 
   useEffect(() => {
     fetchBlogData()
@@ -88,6 +95,25 @@ export default function BlogPage() {
       console.error('Error fetching blog data:', error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    try {
+      setIsSubmitting(true)
+      console.log('Contact form submitted:', contactForm)
+      
+      // Here you would typically send the form data to your backend
+      alert('Message sent successfully! Our CEO, Kris Mitzel, will get back to you soon.')
+      
+      // Reset form
+      setContactForm({ name: '', email: '', message: '' })
+      setShowContactForm(false)
+    } catch (error) {
+      console.error('Contact form error:', error)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -276,15 +302,105 @@ export default function BlogPage() {
             >
               View Courses
             </Link>
-            <Link
-              href="/request-training"
+            <button
+              onClick={() => setShowContactForm(true)}
               className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-blue-600 transition-colors"
             >
               Request Training
-            </Link>
+            </button>
           </div>
         </div>
       </section>
+
+      {/* Contact Form Section */}
+      {showContactForm && (
+        <section className="transition-all duration-500 ease-in-out opacity-100 py-16">
+          <div className="container mx-auto px-4">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8 max-w-4xl mx-auto">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-semibold text-gray-900 mb-2">
+                  Get in Touch with Our Team
+                </h3>
+                <p className="text-gray-600">
+                  Complete the form with a message and our CEO, Kris Mitzel, will get back to you as soon as possible.
+                </p>
+              </div>
+              
+              <form onSubmit={handleContactSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 mb-2">
+                      Your Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="contact-name"
+                      value={contactForm.name}
+                      onChange={(e) => setContactForm(prev => ({ ...prev, name: e.target.value }))}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      required
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 mb-2">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      id="contact-email"
+                      value={contactForm.email}
+                      onChange={(e) => setContactForm(prev => ({ ...prev, email: e.target.value }))}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      required
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <label htmlFor="contact-message" className="block text-sm font-medium text-gray-700 mb-2">
+                    Your Message *
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    value={contactForm.message}
+                    onChange={(e) => setContactForm(prev => ({ ...prev, message: e.target.value }))}
+                    placeholder="Tell us about your safety training needs, questions, or how we can help..."
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                    rows={4}
+                    required
+                  />
+                </div>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || !contactForm.name || !contactForm.email || !contactForm.message}
+                    className="w-full sm:w-auto bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        Sending...
+                      </>
+                    ) : (
+                      'Send Message'
+                    )}
+                  </button>
+                  
+                  <button
+                    type="button"
+                    onClick={() => setShowContactForm(false)}
+                    className="w-full sm:w-auto px-6 py-3 text-gray-600 hover:text-gray-800 transition-colors border border-gray-300 rounded-lg hover:bg-gray-50"
+                  >
+                    Close
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   )
 }

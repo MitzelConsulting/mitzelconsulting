@@ -363,11 +363,11 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 { name: 'Construction Safety', color: 'bg-blue-600', courses: ['OSHA 30-Hour Construction', 'Scaffold Safety', 'Fall Protection', 'Excavation Safety'] },
-                { name: 'Environmental Safety', color: 'bg-green-600', courses: ['HAZWOPER 40-Hour', 'Environmental Compliance', 'Waste Management', 'Spill Response'] },
-                { name: 'General Industry', color: 'bg-purple-600', courses: ['OSHA 10-Hour General', 'Workplace Safety', 'Emergency Response', 'Safety Management'] },
-                { name: 'Healthcare Safety', color: 'bg-red-600', courses: ['Bloodborne Pathogens', 'Infection Control', 'Healthcare Ergonomics', 'Patient Safety'] },
+                { name: 'Environmental Safety', color: 'bg-blue-600', courses: ['HAZWOPER 40-Hour', 'Environmental Compliance', 'Waste Management', 'Spill Response'] },
+                { name: 'General Industry', color: 'bg-blue-600', courses: ['OSHA 10-Hour General', 'Workplace Safety', 'Emergency Response', 'Safety Management'] },
+                { name: 'Healthcare Safety', color: 'bg-blue-600', courses: ['Bloodborne Pathogens', 'Infection Control', 'Healthcare Ergonomics', 'Patient Safety'] },
                 { name: 'Manufacturing', color: 'bg-blue-600', courses: ['Machine Safety', 'Chemical Safety', 'Quality Control', 'Process Safety'] },
-                { name: 'Specialized Training', color: 'bg-teal-600', courses: ['Confined Space Entry', 'Lockout/Tagout', 'Respiratory Protection', 'Hearing Conservation'] }
+                { name: 'Specialized Training', color: 'bg-blue-600', courses: ['Confined Space Entry', 'Lockout/Tagout', 'Respiratory Protection', 'Hearing Conservation'] }
               ].map((category, index) => (
                 <div key={index} className="bg-black rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                   <div className={`h-32 ${category.color} flex items-center justify-center`}>

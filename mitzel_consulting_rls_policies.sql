@@ -178,7 +178,7 @@ CREATE POLICY "Company admins can view company enrollments" ON course_enrollment
       AND client_users.user_role = 'company_admin'
       AND client_users.company_id = (
         SELECT company_id FROM client_users 
-        WHERE client_users.user_id = course_enrollments.user_id
+        WHERE client_users.id = course_enrollments.user_id
       )
       AND client_users.account_status = 'active'
     )
@@ -241,7 +241,7 @@ CREATE POLICY "Company admins can view company bookings" ON session_bookings
       AND client_users.user_role = 'company_admin'
       AND client_users.company_id = (
         SELECT company_id FROM client_users 
-        WHERE client_users.user_id = session_bookings.user_id
+        WHERE client_users.id = session_bookings.user_id
       )
       AND client_users.account_status = 'active'
     )
@@ -392,7 +392,7 @@ BEGIN
 
   RETURN QUERY
   SELECT 
-    cu.user_id,
+    cu.id as user_id,
     cu.email as user_email,
     c.name as company_name,
     COALESCE(ce.course_views, 0) as courses_viewed,
@@ -434,7 +434,7 @@ BEGIN
       COUNT(DISTINCT course_id) as enrollments
     FROM course_engagement 
     GROUP BY user_id
-  ) ce ON cu.user_id = ce.user_id
+  ) ce ON cu.id = ce.user_id
   LEFT JOIN (
     SELECT 
       user_id,
@@ -443,7 +443,7 @@ BEGIN
     FROM page_views 
     WHERE page_type = 'blog_post'
     GROUP BY user_id
-  ) pv ON cu.user_id = pv.user_id
+  ) pv ON cu.id = pv.user_id
   LEFT JOIN (
     SELECT 
       user_id,
@@ -451,7 +451,7 @@ BEGIN
       MAX(created_at) as last_chat_interaction
     FROM chatbot_conversations 
     GROUP BY user_id
-  ) cc ON cu.user_id = cc.user_id
+  ) cc ON cu.id = cc.user_id
   WHERE cu.account_status = 'active'
   ORDER BY enrollment_interest_score DESC, last_activity DESC;
 END;

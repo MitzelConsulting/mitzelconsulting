@@ -204,14 +204,13 @@ export default function ArtistSignup() {
               {/* Title/Position */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Title/Position *
+                  Title/Position
                 </label>
                 <input
                   type="text"
                   name="title"
                   value={formData.title}
                   onChange={handleInputChange}
-                  required
                   className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-gray-900 placeholder-gray-500"
                   placeholder="e.g., Safety Manager, HR Director, Operations Manager"
                 />
@@ -257,13 +256,12 @@ export default function ArtistSignup() {
               {/* Industry */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Industry *
+                  Industry
                 </label>
                 <select
                   name="industry"
                   value={formData.industry}
                   onChange={handleInputChange}
-                  required
                   className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-gray-900"
                 >
                   <option value="">Select your industry</option>
@@ -277,6 +275,20 @@ export default function ArtistSignup() {
                   <option value="hospitality">Hospitality</option>
                   <option value="education">Education</option>
                   <option value="government">Government</option>
+                  <option value="agriculture">Agriculture</option>
+                  <option value="aviation">Aviation</option>
+                  <option value="chemical">Chemical</option>
+                  <option value="energy">Energy</option>
+                  <option value="entertainment">Entertainment</option>
+                  <option value="finance">Finance</option>
+                  <option value="food-service">Food Service</option>
+                  <option value="logistics">Logistics</option>
+                  <option value="marine">Marine</option>
+                  <option value="pharmaceutical">Pharmaceutical</option>
+                  <option value="real-estate">Real Estate</option>
+                  <option value="technology">Technology</option>
+                  <option value="utilities">Utilities</option>
+                  <option value="warehousing">Warehousing</option>
                   <option value="other">Other</option>
                 </select>
               </div>
@@ -318,7 +330,7 @@ export default function ArtistSignup() {
               {/* Safety Interests */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-3">
-                  Safety Training Interests (Select all that apply) *
+                  Safety Training Interests (Select all that apply)
                 </label>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {[

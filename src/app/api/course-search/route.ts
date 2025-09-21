@@ -7,7 +7,7 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
 export async function POST(request: NextRequest) {
   try {
-    const { query, email } = await request.json()
+    const { query, email, mode = 'default' } = await request.json()
 
     if (!query) {
       return NextResponse.json({ error: 'Search query is required' }, { status: 400 })
@@ -26,6 +26,18 @@ export async function POST(request: NextRequest) {
     if (analyticsError) {
       console.error('Analytics error:', analyticsError)
       // Don't fail the request if analytics fails
+    }
+
+    // Handle enterprise manager mode
+    if (mode === 'manager') {
+      const enterpriseResponse = generateEnterpriseResponse(query)
+      return NextResponse.json({
+        success: true,
+        courses: [],
+        query,
+        message: enterpriseResponse,
+        mode: 'manager'
+      })
     }
 
     // Search courses based on query
@@ -51,6 +63,93 @@ export async function POST(request: NextRequest) {
     console.error('Course search error:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
+}
+
+function generateEnterpriseResponse(query: string): string {
+  const lowerQuery = query.toLowerCase()
+  
+  // Custom Training Programs
+  if (lowerQuery.includes('custom') || lowerQuery.includes('tailored') || lowerQuery.includes('bespoke')) {
+    return `Great! I'd love to help you with custom training programs. We offer:
+
+🎯 **Customized Curriculum**: Tailored specifically for your industry, company culture, and compliance requirements
+📅 **Flexible Scheduling**: On-site training, virtual sessions, or hybrid delivery options
+👥 **Dedicated Account Management**: Your personal training coordinator
+📊 **Progress Tracking**: Comprehensive reporting and analytics dashboard
+💰 **Bulk Pricing**: Volume discounts for large teams (50+ employees)
+
+What industry are you in, and how many employees need training? I can provide a customized quote based on your specific needs.`
+  }
+  
+  // LMS Integration
+  if (lowerQuery.includes('lms') || lowerQuery.includes('learning management') || lowerQuery.includes('platform') || lowerQuery.includes('integration')) {
+    return `Excellent choice! Our Learning Management System integration includes:
+
+🔗 **Advanced LMS Integration**: Seamless integration with your existing systems (SCORM, xAPI compliant)
+📱 **Mobile-Friendly Platform**: Access training anywhere, anytime
+📈 **Employee Progress Tracking**: Real-time analytics and completion reports
+🤖 **Automated Compliance Reporting**: Generate reports for audits and compliance
+🛠️ **24/7 Technical Support**: Dedicated support team for your organization
+🎓 **White-Label Options**: Custom branding to match your company identity
+
+What's your current LMS system? I can provide specific integration details and pricing for your setup.`
+  }
+  
+  // Volume Training
+  if (lowerQuery.includes('volume') || lowerQuery.includes('bulk') || lowerQuery.includes('many employees') || lowerQuery.includes('large team')) {
+    return `Perfect! For volume training, we offer significant savings:
+
+👥 **Volume Discounts**: Up to 40% off for teams of 100+ employees
+🏢 **Enterprise Packages**: Comprehensive training bundles for entire organizations
+📚 **Course Libraries**: Access to our full catalog of 50+ safety courses
+🎯 **Custom Bundles**: Mix and match courses to meet your specific needs
+📊 **Centralized Management**: One dashboard to manage all employee training
+💼 **Dedicated Account Manager**: Your personal point of contact
+
+How many employees do you need to train? I can provide detailed pricing and create a custom training package for your organization.`
+  }
+  
+  // Pricing
+  if (lowerQuery.includes('price') || lowerQuery.includes('cost') || lowerQuery.includes('quote') || lowerQuery.includes('pricing')) {
+    return `I'd be happy to provide pricing information! Our enterprise solutions include:
+
+💰 **Volume Pricing**: Starting at $25/employee for teams of 100+
+🎯 **Custom Programs**: $150-300 per hour for on-site training
+🔗 **LMS Integration**: $2,000-5,000 setup + $10-20/employee/month
+📊 **Reporting & Analytics**: Included with all enterprise packages
+🛠️ **Support**: 24/7 technical support included
+
+**Next Steps:**
+1. Tell me your team size and training needs
+2. I'll create a custom quote
+3. Schedule a demo with our enterprise team
+
+What's your company size and what type of training are you most interested in?`
+  }
+  
+  // General enterprise response
+  return `Thank you for your interest in our Enterprise Training Solutions! Here's what we offer:
+
+🎯 **Custom Training Programs**
+• Tailored curriculum for your industry
+• Flexible scheduling and delivery
+• Dedicated account management
+• Progress tracking and reporting
+• Volume discounts available
+
+🔗 **Learning Management System**
+• Advanced LMS integration
+• Employee progress tracking  
+• Automated compliance reporting
+• Mobile-friendly platform
+• 24/7 technical support
+
+**To get started, please tell me:**
+• Your company size and industry
+• What type of training you need
+• Your preferred delivery method (on-site, virtual, or hybrid)
+
+I'll create a customized proposal for your organization. What would you like to know more about?`
 }
 
 export async function GET(request: NextRequest) {

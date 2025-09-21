@@ -79,7 +79,7 @@ CREATE TRIGGER clients_updated_at_trigger
   EXECUTE FUNCTION update_clients_updated_at();
 
 -- Add comments for documentation
-COMMENT ON TABLE clients IS 'Client accounts for Mitzel Safety Consulting safety training platform';
+COMMENT ON TABLE clients IS 'Client accounts for Mizel Safety Consulting safety training platform';
 COMMENT ON COLUMN clients.id IS 'UUID from auth.users table';
 COMMENT ON COLUMN clients.full_name IS 'Client full name';
 COMMENT ON COLUMN clients.title IS 'Client job title or position (optional)';

@@ -32,10 +32,28 @@ export default function BlogPage() {
   const [categories, setCategories] = useState<BlogCategory[]>([])
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [loading, setLoading] = useState(true)
+  const [currentPage, setCurrentPage] = useState(1)
+  const postsPerPage = 6
 
   useEffect(() => {
     fetchBlogData()
   }, [])
+
+  // Filter posts by category
+  const filteredPosts = selectedCategory === 'all' 
+    ? posts 
+    : posts.filter(post => post.category_id === selectedCategory)
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage)
+  const startIndex = (currentPage - 1) * postsPerPage
+  const endIndex = startIndex + postsPerPage
+  const currentPosts = filteredPosts.slice(startIndex, endIndex)
+
+  // Reset to page 1 when category changes
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [selectedCategory])
 
   const fetchBlogData = async () => {
     try {
@@ -62,7 +80,9 @@ export default function BlogPage() {
       if (categoriesError) {
         console.error('Error fetching blog categories:', categoriesError)
       } else {
-        setCategories(categoriesData || [])
+        // Filter out Industry News category
+        const filteredCategories = (categoriesData || []).filter(category => category.name !== 'Industry News')
+        setCategories(filteredCategories)
       }
     } catch (error) {
       console.error('Error fetching blog data:', error)
@@ -70,10 +90,6 @@ export default function BlogPage() {
       setLoading(false)
     }
   }
-
-  const filteredPosts = selectedCategory === 'all' 
-    ? posts 
-    : posts.filter(post => post.category_id === selectedCategory)
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -88,7 +104,7 @@ export default function BlogPage() {
       <div className="min-h-screen bg-gray-50 py-12">
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#E55A2B] mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading blog posts...</p>
           </div>
         </div>
@@ -101,12 +117,11 @@ export default function BlogPage() {
       {/* Header */}
       <section className="bg-white py-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-8xl md:text-10xl font-bold text-gray-900 mb-6 title-black">
             Safety Training Blog
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Expert insights, OSHA updates, and best practices for workplace safety. 
-            Stay informed with the latest safety training trends and regulations.
+            Expert insights, OSHA updates, and best practices for workplace safety. Stay informed.
           </p>
         </div>
       </section>
@@ -119,7 +134,7 @@ export default function BlogPage() {
               onClick={() => setSelectedCategory('all')}
               className={`px-6 py-2 rounded-full font-medium transition-colors ${
                 selectedCategory === 'all'
-                  ? 'bg-[#E55A2B] text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -131,7 +146,7 @@ export default function BlogPage() {
                 onClick={() => setSelectedCategory(category.id)}
                 className={`px-6 py-2 rounded-full font-medium transition-colors ${
                   selectedCategory === category.id
-                    ? 'bg-[#E55A2B] text-white'
+                    ? 'bg-blue-600 text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -151,7 +166,7 @@ export default function BlogPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map((post) => (
+              {currentPosts.map((post) => (
                 <article key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                   <Link href={`/blog/${post.slug}`}>
                     <div className="relative h-48">
@@ -175,7 +190,7 @@ export default function BlogPage() {
                         {post.title}
                       </h2>
                       
-                      <p className="text-gray-600 mb-4 line-clamp-3">
+                      <p className="text-xl text-gray-600 mb-4 line-clamp-3">
                         {post.excerpt}
                       </p>
                       
@@ -191,7 +206,7 @@ export default function BlogPage() {
                       </div>
                       
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 bg-[#E55A2B] rounded-full flex items-center justify-center">
+                        <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
                           <span className="text-white text-sm font-bold">
                             {post.author_name.charAt(0)}
                           </span>
@@ -204,29 +219,66 @@ export default function BlogPage() {
               ))}
             </div>
           )}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="mt-12 flex justify-center">
+              <nav className="flex items-center space-x-2">
+                <button
+                  onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                  disabled={currentPage === 1}
+                  className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Previous
+                </button>
+                
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`px-3 py-2 text-sm font-medium rounded-md ${
+                      currentPage === page
+                        ? 'bg-blue-600 text-white'
+                        : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50'
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ))}
+                
+                <button
+                  onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                  disabled={currentPage === totalPages}
+                  className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Next
+                </button>
+              </nav>
+            </div>
+          )}
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="bg-[#E55A2B] py-16">
+      <section className="bg-blue-600 py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
             Ready to Start Your Safety Training?
           </h2>
-          <p className="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
             Get your team OSHA certified with our comprehensive training programs. 
             Digital and on-site options available.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/"
-              className="bg-white text-[#E55A2B] font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors"
+              className="bg-white text-blue-600 font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors"
             >
               View Courses
             </Link>
             <Link
               href="/request-training"
-              className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-[#E55A2B] transition-colors"
+              className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-blue-600 transition-colors"
             >
               Request Training
             </Link>

@@ -140,7 +140,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     <>
       {/* SEO Meta Tags */}
       <head>
-        <title>{post.seo_title || post.title} | Mitzel Consulting</title>
+        <title>{post.seo_title || post.title} | Mitzel Safety Consulting</title>
         <meta name="description" content={post.seo_description || post.excerpt} />
         <meta name="keywords" content={post.seo_keywords?.join(', ') || post.tags.join(', ')} />
         <meta property="og:title" content={post.title} />

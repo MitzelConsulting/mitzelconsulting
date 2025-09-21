@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
 
 interface FAQItem {
@@ -9,255 +11,542 @@ interface FAQItem {
 
 const faqData: FAQItem[] = [
   {
-    question: "What is OSHA certification and why is it important?",
-    answer: "OSHA (Occupational Safety and Health Administration) certification ensures that workers have the necessary knowledge and skills to work safely in their industry. OSHA certification is crucial for compliance with federal safety regulations and helps prevent workplace accidents, injuries, and fatalities. It demonstrates your commitment to workplace safety and can reduce insurance costs while protecting your employees.",
+    question: "What OSHA training courses do you offer?",
+    answer: "We offer comprehensive OSHA training courses including OSHA 10-hour and 30-hour construction and general industry courses, HAZWOPER training, confined space entry, fall protection, and many other specialized safety programs.",
     category: "General"
   },
   {
-    question: "What's the difference between OSHA 10-Hour and OSHA 30-Hour training?",
-    answer: "OSHA 10-Hour training provides basic awareness training covering fundamental safety and health hazards in the workplace. OSHA 30-Hour training offers more comprehensive coverage with detailed instruction on safety management systems, hazard recognition, and prevention strategies. OSHA 30-Hour is typically required for supervisors and safety personnel, while OSHA 10-Hour is suitable for entry-level workers.",
-    category: "Training Levels"
-  },
-  {
-    question: "How long does OSHA certification last?",
-    answer: "OSHA 10-Hour and 30-Hour certifications do not expire, but OSHA recommends refresher training every 3-5 years to stay current with updated regulations and best practices. Some employers or industries may require more frequent refresher training. HAZWOPER certification requires annual 8-hour refresher training.",
-    category: "Certification"
-  },
-  {
-    question: "Can I take OSHA training online?",
-    answer: "Yes! Our online OSHA training courses are fully compliant and recognized by OSHA. Our digital courses offer the same comprehensive content as in-person training but with the convenience of self-paced learning. You can access your training materials 24/7 and complete the courses on your schedule.",
-    category: "Training Methods"
-  },
-  {
-    question: "What is HAZWOPER training and who needs it?",
-    answer: "HAZWOPER (Hazardous Waste Operations and Emergency Response) training is required for workers involved in hazardous waste cleanup, emergency response, or handling hazardous substances. This includes cleanup technicians, emergency responders, and personnel at treatment, storage, and disposal facilities. HAZWOPER training comes in 24-hour, 40-hour, and 8-hour refresher levels.",
-    category: "Specialized Training"
-  },
-  {
-    question: "How much does OSHA training cost?",
-    answer: "Our OSHA training courses range from $49 for basic refresher courses to $299 for comprehensive 30-hour programs. We offer volume discounts for companies training multiple employees and special pricing for partnerships. Contact us for custom pricing based on your specific training needs.",
-    category: "Pricing"
-  },
-  {
-    question: "Do you offer on-site training?",
-    answer: "Yes! We provide on-site training at your facility for groups of 10 or more employees. On-site training allows for customized content specific to your workplace hazards and can be more cost-effective for larger groups. Our expert instructors will come to your location and provide hands-on training tailored to your industry.",
-    category: "Training Methods"
-  },
-  {
-    question: "What's included in the training materials?",
-    answer: "All our courses include comprehensive study materials, interactive modules, practice quizzes, and a final exam. Upon successful completion, you'll receive a printable certificate of completion. Our materials are regularly updated to reflect the latest OSHA standards and best practices.",
-    category: "Course Content"
-  },
-  {
-    question: "How quickly can I complete OSHA training?",
-    answer: "OSHA 10-Hour courses typically take 10-12 hours to complete, while OSHA 30-Hour courses take 30-35 hours. Our self-paced online format allows you to complete training as quickly as your schedule permits. Some students complete courses in just a few days, while others prefer to spread it out over several weeks.",
+    question: "How long does it take to complete a course?",
+    answer: "Course duration varies by program. OSHA 10-hour courses typically take 10 hours, OSHA 30-hour courses take 30 hours. Most courses can be completed at your own pace within 180 days of enrollment.",
     category: "Training Timeline"
   },
   {
-    question: "What industries require OSHA training?",
-    answer: "OSHA training is required or highly recommended in construction, manufacturing, healthcare, warehousing, agriculture, and many other industries. Any workplace with potential safety hazards should consider OSHA training for their employees. Our courses cover both construction and general industry requirements.",
-    category: "Industries"
-  },
-  {
-    question: "Can I get a refund if I'm not satisfied?",
-    answer: "We offer a 30-day money-back guarantee on all our training courses. If you're not completely satisfied with your training experience, contact our customer service team within 30 days of purchase for a full refund. We're committed to your success and satisfaction.",
-    category: "Pricing"
-  },
-  {
-    question: "Do you offer training in Spanish?",
-    answer: "Yes! We offer OSHA training courses in Spanish to serve our Spanish-speaking workforce. Our Spanish courses cover the same comprehensive content as our English courses and are fully OSHA compliant. This ensures all your employees can receive proper safety training regardless of their primary language.",
-    category: "Language Options"
-  },
-  {
-    question: "What support do you provide during training?",
-    answer: "We provide comprehensive support throughout your training journey. Our customer service team is available via phone, email, and live chat to answer questions and provide technical support. We also offer progress tracking and reminders to help you stay on track with your training goals.",
-    category: "Support"
-  },
-  {
-    question: "How do I verify my OSHA certification?",
-    answer: "Upon completing your training, you'll receive a certificate of completion that includes your name, course details, and completion date. This certificate serves as proof of your OSHA training. We also maintain records of all completed training for verification purposes if needed by employers or regulatory agencies.",
+    question: "Are your courses OSHA approved?",
+    answer: "Yes, all our OSHA training courses are developed in accordance with OSHA standards and are delivered by authorized OSHA outreach trainers. Upon successful completion, you'll receive an official OSHA completion card.",
     category: "Certification"
   },
   {
-    question: "Can I train my entire team at once?",
-    answer: "Absolutely! We offer group training solutions for companies of all sizes. Our Learning Management System (LMS) allows you to track progress for multiple employees, and we provide volume discounts for bulk training purchases. We can also customize training content to address your specific workplace hazards and safety concerns.",
+    question: "Can I take courses online?",
+    answer: "Yes! We offer both online and on-site training options. Our online courses are interactive, self-paced, and include multimedia content, quizzes, and final exams to ensure comprehensive learning.",
+    category: "Training Methods"
+  },
+  {
+    question: "What is the cost of OSHA training?",
+    answer: "Course prices vary depending on the program. OSHA 10-hour courses start at $89, OSHA 30-hour courses start at $189. We also offer group discounts for companies training multiple employees.",
+    category: "Pricing"
+  },
+  {
+    question: "Do you offer HAZWOPER training?",
+    answer: "Yes, we provide comprehensive HAZWOPER training programs including 40-hour initial training, 8-hour refresher courses, and specialized training for emergency response personnel.",
+    category: "Specialized Training"
+  },
+  {
+    question: "What if I fail the final exam?",
+    answer: "If you don't pass the final exam on your first attempt, you can retake it up to two additional times at no extra cost. Our courses are designed to help you succeed.",
+    category: "Course Content"
+  },
+  {
+    question: "How quickly will I receive my certificate?",
+    answer: "For online courses, you'll receive your completion certificate immediately after passing the final exam. For on-site training, certificates are typically issued within 5-7 business days.",
+    category: "Training Timeline"
+  },
+  {
+    question: "Do you offer training in languages other than English?",
+    answer: "Currently, our courses are available in English. However, we can arrange for interpreters for on-site training sessions if needed. Please contact us to discuss your specific language requirements.",
+    category: "Language Options"
+  },
+  {
+    question: "What industries do you serve?",
+    answer: "We serve a wide range of industries including construction, manufacturing, healthcare, oil and gas, chemical processing, and general industry. Our training programs are tailored to meet specific industry requirements.",
+    category: "Industries"
+  },
+  {
+    question: "Can you provide training at our facility?",
+    answer: "Yes, we offer on-site training at your facility. This is ideal for companies that need to train multiple employees or want customized training content. Contact us for pricing and scheduling.",
+    category: "Training Methods"
+  },
+  {
+    question: "What support do you provide during training?",
+    answer: "We provide comprehensive support including technical assistance, instructor support via email and phone, and access to additional learning resources. Our team is committed to your success.",
+    category: "Support"
+  },
+  {
+    question: "Are there prerequisites for OSHA courses?",
+    answer: "Most OSHA courses don't have prerequisites. However, some specialized courses like HAZWOPER may require basic safety knowledge. Course descriptions will indicate any prerequisites.",
+    category: "Training Levels"
+  },
+  {
+    question: "How often do I need to renew my OSHA certification?",
+    answer: "OSHA completion cards don't expire, but we recommend refresher training every 3-5 years to stay current with regulations and best practices. Some employers may require more frequent updates.",
+    category: "Certification"
+  },
+  {
+    question: "Do you offer group training discounts?",
+    answer: "Yes, we offer significant discounts for group training. Discounts increase with the number of participants. Contact us for a custom quote based on your group size and training needs.",
     category: "Group Training"
+  },
+  {
+    question: "What payment methods do you accept?",
+    answer: "We accept all major credit cards, PayPal, and can arrange invoicing for corporate accounts. Payment is due before course access is granted.",
+    category: "Pricing"
+  },
+  {
+    question: "Can I get a refund if I'm not satisfied?",
+    answer: "We offer a 30-day money-back guarantee for all our training courses. If you're not completely satisfied, contact us within 30 days for a full refund.",
+    category: "Support"
+  },
+  {
+    question: "Do you offer continuing education credits?",
+    answer: "Yes, many of our courses qualify for continuing education credits. Specific credit information is provided with each course description.",
+    category: "Certification"
+  },
+  {
+    question: "How do I access my course materials?",
+    answer: "Once enrolled, you'll receive login credentials to access your course materials through our secure learning management system. You can access materials 24/7 from any device.",
+    category: "Course Content"
+  },
+  {
+    question: "What if I have technical issues during training?",
+    answer: "Our technical support team is available Monday through Friday, 8 AM to 6 PM EST. You can reach us via phone, email, or live chat for immediate assistance.",
+    category: "Support"
   }
 ];
 
-const categories = ["All", "General", "Training Levels", "Certification", "Training Methods", "Specialized Training", "Pricing", "Course Content", "Training Timeline", "Industries", "Language Options", "Support", "Group Training"];
-
 export default function FAQPage() {
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [showConsultationForm, setShowConsultationForm] = useState(false);
+  const [showContactForm, setShowContactForm] = useState(false);
+  const [consultationForm, setConsultationForm] = useState({
+    name: '',
+    email: '',
+    company: '',
+    trainingNeeds: '',
+  });
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredFAQs = selectedCategory === 'All' 
+    ? faqData 
+    : faqData.filter(faq => faq.category === selectedCategory);
+
+  const handleConsultationSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // Handle form submission
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setShowConsultationForm(false);
+      setConsultationForm({ name: '', email: '', company: '', trainingNeeds: '' });
+    }, 1000);
+  };
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // Handle form submission
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setShowContactForm(false);
+      setContactForm({ name: '', email: '', message: '' });
+    }, 1000);
+  };
+
   return (
-    <>
-      <head>
-        <title>Frequently Asked Questions | OSHA Training | Mitzel Consulting</title>
-        <meta name="description" content="Get answers to common questions about OSHA training, HAZWOPER certification, pricing, and safety training requirements. Expert guidance from Mitzel Consulting." />
-        <meta name="keywords" content="OSHA training FAQ, safety training questions, HAZWOPER certification, OSHA 10 30 hour training, workplace safety" />
-        <meta property="og:title" content="OSHA Training FAQs | Mitzel Consulting" />
-        <meta property="og:description" content="Expert answers to your OSHA training questions. Learn about certification requirements, pricing, and training options." />
-        <meta property="og:type" content="website" />
-      </head>
-
-      <div className="min-h-screen bg-gray-50">
-        {/* Breadcrumb */}
-        <nav className="bg-white border-b">
-          <div className="container mx-auto px-4 py-3">
-            <div className="flex items-center space-x-2 text-sm">
-              <Link href="/" className="text-gray-500 hover:text-[#E55A2B]">Home</Link>
-              <span className="text-gray-400">/</span>
-              <span className="text-gray-900">FAQ</span>
-            </div>
-          </div>
-        </nav>
-
-        {/* Header */}
-        <div className="bg-white py-16">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Frequently Asked Questions
-            </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Get expert answers to your OSHA training questions. Can't find what you're looking for? 
-              Contact our safety training experts for personalized guidance.
-            </p>
-          </div>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white py-16">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-8xl md:text-10xl font-bold text-gray-900 mb-6 title-black">
+            Frequently Asked Questions
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Can't find what you're looking for? <br />
+            Our AI can answer thousands of questions. <br />
+            Or, get in touch with our CEO, Kris Mitzel, below.
+          </p>
         </div>
+      </div>
 
-        {/* FAQ Content */}
-        <div className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              {/* Category Filter */}
-              <div className="mb-12">
-                <div className="flex flex-wrap gap-2 justify-center">
-                  {categories.map((category) => (
-                    <button
-                      key={category}
-                      className="px-4 py-2 text-sm font-medium rounded-full border border-gray-300 hover:border-[#E55A2B] hover:text-[#E55A2B] transition-colors"
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* FAQ Items */}
-              <div className="space-y-6">
-                {faqData.map((faq, index) => (
-                  <div
-                    key={index}
-                    className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
+      {/* FAQ Content */}
+      <div className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            {/* Category Filter */}
+            <div className="mb-12">
+              <div className="flex flex-wrap gap-2 justify-center">
+                <button
+                  onClick={() => handleCategoryChange('All')}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                    selectedCategory === 'All'
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  All
+                </button>
+                {['General', 'Training Levels', 'Certification', 'Training Methods', 'Specialized Training', 'Pricing', 'Course Content', 'Training Timeline', 'Industries', 'Language Options', 'Support', 'Group Training'].map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => handleCategoryChange(category)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                      selectedCategory === category
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
                   >
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-8 h-8 bg-[#E55A2B] rounded-full flex items-center justify-center">
-                        <span className="text-white text-sm font-bold">Q</span>
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                          {faq.question}
-                        </h3>
-                        <p className="text-gray-700 leading-relaxed">
-                          {faq.answer}
-                        </p>
-                        <div className="mt-3">
-                          <span className="inline-block px-3 py-1 text-xs font-medium bg-gray-100 text-gray-600 rounded-full">
-                            {faq.category}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    {category}
+                  </button>
                 ))}
               </div>
+            </div>
 
-              {/* Contact CTA */}
-              <div className="mt-16 bg-[#E55A2B] rounded-2xl p-8 text-center text-white">
-                <h2 className="text-2xl font-bold mb-4">
-                  Still Have Questions?
-                </h2>
-                <p className="text-orange-100 mb-6 max-w-2xl mx-auto">
-                  Our OSHA training experts are here to help you find the right safety training solution for your team. 
-                  Get personalized guidance on certification requirements and training options.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link
-                    href="/request-training"
-                    className="bg-white text-[#E55A2B] font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors"
-                  >
-                    Request Training Consultation
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-[#E55A2B] transition-colors"
-                  >
-                    Contact Us
-                  </Link>
+            {/* FAQ Items */}
+            <div className="space-y-6">
+              {filteredFAQs.map((faq, index) => (
+                <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                        <span className="text-white text-sm font-bold">Q</span>
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                        {faq.question}
+                      </h3>
+                      <p className="text-gray-600 mb-3">
+                        {faq.answer}
+                      </p>
+                      <span className="inline-block px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">
+                        {faq.category}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
+            </div>
 
-              {/* Popular Topics */}
-              <div className="mt-16">
-                <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
-                  Popular Training Topics
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  <Link
-                    href="/courses/osha-10-construction"
-                    className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow group"
-                  >
-                    <div className="w-12 h-12 bg-[#E55A2B] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                      <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                      OSHA 10-Hour Construction
-                    </h3>
-                    <p className="text-gray-600 text-sm">
-                      Essential safety training for construction workers covering hazard recognition and prevention.
-                    </p>
-                  </Link>
-
-                  <Link
-                    href="/courses/hazwoper-40-hour"
-                    className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow group"
-                  >
-                    <div className="w-12 h-12 bg-[#E55A2B] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                      <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                      HAZWOPER 40-Hour
-                    </h3>
-                    <p className="text-gray-600 text-sm">
-                      Comprehensive hazardous waste operations training for emergency responders and cleanup workers.
-                    </p>
-                  </Link>
-
-                  <Link
-                    href="/courses/fall-protection"
-                    className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow group"
-                  >
-                    <div className="w-12 h-12 bg-[#E55A2B] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                      <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                      Fall Protection
-                    </h3>
-                    <p className="text-gray-600 text-sm">
-                      Critical training for workers at height, covering proper use of safety equipment and procedures.
-                    </p>
-                  </Link>
-                </div>
+            {/* Still Have Questions */}
+            <div className="mt-16 text-center">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Still Have Questions?
+              </h2>
+              <p className="text-lg text-gray-600 mb-8">
+                Get personalized guidance on certification requirements and training options.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button
+                  onClick={() => setShowConsultationForm(true)}
+                  className="bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Request Training Consultation
+                </button>
+                <button
+                  onClick={() => setShowContactForm(true)}
+                  className="bg-transparent border-2 border-blue-600 text-blue-600 font-semibold py-3 px-8 rounded-lg hover:bg-blue-600 hover:text-white transition-colors"
+                >
+                  Contact Us
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </>
+
+      {/* Request Training Consultation Form */}
+      {showConsultationForm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-2xl font-bold text-gray-900">
+                  Request Training Consultation
+                </h3>
+                <button
+                  onClick={() => setShowConsultationForm(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              
+              <form onSubmit={handleConsultationSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={consultationForm.name}
+                      onChange={(e) => setConsultationForm({...consultationForm, name: e.target.value})}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={consultationForm.email}
+                      onChange={(e) => setConsultationForm({...consultationForm, email: e.target.value})}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Company Name
+                  </label>
+                  <input
+                    type="text"
+                    value={consultationForm.company}
+                    onChange={(e) => setConsultationForm({...consultationForm, company: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Training Needs *
+                  </label>
+                  <textarea
+                    required
+                    rows={4}
+                    value={consultationForm.trainingNeeds}
+                    onChange={(e) => setConsultationForm({...consultationForm, trainingNeeds: e.target.value})}
+                    placeholder="Please describe your training requirements, number of employees, timeline, and any specific compliance needs..."
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                  />
+                </div>
+                
+                <div className="flex justify-end space-x-4">
+                  <button
+                    type="button"
+                    onClick={() => setShowConsultationForm(false)}
+                    className="px-6 py-2 text-gray-600 hover:text-gray-800 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    {isSubmitting ? 'Submitting...' : 'Send Request'}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Contact Form */}
+      {showContactForm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-2xl font-bold text-gray-900">
+                  Contact Us
+                </h3>
+                <button
+                  onClick={() => setShowContactForm(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              
+              <form onSubmit={handleContactSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={contactForm.name}
+                      onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={contactForm.email}
+                      onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Message *
+                  </label>
+                  <textarea
+                    required
+                    rows={6}
+                    value={contactForm.message}
+                    onChange={(e) => setContactForm({...contactForm, message: e.target.value})}
+                    placeholder="Complete the form with a message and our CEO, Kris Mitzel, will get back to you as soon as possible."
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                  />
+                </div>
+                
+                <div className="flex justify-end space-x-4">
+                  <button
+                    type="button"
+                    onClick={() => setShowContactForm(false)}
+                    className="px-6 py-2 text-gray-600 hover:text-gray-800 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Popular Training Topics */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Popular Trainings
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Explore our most requested safety training programs
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <Link href="/courses#osha" className="group">
+              <div className="bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                <h3 className="text-3xl font-bold text-gray-900 mb-3 group-hover:text-blue-600">
+                  OSHA 10 & 30 Hour
+                </h3>
+                <p className="text-2xl text-gray-600">
+                  Essential construction and general industry safety training
+                </p>
+              </div>
+            </Link>
+            
+            <Link href="/courses#hazwoper" className="group">
+              <div className="bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                <h3 className="text-3xl font-bold text-gray-900 mb-3 group-hover:text-blue-600">
+                  HAZWOPER Training
+                </h3>
+                <p className="text-2xl text-gray-600">
+                  Comprehensive hazardous waste operations and emergency response
+                </p>
+              </div>
+            </Link>
+            
+            <Link href="/courses#confined-space" className="group">
+              <div className="bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                <h3 className="text-3xl font-bold text-gray-900 mb-3 group-hover:text-blue-600">
+                  Confined Space Entry
+                </h3>
+                <p className="text-2xl text-gray-600">
+                  Critical training for workers entering confined spaces
+                </p>
+              </div>
+            </Link>
+            
+            <Link href="/courses#fall-protection" className="group">
+              <div className="bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                <h3 className="text-3xl font-bold text-gray-900 mb-3 group-hover:text-blue-600">
+                  Fall Protection
+                </h3>
+                <p className="text-2xl text-gray-600">
+                  Essential training for working at height safely
+                </p>
+              </div>
+            </Link>
+            
+            <Link href="/courses#lockout-tagout" className="group">
+              <div className="bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                <h3 className="text-3xl font-bold text-gray-900 mb-3 group-hover:text-blue-600">
+                  Lockout/Tagout
+                </h3>
+                <p className="text-2xl text-gray-600">
+                  Control hazardous energy and prevent workplace injuries
+                </p>
+              </div>
+            </Link>
+            
+            <Link href="/courses#electrical-safety" className="group">
+              <div className="bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                <h3 className="text-3xl font-bold text-gray-900 mb-3 group-hover:text-blue-600">
+                  Electrical Safety
+                </h3>
+                <p className="text-2xl text-gray-600">
+                  Protect workers from electrical hazards and arc flash
+                </p>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-blue-600 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-6">
+            Ready to Get Started?
+          </h2>
+          <p className="text-xl mb-8 max-w-3xl mx-auto">
+            Join thousands of professionals who trust Mitzel Safety Consulting for their safety training needs.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              href="/courses"
+              className="bg-white text-blue-600 font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              View All Courses
+            </Link>
+            <Link 
+              href="/contact"
+              className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-blue-600 transition-colors"
+            >
+              Contact Us Today
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

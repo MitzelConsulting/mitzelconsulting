@@ -7,19 +7,17 @@ import { useState } from 'react'
 import { usePathname } from 'next/navigation'
 
 const Logo = () => (
-  <Link href="/" className="flex items-center gap-2">
+  <Link href="/" className="flex items-center gap-3">
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 20 20"
+      className="w-8 h-8 text-blue-600"
       fill="currentColor"
-      className="w-8 h-8 text-[#E55A2B]"
+      viewBox="0 0 24 24"
     >
-      <path
-        d="M10.894 2.553a1 1 0 00-1.789 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"
-      />
+      <path d="M12 2L4 7v8c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V7l-8-5z"/>
+      <path d="M12 6l6 3v6H6V9l6-3z"/>
     </svg>
 
-    <span className="text-xl font-bold text-gray-900">Mitzel Consulting</span>
+    <span className="text-2xl font-bold text-gray-900">Mitzel Safety Consulting</span>
   </Link>
 )
 
@@ -53,25 +51,25 @@ export default function Navbar() {
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
-          <Link href="/blog" className="text-gray-700 hover:text-black transition-colors">
-            Blog
-          </Link>
-          <Link href="/courses" className="text-gray-700 hover:text-black transition-colors">
+          <Link href="/courses" className="text-2xl text-gray-700 hover:text-blue-600 transition-colors">
             Courses
           </Link>
-          <Link href="/faq" className="text-gray-700 hover:text-black transition-colors">
+          <Link href="/faq" className="text-2xl text-gray-700 hover:text-blue-600 transition-colors">
             FAQ
+          </Link>
+          <Link href="/blog" className="text-2xl text-gray-700 hover:text-blue-600 transition-colors">
+            Blog
           </Link>
           <a
             href="#how-it-works"
-            className="hover:text-black transition-colors bg-transparent border-none text-gray-700 cursor-pointer"
+            className="text-2xl hover:text-blue-600 transition-colors bg-transparent border-none text-gray-700 cursor-pointer"
             onClick={handleHowItWorks}
           >
             How It Works
           </a>
           <Link
             href="/login"
-            className="bg-[#E55A2B] text-white font-semibold py-2 px-4 rounded-full hover:bg-[#D14A1B] transition-colors"
+            className="bg-blue-600 text-white font-semibold py-3 px-6 rounded-full hover:bg-blue-700 transition-colors text-xl"
           >
             Login
           </Link>
@@ -148,7 +146,7 @@ export default function Navbar() {
                 </a>
                 <Link
                   href="/login"
-                  className="block bg-[#E55A2B] text-white font-semibold py-2 px-4 rounded-full hover:bg-[#D14A1B] transition-colors text-center"
+                  className="block bg-blue-600 text-white font-semibold py-2 px-4 rounded-full hover:bg-blue-700 transition-colors text-center"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Login

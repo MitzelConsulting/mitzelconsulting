@@ -7,15 +7,16 @@ import Image from 'next/image'
 import { supabase } from '@/lib/supabaseClient'
 
 interface FormData {
-  artistName: string
+  fullName: string
+  title: string
+  company: string
+  teamSize: string
+  industry: string
   email: string
+  phone: string
   password: string
   confirmPassword: string
-  songName: string
-  songFile: File | null
-  bioImage: File | null
-  bio: string
-  website: string
+  safetyInterests: string[]
   agreeToTerms: boolean
   hasViewedTerms: boolean
 }
@@ -27,20 +28,21 @@ export default function ArtistSignup() {
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
   const [formData, setFormData] = useState<FormData>({
-    artistName: '',
+    fullName: '',
+    title: '',
+    company: '',
+    teamSize: '',
+    industry: '',
     email: '',
+    phone: '',
     password: '',
     confirmPassword: '',
-    songName: '',
-    songFile: null,
-    bioImage: null,
-    bio: '',
-    website: '',
+    safetyInterests: [],
     agreeToTerms: false,
     hasViewedTerms: false
   })
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target
     if (type === 'checkbox') {
       const checked = (e.target as HTMLInputElement).checked
@@ -50,11 +52,15 @@ export default function ArtistSignup() {
     }
   }
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name } = e.target
-    const file = e.target.files?.[0] || null
-    setFormData(prev => ({ ...prev, [name]: file }))
+  const handleSafetyInterestChange = (interest: string, checked: boolean) => {
+    setFormData(prev => ({
+      ...prev,
+      safetyInterests: checked 
+        ? [...prev.safetyInterests, interest]
+        : prev.safetyInterests.filter(item => item !== interest)
+    }))
   }
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -64,93 +70,43 @@ export default function ArtistSignup() {
     try {
       // Validate passwords match
       if (formData.password !== formData.confirmPassword) {
-        alert('Passwords do not match')
+        setError('Passwords do not match')
         setIsSubmitting(false)
         return
       }
 
       // Validate password length
       if (formData.password.length < 6) {
-        alert('Password must be at least 6 characters')
+        setError('Password must be at least 6 characters')
         setIsSubmitting(false)
         return
       }
 
       // Validate terms agreement
       if (!formData.agreeToTerms || !formData.hasViewedTerms) {
-        alert('You must view and agree to the Terms of Use')
+        setError('You must view and agree to the Terms of Use')
         setIsSubmitting(false)
         return
       }
 
-      // Validate bio image is provided
-      if (!formData.bioImage) {
-        alert('Please upload a bio image')
-        setIsSubmitting(false)
-        return
-      }
-
-      // Validate song file is provided
-      if (!formData.songFile) {
-        alert('Please upload a song file')
-        setIsSubmitting(false)
-        return
-      }
-
-      // --- Direct upload to Supabase Storage ---
-      // Upload bio image
-      const sanitizedBioImageName = formData.bioImage.name.replace(/[^a-zA-Z0-9.\-]/g, '_');
-      const bioImageName = `bio-${Date.now()}-${sanitizedBioImageName}`;
-      const { data: bioUploadData, error: bioUploadError } = await supabase.storage
-        .from('artist-images')
-        .upload(bioImageName, formData.bioImage);
-      if (bioUploadError) {
-        alert('Failed to upload artist photo: ' + bioUploadError.message)
-        setIsSubmitting(false)
-        return
-      }
-      const { data: bioUrlData } = supabase.storage
-        .from('artist-images')
-        .getPublicUrl(bioImageName);
-      const bioImageUrl = bioUrlData.publicUrl;
-
-      // Upload song file
-      const sanitizedSongFileName = formData.songFile.name.replace(/[^a-zA-Z0-9.\-]/g, '_');
-      const songFileName = `${Date.now()}-${sanitizedSongFileName}`;
-      const { data: songUploadData, error: songUploadError } = await supabase.storage
-        .from('songs')
-        .upload(songFileName, formData.songFile, {
-          contentType: formData.songFile.type,
-          cacheControl: '3600'
-        });
-      if (songUploadError) {
-        alert('Failed to upload song file: ' + songUploadError.message)
-        setIsSubmitting(false)
-        return
-      }
-      const { data: songUrlData } = supabase.storage
-        .from('songs')
-        .getPublicUrl(songFileName);
-      const songFileUrl = songUrlData.publicUrl;
-
-      // --- Send metadata to API route ---
-      const response = await fetch('/api/artist-signup', {
+      // --- Send data to API route ---
+      const response = await fetch('/api/client-signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          artistName: formData.artistName,
+          fullName: formData.fullName,
+          title: formData.title,
+          company: formData.company,
+          teamSize: formData.teamSize,
+          industry: formData.industry,
           email: formData.email,
+          phone: formData.phone,
           password: formData.password,
           confirmPassword: formData.confirmPassword,
-          songName: formData.songName,
-          bio: formData.bio,
-          website: formData.website,
-          bioImageUrl,
-          songFileUrl,
-          songFileSize: formData.songFile.size,
-          songFileType: formData.songFile.type
+          safetyInterests: formData.safetyInterests,
+          agreeToTerms: formData.agreeToTerms
         })
       })
 
@@ -168,7 +124,7 @@ export default function ArtistSignup() {
       }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'There was an error creating your account. Please try again.'
-      alert(errorMessage)
+      setError(errorMessage)
       setIsSubmitting(false)
     }
   }
@@ -185,28 +141,28 @@ export default function ArtistSignup() {
         <div className="max-w-2xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">Create Your Artist Account</h1>
+            <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">Create Your Client Account</h1>
             <p className="text-lg text-gray-700 mb-8 text-center">
-              Upload your first song! Activate and sign-in to your artist dashboard to manage the songs on your artist page, hear the private feedback of visitors through voice comments, and access your paid contributions.
+              Create your account to access safety training courses, track your progress, and manage your certifications. Get started with comprehensive OSHA training programs designed for your industry.
             </p>
           </div>
 
           {/* Form */}
           <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-lg">
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Artist Name */}
+              {/* Client Name */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Artist Name *
+                  Full Name *
                 </label>
                 <input
                   type="text"
-                  name="artistName"
-                  value={formData.artistName}
+                  name="fullName"
+                  value={formData.fullName}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E55A2B] focus:border-[#E55A2B] text-gray-900 placeholder-gray-500"
-                  placeholder="Enter your artist name"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-gray-900 placeholder-gray-500"
+                  placeholder="Enter your full name"
                 />
               </div>
 
@@ -221,12 +177,108 @@ export default function ArtistSignup() {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E55A2B] focus:border-[#E55A2B] text-gray-900 placeholder-gray-500"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-gray-900 placeholder-gray-500"
                   placeholder="Enter your email address"
                 />
                 <p className="text-sm text-gray-500 mt-1">
                   We'll send a verification link to this email
                 </p>
+              </div>
+
+              {/* Phone */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Phone Number *
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-gray-900 placeholder-gray-500"
+                  placeholder="Enter your phone number"
+                />
+              </div>
+
+              {/* Title/Position */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Title/Position *
+                </label>
+                <input
+                  type="text"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-gray-900 placeholder-gray-500"
+                  placeholder="e.g., Safety Manager, HR Director, Operations Manager"
+                />
+              </div>
+
+              {/* Company */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Company Name *
+                </label>
+                <input
+                  type="text"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-gray-900 placeholder-gray-500"
+                  placeholder="Enter your company name"
+                />
+              </div>
+
+              {/* Team Size */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Team Size *
+                </label>
+                <select
+                  name="teamSize"
+                  value={formData.teamSize}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-gray-900"
+                >
+                  <option value="">Select team size</option>
+                  <option value="1-10">1-10 employees</option>
+                  <option value="11-50">11-50 employees</option>
+                  <option value="51-200">51-200 employees</option>
+                  <option value="201-500">201-500 employees</option>
+                  <option value="500+">500+ employees</option>
+                </select>
+              </div>
+
+              {/* Industry */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Industry *
+                </label>
+                <select
+                  name="industry"
+                  value={formData.industry}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-gray-900"
+                >
+                  <option value="">Select your industry</option>
+                  <option value="construction">Construction</option>
+                  <option value="manufacturing">Manufacturing</option>
+                  <option value="healthcare">Healthcare</option>
+                  <option value="oil-gas">Oil & Gas</option>
+                  <option value="mining">Mining</option>
+                  <option value="transportation">Transportation</option>
+                  <option value="retail">Retail</option>
+                  <option value="hospitality">Hospitality</option>
+                  <option value="education">Education</option>
+                  <option value="government">Government</option>
+                  <option value="other">Other</option>
+                </select>
               </div>
 
               {/* Password */}
@@ -241,7 +293,7 @@ export default function ArtistSignup() {
                   onChange={handleInputChange}
                   required
                   minLength={6}
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E55A2B] focus:border-[#E55A2B] text-gray-900 placeholder-gray-500"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-gray-900 placeholder-gray-500"
                   placeholder="Create a password (min 6 characters)"
                 />
               </div>
@@ -258,93 +310,55 @@ export default function ArtistSignup() {
                   onChange={handleInputChange}
                   required
                   minLength={6}
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E55A2B] focus:border-[#E55A2B] text-gray-900 placeholder-gray-500"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-gray-900 placeholder-gray-500"
                   placeholder="Confirm your password"
                 />
               </div>
 
-              {/* Song Name */}
+              {/* Safety Interests */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Song Name *
+                <label className="block text-sm font-medium text-gray-700 mb-3">
+                  Safety Training Interests (Select all that apply) *
                 </label>
-                <input
-                  type="text"
-                  name="songName"
-                  value={formData.songName}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E55A2B] focus:border-[#E55A2B] text-gray-900 placeholder-gray-500"
-                  placeholder="Enter the name of your song"
-                />
-              </div>
-
-              {/* Song File Upload */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Song File (MP3, WAV, M4A, AIFF, or AIF) *
-                </label>
-                <input
-                  type="file"
-                  name="songFile"
-                  onChange={handleFileChange}
-                  accept=".mp3,.wav,.m4a,.aiff,.aif"
-                  required
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E55A2B] focus:border-[#E55A2B] text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#E55A2B] file:text-white hover:file:bg-[#D14A1B]"
-                />
-                <p className="text-sm text-gray-500 mt-1">
-                  Maximum file size: 50MB
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {[
+                    'OSHA 10-Hour Construction',
+                    'OSHA 30-Hour Construction', 
+                    'OSHA 10-Hour General Industry',
+                    'OSHA 30-Hour General Industry',
+                    'HAZWOPER 40-Hour',
+                    'HAZWOPER 24-Hour',
+                    'HAZWOPER 8-Hour Refresher',
+                    'Confined Space Entry',
+                    'Fall Protection',
+                    'Scaffold Safety',
+                    'Electrical Safety',
+                    'Lockout/Tagout',
+                    'Personal Protective Equipment',
+                    'Workplace Violence Prevention',
+                    'Bloodborne Pathogens',
+                    'First Aid/CPR',
+                    'Forklift Safety',
+                    'Crane Safety',
+                    'Excavation Safety',
+                    'Heat Stress Prevention'
+                  ].map((interest) => (
+                    <label key={interest} className="flex items-center space-x-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={formData.safetyInterests.includes(interest)}
+                        onChange={(e) => handleSafetyInterestChange(interest, e.target.checked)}
+                        className="h-4 w-4 text-blue-600 focus:ring-blue-600 border-gray-300 rounded"
+                      />
+                      <span className="text-sm text-gray-700">{interest}</span>
+                    </label>
+                  ))}
+                </div>
+                <p className="text-sm text-gray-500 mt-2">
+                  Select the safety training topics that interest you or your team
                 </p>
               </div>
 
-              {/* Bio Image Upload */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Bio Image *
-                </label>
-                <input
-                  type="file"
-                  name="bioImage"
-                  onChange={handleFileChange}
-                  accept="image/*"
-                  required
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E55A2B] focus:border-[#E55A2B] text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#E55A2B] file:text-white hover:file:bg-[#D14A1B]"
-                />
-                <p className="text-sm text-gray-500 mt-1">
-                  Upload a profile image (JPG, PNG, or GIF)
-                </p>
-              </div>
-
-              {/* Bio */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Bio *
-                </label>
-                <textarea
-                  name="bio"
-                  value={formData.bio}
-                  onChange={handleInputChange}
-                  required
-                  rows={4}
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E55A2B] focus:border-[#E55A2B] text-gray-900 placeholder-gray-500 resize-none"
-                  placeholder="Tell us about yourself and your music..."
-                />
-              </div>
-
-              {/* Website */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Website (Optional)
-                </label>
-                <input
-                  type="url"
-                  name="website"
-                  value={formData.website}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E55A2B] focus:border-[#E55A2B] text-gray-900 placeholder-gray-500"
-                  placeholder="https://yourwebsite.com"
-                />
-              </div>
 
               {/* Terms Agreement */}
               <div className="flex items-start space-x-3">
@@ -354,14 +368,14 @@ export default function ArtistSignup() {
                   checked={formData.agreeToTerms}
                   onChange={handleInputChange}
                   required
-                  className="h-5 w-5 text-[#E55A2B] focus:ring-[#E55A2B] border-gray-300 rounded bg-gray-50 mt-0.5"
+                  className="h-5 w-5 text-blue-600 focus:ring-blue-600 border-gray-300 rounded bg-gray-50 mt-0.5"
                 />
                 <div className="text-sm text-gray-700">
                   <span>I agree to the </span>
                   <button
                     type="button"
                     onClick={openTerms}
-                    className="text-[#E55A2B] hover:text-[#D14A1B] underline"
+                    className="text-blue-600 hover:text-blue-700 underline"
                   >
                     Terms of Use
                   </button>
@@ -369,7 +383,7 @@ export default function ArtistSignup() {
                   <button
                     type="button"
                     onClick={openTerms}
-                    className="text-[#E55A2B] hover:text-[#D14A1B] underline"
+                    className="text-blue-600 hover:text-blue-700 underline"
                   >
                     Privacy Policy
                   </button>
@@ -381,9 +395,9 @@ export default function ArtistSignup() {
                 <button
                   type="submit"
                   disabled={isSubmitting || success}
-                  className="w-full py-4 bg-[#E55A2B] hover:bg-[#D14A1B] text-white rounded-xl transition-colors disabled:opacity-50 font-semibold text-lg"
+                  className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-colors disabled:opacity-50 font-semibold text-lg"
                 >
-                  {success ? 'Account Created Successfully!' : isSubmitting ? 'Creating Account...' : 'Create Artist Account'}
+                  {success ? 'Account Created Successfully!' : isSubmitting ? 'Creating Account...' : 'Create Client Account'}
                 </button>
               </div>
 
@@ -411,14 +425,14 @@ export default function ArtistSignup() {
                     </div>
                     
                     <p className="text-sm text-blue-700">
-                      Once you verify your email, you can login to access your artist dashboard.
+                      Once you verify your email, you can login to access your client dashboard.
                     </p>
                   </div>
                   
                   <div className="mt-6 space-y-3">
                     <button
                       onClick={() => router.push('/login')}
-                      className="bg-[#E55A2B] hover:bg-[#D14A1B] text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
                     >
                       Go to Login (After Confirming Email)
                     </button>
@@ -435,7 +449,7 @@ export default function ArtistSignup() {
                 <div className="text-center">
                   <p className="text-gray-600">
                     Already have an account?{' '}
-                    <Link href="/login" className="text-[#E55A2B] hover:text-[#D14A1B] underline">
+                    <Link href="/login" className="text-blue-600 hover:text-blue-700 underline">
                       Login here
                     </Link>
                   </p>
@@ -471,12 +485,12 @@ export default function ArtistSignup() {
                 Welcome to <strong>LaunchThatSong.com</strong>, a platform operated by <strong>Sudden Impact Labs LLC</strong> ("Company", "we", "us", "our"). These Terms and Conditions ("Terms") govern your access to and use of the LaunchThatSong.com website and its services ("Platform"). By creating an account or uploading content, you ("Artist", "User", or "You") agree to these Terms.
               </p>
 
-              <h2 className="text-xl font-bold text-[#E55A2B] mt-8 mb-4">1. Platform Purpose</h2>
+              <h2 className="text-xl font-bold text-blue-600 mt-8 mb-4">1. Platform Purpose</h2>
               <p className="mb-6">
                 LaunchThatSong.com enables artists to upload original, unreleased music and receive votes (monetary support) from fans to unlock distribution to Spotify and other platforms. The platform also offers NFT rewards for fans and artists.
               </p>
 
-              <h2 className="text-xl font-bold text-[#E55A2B] mt-8 mb-4">2. Content Ownership & Copyright</h2>
+              <h2 className="text-xl font-bold text-blue-600 mt-8 mb-4">2. Content Ownership & Copyright</h2>
               <ul className="mb-6 pl-6">
                 <li>You must own or have full legal rights to all music, lyrics, images, or media you upload.</li>
                 <li>Uploading copyrighted content that you do not own is strictly prohibited and will result in:
@@ -495,7 +509,7 @@ export default function ArtistSignup() {
                 <li>Sudden Impact Labs assumes no liability for potential misuses of AI and reserves the right to remove or flag AI-generated content.</li>
               </ul>
 
-              <h2 className="text-xl font-bold text-[#E55A2B] mt-8 mb-4">4. NFT Rewards and Digital Goods</h2>
+              <h2 className="text-xl font-bold text-blue-600 mt-8 mb-4">4. NFT Rewards and Digital Goods</h2>
               <ul className="mb-6 pl-6">
                 <li>Artists may optionally create NFTs offered to fans in exchange for votes or engagement.</li>
                 <li>By using this feature, you certify you have the legal right to issue the digital content included in the NFT.</li>
@@ -524,12 +538,12 @@ export default function ArtistSignup() {
                 <li>We are not obligated to review every upload, but we will take swift action on discovered violations.</li>
               </ul>
 
-              <h2 className="text-xl font-bold text-[#E55A2B] mt-8 mb-4">7. Limitation of Liability</h2>
+              <h2 className="text-xl font-bold text-blue-600 mt-8 mb-4">7. Limitation of Liability</h2>
               <p className="mb-6">
                 To the fullest extent permitted by law, Sudden Impact Labs shall not be held liable for user-submitted content, fraudulent activity, copyright violations, or NFT misrepresentation. You agree to indemnify and hold harmless Sudden Impact Labs from any claims arising from your use of the Platform.
               </p>
 
-              <h2 className="text-xl font-bold text-[#E55A2B] mt-8 mb-4">8. Business Operations</h2>
+              <h2 className="text-xl font-bold text-blue-600 mt-8 mb-4">8. Business Operations</h2>
               <ul className="mb-6 pl-6">
                 <li>We do not act as a publisher, label, distributor, or legal agent on behalf of any artist.</li>
                 <li>All content and promotional materials are user-submitted and not guaranteed to meet commercial, legal, or ethical standards.</li>

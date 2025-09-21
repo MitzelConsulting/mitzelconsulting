@@ -77,25 +77,25 @@ export default function LoginPage() {
           return
         }
 
-        // Check if user is an artist
-        const { data: artist, error: artistError } = await supabase
-          .from('artists')
+        // Check if user is a client
+        const { data: client, error: clientError } = await supabase
+          .from('clients')
           .select('id, status')
           .eq('email', email)
           .single()
 
-        console.log('Artist check result:', { artist, artistError })
+        console.log('Client check result:', { client, clientError })
 
-        if (artistError || !artist) {
-          setError('No artist or admin account found with this email')
+        if (clientError || !client) {
+          setError('No client or admin account found with this email')
         } else {
-          setUserType('artist')
+          setUserType('client')
           
-          // Check if artist account is approved
-          if (artist.status === 'pending') {
+          // Check if client account is approved
+          if (client.status === 'pending') {
             setError('Your account is pending admin approval. You will be notified once approved.')
           } else {
-            router.push('/artist-dashboard')
+            router.push('/client-dashboard')
           }
         }
       }
@@ -162,7 +162,7 @@ export default function LoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#E55A2B] focus:ring-2 focus:ring-[#E55A2B] transition-colors"
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600 transition-colors"
                 placeholder="your@email.com"
                 required
               />
@@ -184,7 +184,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={loading || resetEmailSent}
-                className="w-full bg-[#E55A2B] text-white hover:bg-[#D14A1B] py-3 px-6 rounded-lg font-semibold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-blue-600 text-white hover:bg-blue-700 py-3 px-6 rounded-lg font-semibold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? 'Sending...' : resetEmailSent ? 'Email Sent!' : 'Send Reset Link'}
               </button>
@@ -205,7 +205,7 @@ export default function LoginPage() {
               onClick={() => router.push('/')}
               className="text-gray-600 hover:text-gray-900 transition-colors text-sm"
             >
-              ← Back to Launch That Song
+              ← Back to Mitzel Safety Consulting
             </button>
           </div>
         </div>
@@ -217,8 +217,8 @@ export default function LoginPage() {
     <div className="min-h-screen bg-white flex items-center justify-center p-4">
       <div className="bg-white border border-gray-200 p-8 rounded-2xl max-w-md w-full shadow-lg">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Launch That Song</h1>
-          <p className="text-gray-600">Artist Sign Up and Login</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Mitzel Safety Consulting</h1>
+          <p className="text-gray-600">Client signup or login</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
@@ -231,7 +231,7 @@ export default function LoginPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#E55A2B] focus:ring-2 focus:ring-[#E55A2B] transition-colors"
+              className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600 transition-colors"
               placeholder="your@email.com"
               required
             />
@@ -246,7 +246,7 @@ export default function LoginPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#E55A2B] focus:ring-2 focus:ring-[#E55A2B] transition-colors"
+              className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600 transition-colors"
               placeholder="••••••••"
               required
             />
@@ -268,16 +268,16 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#E55A2B] text-white hover:bg-[#D14A1B] py-3 px-6 rounded-lg font-semibold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-blue-600 text-white hover:bg-blue-700 py-3 px-6 rounded-lg font-semibold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? 'Logging in...' : 'Login'}
             </button>
 
             <Link
               href="/artist-signup"
               className="w-full bg-gray-600 hover:bg-gray-700 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed inline-block text-center"
             >
-              Create Artist Account
+              Create Client Account
             </Link>
           </div>
         </form>

@@ -1,5 +1,5 @@
 -- =====================================================
--- MITZEL CONSULTING - ROW LEVEL SECURITY POLICIES
+-- MIZEL CONSULTING - ROW LEVEL SECURITY POLICIES
 -- =====================================================
 -- Comprehensive RLS policies for safety training platform
 -- Run this in Supabase SQL Editor after running mitzel_consulting_schema.sql
@@ -544,7 +544,7 @@ INSERT INTO admin_users (
   permissions,
   is_active
 ) VALUES (
-  'kris@mitzelconsulting.com',
+  'kris@mizelconsulting.com',
   'Kris',
   'Mitzel',
   'platform_admin',
@@ -587,4 +587,4 @@ COMMENT ON FUNCTION get_course_performance_analytics() IS 'Returns detailed cour
 -- 4. Performance indexes
 -- 5. Sample admin user setup
 
-SELECT 'Mitzel Consulting RLS policies and admin analytics functions created successfully!' as status;
+SELECT 'Mizel Consulting RLS policies and admin analytics functions created successfully!' as status;

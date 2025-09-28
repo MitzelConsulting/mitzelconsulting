@@ -17,6 +17,7 @@ const Chatbot = () => {
   const [inputValue, setInputValue] = useState('')
   const [isTyping, setIsTyping] = useState(false)
   const [email, setEmail] = useState('')
+  const [sessionId, setSessionId] = useState('')
   const [isDragging, setIsDragging] = useState(false)
   const [isResizing, setIsResizing] = useState(false)
   const [position, setPosition] = useState({ x: 20, y: 20 })
@@ -54,9 +55,13 @@ const Chatbot = () => {
     }
   }, [])
 
-  // Initialize welcome message
+  // Initialize session and welcome message
   useEffect(() => {
     if (isChatbotOpen && messages.length === 0) {
+      // Generate unique session ID
+      const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+      setSessionId(newSessionId)
+
       let welcomeText = "Welcome to your Mizel Course and Safety Training Advisor! I can help you search the entire site for training courses, understand safety requirements and which courses may fit your needs best, while ensuring your team gets the proper trainings and certifications. I'm loaded up with thousands of proprietary course materials, documents, and experiences in safety situations and trainings, so how can I support?"
       
       if (chatbotMode === 'manager') {
@@ -70,6 +75,9 @@ const Chatbot = () => {
         timestamp: new Date()
       }
       setMessages([welcomeMessage])
+
+      // Save welcome message to session
+      saveMessageToSession(newSessionId, welcomeText, false)
     }
   }, [isChatbotOpen, chatbotMode])
 
@@ -114,6 +122,28 @@ const Chatbot = () => {
     }
   }
 
+  const saveMessageToSession = async (sessionId: string, message: string, isUserMessage: boolean, email?: string) => {
+    try {
+      const sourcePage = window.location.pathname
+      await fetch('/api/chat-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sessionId,
+          email,
+          message,
+          isUserMessage,
+          sourcePage,
+          chatMode: chatbotMode
+        })
+      })
+    } catch (error) {
+      console.error('Error saving message to session:', error)
+    }
+  }
+
   const handleSendMessage = async (messageText?: string) => {
     const text = messageText || inputValue.trim()
     if (!text) return
@@ -128,6 +158,11 @@ const Chatbot = () => {
     setMessages(prev => [...prev, userMessage])
     setInputValue('')
     setIsTyping(true)
+
+    // Save user message to session
+    if (sessionId) {
+      await saveMessageToSession(sessionId, text, true, email || undefined)
+    }
 
     try {
       // Send search query to API for course search and analytics
@@ -166,10 +201,15 @@ const Chatbot = () => {
           timestamp: new Date()
         }
 
-        setTimeout(() => {
+        setTimeout(async () => {
           setMessages(prev => [...prev, aiResponse])
           setIsTyping(false)
           speak(aiResponse.text)
+          
+          // Save AI response to session
+          if (sessionId) {
+            await saveMessageToSession(sessionId, aiResponse.text, false, email || undefined)
+          }
         }, 1000)
       } else {
         // Fallback response if no courses found
@@ -180,10 +220,15 @@ const Chatbot = () => {
           timestamp: new Date()
         }
 
-        setTimeout(() => {
+        setTimeout(async () => {
           setMessages(prev => [...prev, aiResponse])
           setIsTyping(false)
           speak(aiResponse.text)
+          
+          // Save AI response to session
+          if (sessionId) {
+            await saveMessageToSession(sessionId, aiResponse.text, false, email || undefined)
+          }
         }, 1000)
       }
 
@@ -196,9 +241,14 @@ const Chatbot = () => {
         timestamp: new Date()
       }
       
-      setTimeout(() => {
+      setTimeout(async () => {
         setMessages(prev => [...prev, errorMessage])
         setIsTyping(false)
+        
+        // Save error message to session
+        if (sessionId) {
+          await saveMessageToSession(sessionId, errorMessage.text, false, email || undefined)
+        }
       }, 1000)
     }
   }
@@ -207,6 +257,40 @@ const Chatbot = () => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       handleSendMessage()
+    }
+  }
+
+  const handleEmailSubmit = async () => {
+    if (email && sessionId) {
+      try {
+        await fetch('/api/chat-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            sessionId,
+            email,
+            sourcePage: window.location.pathname,
+            chatMode: chatbotMode
+          })
+        })
+        console.log('Email captured successfully:', email)
+      } catch (error) {
+        console.error('Error capturing email:', error)
+      }
+    }
+  }
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newEmail = e.target.value
+    setEmail(newEmail)
+    
+    // Auto-submit email when it looks valid
+    if (newEmail && newEmail.includes('@') && newEmail.includes('.') && sessionId) {
+      setTimeout(() => {
+        handleEmailSubmit()
+      }, 1000) // Wait 1 second after user stops typing
     }
   }
 
@@ -348,20 +432,24 @@ const Chatbot = () => {
       </div>
 
       {/* Email Capture */}
-      {email === '' && messages.length > 2 && (
-        <div className="p-4 border-t border-gray-200">
-          <label className="block text-xl font-medium text-gray-700 mb-2">
-            Email for follow-up
-          </label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="your.email@company.com"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          />
-        </div>
-      )}
+      <div className="p-4 border-t border-gray-200">
+        <label className="block text-xl font-medium text-gray-700 mb-2">
+          {email ? 'Email captured ✓' : 'Provide your email address'}
+        </label>
+        <input
+          type="email"
+          value={email}
+          onChange={handleEmailChange}
+          placeholder="your.email@company.com"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          disabled={!!email}
+        />
+        {email && (
+          <p className="text-sm text-green-600 mt-1">
+            Thank you! We'll follow up with you soon.
+          </p>
+        )}
+      </div>
 
       {/* Input */}
       <div className="p-4 border-t border-gray-200">

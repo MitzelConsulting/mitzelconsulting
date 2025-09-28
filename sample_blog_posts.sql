@@ -1,4 +1,4 @@
--- Sample Blog Posts for Mitzel Consulting Demo
+-- Sample Blog Posts for Mizel Consulting Demo
 -- Insert sample blog posts into the database
 
 -- First, ensure we have blog categories
@@ -95,7 +95,7 @@ Remember, OSHA training is not just about compliance—it''s about protecting yo
   NOW() - INTERVAL '5 days',
   (SELECT id FROM blog_categories WHERE slug = 'osha-training'),
   ARRAY['OSHA training', 'safety certification', 'workplace safety', 'construction safety'],
-  'OSHA 10 vs 30 Hour Training: Complete Certification Guide | Mitzel Consulting',
+  'OSHA 10 vs 30 Hour Training: Complete Certification Guide | Mizel Consulting',
   'Learn the key differences between OSHA 10-Hour and 30-Hour training programs. Choose the right OSHA certification for your career with expert guidance.',
   ARRAY['OSHA 10 hour training', 'OSHA 30 hour training', 'OSHA certification', 'safety training comparison'],
   'published',
@@ -221,7 +221,7 @@ Choose the training level that matches your job responsibilities and exposure ri
   NOW() - INTERVAL '3 days',
   (SELECT id FROM blog_categories WHERE slug = 'hazwoper'),
   ARRAY['HAZWOPER training', 'hazardous waste', 'emergency response', 'OSHA compliance'],
-  'HAZWOPER Training Guide: Levels, Requirements & Certification | Mitzel Consulting',
+  'HAZWOPER Training Guide: Levels, Requirements & Certification | Mizel Consulting',
   'Complete guide to HAZWOPER training levels, requirements, and certification. Expert insights on hazardous waste operations and emergency response training.',
   ARRAY['HAZWOPER training', 'hazardous waste operations', 'emergency response training', 'OSHA HAZWOPER'],
   'published',
@@ -352,7 +352,7 @@ Implementing these construction safety best practices requires commitment from a
 
 Remember, the cost of preventing accidents is always less than the cost of dealing with them. Invest in safety training, proper equipment, and a strong safety culture to protect your workers and your business.
 
-For comprehensive OSHA training and safety consulting services, contact Mitzel Consulting. We provide expert guidance to help you implement effective safety programs and maintain compliance with all applicable regulations.',
+For comprehensive OSHA training and safety consulting services, contact Mizel Consulting. We provide expert guidance to help you implement effective safety programs and maintain compliance with all applicable regulations.',
   'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800',
   'Construction workers in safety gear on a construction site',
   'Kris Mitzel',
@@ -361,7 +361,7 @@ For comprehensive OSHA training and safety consulting services, contact Mitzel C
   NOW() - INTERVAL '1 day',
   (SELECT id FROM blog_categories WHERE slug = 'construction-safety'),
   ARRAY['construction safety', 'OSHA compliance', 'workplace safety', 'construction training'],
-  'Top 10 Construction Safety Best Practices 2024 | Mitzel Consulting',
+  'Top 10 Construction Safety Best Practices 2024 | Mizel Consulting',
   'Essential construction safety practices for 2024. Expert tips on OSHA compliance, fall protection, and creating a safe construction environment.',
   ARRAY['construction safety best practices', 'OSHA construction training', 'construction safety tips', 'workplace safety'],
   'published',
@@ -515,7 +515,7 @@ Fall protection is not optional in construction—it''s a critical safety requir
 
 Invest in proper fall protection systems, provide thorough training, and maintain a culture of safety to protect your workers from the leading cause of construction fatalities.
 
-For expert fall protection training and consultation, contact Mitzel Consulting. We provide comprehensive OSHA-compliant training programs tailored to your specific workplace needs.',
+For expert fall protection training and consultation, contact Mizel Consulting. We provide comprehensive OSHA-compliant training programs tailored to your specific workplace needs.',
   'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800',
   'Construction worker wearing fall protection harness on scaffolding',
   'Kris Mitzel',
@@ -524,7 +524,7 @@ For expert fall protection training and consultation, contact Mitzel Consulting.
   NOW() - INTERVAL '7 days',
   (SELECT id FROM blog_categories WHERE slug = 'construction-safety'),
   ARRAY['fall protection', 'construction safety', 'OSHA training', 'safety equipment'],
-  'Fall Protection Construction Safety Guide | Mitzel Consulting',
+  'Fall Protection Construction Safety Guide | Mizel Consulting',
   'Complete guide to fall protection in construction. Learn about safety systems, equipment, training, and OSHA compliance requirements.',
   ARRAY['fall protection training', 'construction fall safety', 'OSHA fall protection', 'safety harness'],
   'published',
@@ -689,7 +689,7 @@ Electrical safety requires constant vigilance and proper training. By understand
 
 Remember, electrical safety is everyone''s responsibility. Invest in proper training, maintain equipment properly, and always follow established safety procedures to protect yourself and your colleagues from electrical hazards.
 
-For comprehensive electrical safety training and consultation, contact Mitzel Consulting. We provide expert OSHA-compliant training programs designed to keep your workers safe from electrical hazards.',
+For comprehensive electrical safety training and consultation, contact Mizel Consulting. We provide expert OSHA-compliant training programs designed to keep your workers safe from electrical hazards.',
   'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800',
   'Electrical safety equipment and warning signs in industrial setting',
   'Kris Mitzel',
@@ -698,7 +698,7 @@ For comprehensive electrical safety training and consultation, contact Mitzel Co
   NOW() - INTERVAL '10 days',
   (SELECT id FROM blog_categories WHERE slug = 'general-safety'),
   ARRAY['electrical safety', 'OSHA training', 'lockout tagout', 'workplace safety'],
-  'Electrical Safety Workplace Guide: Preventing Electrical Accidents | Mitzel Consulting',
+  'Electrical Safety Workplace Guide: Preventing Electrical Accidents | Mizel Consulting',
   'Complete guide to electrical safety in the workplace. Learn about lockout/tagout, electrical hazards, and OSHA compliance requirements.',
   ARRAY['electrical safety training', 'lockout tagout procedures', 'electrical hazards', 'OSHA electrical standards'],
   'published',

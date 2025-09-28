@@ -1,4 +1,4 @@
-# Mitzel Consulting - Safety Training Platform
+# Mizel Consulting - Safety Training Platform
 
 A comprehensive safety training platform built with Next.js 15, providing OSHA certification courses, on-site training booking, and client management for HR directors and companies.
 
@@ -50,4 +50,4 @@ The platform is deployed on Vercel with automatic deployments from the main bran
 
 ## Contact
 
-For questions about safety training services, contact Kris Mitzel at kris@mitzelconsulting.com
+For questions about safety training services, contact Kris Mitzel at kris@mizelconsulting.com

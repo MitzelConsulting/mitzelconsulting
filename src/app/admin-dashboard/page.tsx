@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import EmailAnalytics from '@/components/EmailAnalytics'
 
 const AdminDashboard = () => {
   const router = useRouter()
@@ -14,10 +15,47 @@ const AdminDashboard = () => {
     totalInquiries: 0
   })
   const [loading, setLoading] = useState(true)
+  const [adminUser, setAdminUser] = useState<any>(null)
+  const [authLoading, setAuthLoading] = useState(true)
 
   useEffect(() => {
+    checkAdminAuth()
     fetchDashboardData()
   }, [])
+
+  const checkAdminAuth = () => {
+    try {
+      const adminSession = localStorage.getItem('adminSession')
+      if (adminSession) {
+        const sessionData = JSON.parse(adminSession)
+        const now = Date.now()
+        const sessionAge = now - sessionData.timestamp
+        
+        // Check if session is less than 24 hours old
+        if (sessionAge < 24 * 60 * 60 * 1000) {
+          setAdminUser(sessionData.admin)
+          setAuthLoading(false)
+          return
+        } else {
+          // Session expired, remove it
+          localStorage.removeItem('adminSession')
+        }
+      }
+      
+      // No valid session, redirect to login
+      router.push('/login')
+    } catch (error) {
+      console.error('Error checking admin auth:', error)
+      router.push('/login')
+    } finally {
+      setAuthLoading(false)
+    }
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('adminSession')
+    router.push('/login')
+  }
 
   const fetchDashboardData = async () => {
     try {
@@ -45,7 +83,7 @@ const AdminDashboard = () => {
     }
   }
 
-  if (loading) {
+  if (authLoading || loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
@@ -56,18 +94,39 @@ const AdminDashboard = () => {
     )
   }
 
+  if (!adminUser) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-xl text-gray-600">Redirecting to login...</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="bg-white shadow">
         <div className="container mx-auto px-4 py-6">
           <div className="flex justify-between items-center">
-            <h1 className="text-8xl md:text-10xl font-bold text-gray-900 mb-6 title-black">Admin Dashboard</h1>
+            <div>
+              <h1 className="text-8xl md:text-10xl font-bold text-gray-900 mb-2 title-black">Admin Dashboard</h1>
+              <p className="text-xl text-gray-600">Welcome, {adminUser.firstName} {adminUser.lastName}</p>
+            </div>
+            <div className="flex gap-4">
               <button
-              onClick={() => router.push('/')}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Back to Site
+                onClick={handleLogout}
+                className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors"
+              >
+                Logout
               </button>
+              <button
+                onClick={() => router.push('/')}
+                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Back to Site
+              </button>
+            </div>
           </div>
         </div>
         </div>
@@ -159,6 +218,9 @@ const AdminDashboard = () => {
             </div>
           </div>
                   </div>
+
+        {/* Email Analytics */}
+        <EmailAnalytics className="mb-8" />
 
         {/* Course Search Analytics */}
         <div className="bg-white rounded-lg shadow-lg p-6">

@@ -147,7 +147,7 @@ export default function BlogPage() {
             Safety Training Blog
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Expert insights, OSHA updates, and best practices for workplace safety. Stay informed.
+            Expert insights, OSHA updates, and best practices for workplace safety.
           </p>
         </div>
       </section>

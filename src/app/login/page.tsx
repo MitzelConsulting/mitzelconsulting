@@ -48,6 +48,37 @@ export default function LoginPage() {
 
     try {
       console.log('Attempting login with email:', email)
+      
+      // First, try admin login
+      try {
+        const adminResponse = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        })
+
+        if (adminResponse.ok) {
+          const adminData = await adminResponse.json()
+          console.log('Admin user authenticated:', adminData.admin)
+          setUserType('admin')
+          
+          // Store admin session in localStorage
+          localStorage.setItem('adminSession', JSON.stringify({
+            admin: adminData.admin,
+            sessionToken: adminData.sessionToken,
+            timestamp: Date.now()
+          }))
+          
+          router.push('/admin-dashboard')
+          return
+        }
+      } catch (adminError) {
+        console.log('Admin login failed, trying regular auth:', adminError)
+      }
+
+      // If admin login fails, try regular Supabase auth for clients
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -58,24 +89,6 @@ export default function LoginPage() {
         setError(error.message)
       } else if (data.user) {
         console.log('User authenticated:', data.user.email)
-        
-        // Check if user is an admin using the admin_users table (by email)
-        const { data: adminUser, error: adminError } = await supabase
-          .from('admin_users')
-          .select('id, role, is_active')
-          .eq('email', email)
-          .eq('role', 'admin')
-          .single()
-        
-        console.log('Admin check result:', { adminUser, adminError })
-        
-        if (!adminError && adminUser) {
-          // User is an admin
-          console.log('Admin user authenticated:', adminUser)
-          setUserType('admin')
-          router.push('/admin-dashboard')
-          return
-        }
 
         // Check if user is a client
         const { data: client, error: clientError } = await supabase

@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS blog_posts (
     excerpt TEXT,
     slug TEXT UNIQUE NOT NULL,
     category_id UUID REFERENCES blog_categories(id),
-    author_name TEXT DEFAULT 'Mitzel Consulting Team',
+    author_name TEXT DEFAULT 'Mizel Consulting Team',
     published_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),

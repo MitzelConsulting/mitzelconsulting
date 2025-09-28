@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useChatbot } from '@/context/ChatbotContext';
 
 interface FAQItem {
   question: string;
@@ -128,6 +129,8 @@ export default function FAQPage() {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const { setIsChatbotOpen, setChatbotMode } = useChatbot();
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
@@ -139,24 +142,40 @@ export default function FAQPage() {
 
   const handleConsultationSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    // Handle form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setShowConsultationForm(false);
+    try {
+      setIsSubmitting(true);
+      console.log('Consultation form submitted:', consultationForm);
+      
+      // Here you would typically send the form data to your backend
+      alert('Consultation request sent successfully! Our CEO, Kris Mizel, will get back to you soon.');
+      
+      // Reset form
       setConsultationForm({ name: '', email: '', company: '', trainingNeeds: '' });
-    }, 1000);
+      setShowConsultationForm(false);
+    } catch (error) {
+      console.error('Consultation form error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    // Handle form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setShowContactForm(false);
+    try {
+      setIsSubmitting(true);
+      console.log('Contact form submitted:', contactForm);
+      
+      // Here you would typically send the form data to your backend
+      alert('Message sent successfully! Our CEO, Kris Mizel, will get back to you soon.');
+      
+      // Reset form
       setContactForm({ name: '', email: '', message: '' });
-    }, 1000);
+      setShowContactForm(false);
+    } catch (error) {
+      console.error('Contact form error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -167,11 +186,6 @@ export default function FAQPage() {
           <h1 className="text-8xl md:text-10xl font-bold text-gray-900 mb-6 title-black">
             Frequently Asked Questions
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Can't find what you're looking for? <br />
-            Our AI can answer thousands of questions. <br />
-            Or, get in touch with our CEO, Kris Mizel, below.
-          </p>
         </div>
       </div>
 
@@ -245,16 +259,32 @@ export default function FAQPage() {
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
-                  onClick={() => setShowConsultationForm(true)}
-                  className="bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors"
+                  onClick={() => setShowConsultationForm(!showConsultationForm)}
+                  className="bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
                 >
-                  Request Training Consultation
+                  <span>Request Training Consultation</span>
+                  <svg 
+                    className={`w-4 h-4 transition-transform duration-200 ${showConsultationForm ? 'rotate-180' : ''}`} 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
                 </button>
                 <button
-                  onClick={() => setShowContactForm(true)}
-                  className="bg-transparent border-2 border-blue-600 text-blue-600 font-semibold py-3 px-8 rounded-lg hover:bg-blue-600 hover:text-white transition-colors"
+                  onClick={() => setShowContactForm(!showContactForm)}
+                  className="bg-transparent border-2 border-blue-600 text-blue-600 font-semibold py-3 px-8 rounded-lg hover:bg-blue-600 hover:text-white transition-colors flex items-center justify-center gap-2"
                 >
-                  Contact Us
+                  <span>Contact Us</span>
+                  <svg 
+                    className={`w-4 h-4 transition-transform duration-200 ${showContactForm ? 'rotate-180' : ''}`} 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
                 </button>
               </div>
             </div>
@@ -264,180 +294,193 @@ export default function FAQPage() {
 
       {/* Request Training Consultation Form */}
       {showConsultationForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-2xl font-bold text-gray-900">
+        <section className="transition-all duration-500 ease-in-out opacity-100 py-16">
+          <div className="container mx-auto px-4">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+              <div className="text-center mb-6">
+                <h3 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-2">
                   Request Training Consultation
                 </h3>
-                <button
-                  onClick={() => setShowConsultationForm(false)}
-                  className="text-gray-400 hover:text-gray-600"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
+                <p className="text-gray-600 text-2xl">
+                  Get personalized guidance on certification requirements and training options from our CEO, Kris Mizel.
+                </p>
               </div>
               
               <form onSubmit={handleConsultationSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="consultation-name" className="block text-xl font-medium text-gray-700 mb-2">
                       Full Name *
                     </label>
                     <input
                       type="text"
+                      id="consultation-name"
                       required
                       value={consultationForm.name}
                       onChange={(e) => setConsultationForm({...consultationForm, name: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="consultation-email" className="block text-xl font-medium text-gray-700 mb-2">
                       Email Address *
                     </label>
                     <input
                       type="email"
+                      id="consultation-email"
                       required
                       value={consultationForm.email}
                       onChange={(e) => setConsultationForm({...consultationForm, email: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="consultation-company" className="block text-xl font-medium text-gray-700 mb-2">
                     Company Name
                   </label>
                   <input
                     type="text"
+                    id="consultation-company"
                     value={consultationForm.company}
                     onChange={(e) => setConsultationForm({...consultationForm, company: e.target.value})}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="consultation-training-needs" className="block text-xl font-medium text-gray-700 mb-2">
                     Training Needs *
                   </label>
                   <textarea
+                    id="consultation-training-needs"
                     required
                     rows={4}
                     value={consultationForm.trainingNeeds}
                     onChange={(e) => setConsultationForm({...consultationForm, trainingNeeds: e.target.value})}
                     placeholder="Please describe your training requirements, number of employees, timeline, and any specific compliance needs..."
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none text-xl"
                   />
                 </div>
                 
-                <div className="flex justify-end space-x-4">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || !consultationForm.name || !consultationForm.email || !consultationForm.trainingNeeds}
+                    className="w-full sm:w-auto bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        Submitting...
+                      </>
+                    ) : (
+                      'Send Request'
+                    )}
+                  </button>
+                  
                   <button
                     type="button"
                     onClick={() => setShowConsultationForm(false)}
-                    className="px-6 py-2 text-gray-600 hover:text-gray-800 transition-colors"
+                    className="w-full sm:w-auto px-6 py-3 text-gray-600 hover:text-gray-800 transition-colors border border-gray-300 rounded-lg hover:bg-gray-50"
                   >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                  >
-                    {isSubmitting ? 'Submitting...' : 'Send Request'}
+                    Close
                   </button>
                 </div>
               </form>
             </div>
           </div>
-        </div>
+        </section>
       )}
 
       {/* Contact Form */}
       {showContactForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-2xl font-bold text-gray-900">
+        <section className="transition-all duration-500 ease-in-out opacity-100 py-16">
+          <div className="container mx-auto px-4">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+              <div className="text-center mb-6">
+                <h3 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-2">
                   Contact Us
                 </h3>
-                <button
-                  onClick={() => setShowContactForm(false)}
-                  className="text-gray-400 hover:text-gray-600"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
+                <p className="text-gray-600 text-2xl">
+                  Complete the form with a message and our CEO, Kris Mizel, will get back to you as soon as possible.
+                </p>
               </div>
               
               <form onSubmit={handleContactSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="contact-name" className="block text-xl font-medium text-gray-700 mb-2">
                       Full Name *
                     </label>
                     <input
                       type="text"
+                      id="contact-name"
                       required
                       value={contactForm.name}
                       onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="contact-email" className="block text-xl font-medium text-gray-700 mb-2">
                       Email Address *
                     </label>
                     <input
                       type="email"
+                      id="contact-email"
                       required
                       value={contactForm.email}
                       onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="contact-message" className="block text-xl font-medium text-gray-700 mb-2">
                     Message *
                   </label>
                   <textarea
+                    id="contact-message"
                     required
                     rows={6}
                     value={contactForm.message}
                     onChange={(e) => setContactForm({...contactForm, message: e.target.value})}
-                    placeholder="Complete the form with a message and our CEO, Kris Mizel, will get back to you as soon as possible."
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                    placeholder="Tell us about your safety training needs, questions, or how we can help..."
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none text-xl"
                   />
                 </div>
                 
-                <div className="flex justify-end space-x-4">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || !contactForm.name || !contactForm.email || !contactForm.message}
+                    className="w-full sm:w-auto bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        Sending...
+                      </>
+                    ) : (
+                      'Send Message'
+                    )}
+                  </button>
+                  
                   <button
                     type="button"
                     onClick={() => setShowContactForm(false)}
-                    className="px-6 py-2 text-gray-600 hover:text-gray-800 transition-colors"
+                    className="w-full sm:w-auto px-6 py-3 text-gray-600 hover:text-gray-800 transition-colors border border-gray-300 rounded-lg hover:bg-gray-50"
                   >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                  >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                    Close
                   </button>
                 </div>
               </form>
             </div>
           </div>
-        </div>
+        </section>
       )}
 
       {/* Popular Training Topics */}
@@ -531,19 +574,16 @@ export default function FAQPage() {
           <p className="text-xl mb-8 max-w-3xl mx-auto">
             Join thousands of professionals who trust Mizel Safety Consulting for their safety training needs.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              href="/courses"
-              className="bg-white text-blue-600 font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors"
+          <div className="flex justify-center">
+            <button
+              onClick={() => {
+                setChatbotMode('default');
+                setIsChatbotOpen(true);
+              }}
+              className="bg-white text-blue-600 font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors text-xl"
             >
-              View All Courses
-            </Link>
-            <Link 
-              href="/contact"
-              className="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-blue-600 transition-colors"
-            >
-              Contact Us Today
-            </Link>
+              Connect With Us
+            </button>
           </div>
         </div>
       </section>

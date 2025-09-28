@@ -7,25 +7,53 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
 export async function POST(request: NextRequest) {
   try {
-    const { query, email, mode = 'default' } = await request.json()
+    const { query, email, mode = 'default', sessionId } = await request.json()
 
     if (!query) {
       return NextResponse.json({ error: 'Search query is required' }, { status: 400 })
     }
 
+    // Extract keywords from the search query
+    const { data: keywordsData, error: keywordsError } = await supabase
+      .rpc('extract_keywords', { search_text: query })
+
+    const keywords = keywordsError ? [] : (keywordsData || [])
+
     // Store the search query for analytics
-    const { error: analyticsError } = await supabase
+    const { data: searchRecord, error: analyticsError } = await supabase
       .from('course_search_analytics')
       .insert({
         search_query: query,
+        keywords: keywords,
         user_email: email || null,
-        search_timestamp: new Date().toISOString(),
-        ip_address: request.headers.get('x-forwarded-for') || 'unknown'
+        source_page: request.headers.get('referer') || 'unknown',
+        search_mode: mode,
+        session_id: sessionId || null,
+        ip_address: request.headers.get('x-forwarded-for') || 'unknown',
+        user_agent: request.headers.get('user-agent') || 'unknown'
       })
+      .select()
+      .single()
 
     if (analyticsError) {
       console.error('Analytics error:', analyticsError)
       // Don't fail the request if analytics fails
+    } else if (searchRecord && keywords.length > 0) {
+      // Store individual keywords
+      const keywordInserts = keywords.map((keyword, index) => ({
+        keyword: keyword,
+        search_id: searchRecord.id,
+        position: index + 1,
+        is_primary: index === 0
+      }))
+
+      const { error: keywordError } = await supabase
+        .from('course_search_keywords')
+        .insert(keywordInserts)
+
+      if (keywordError) {
+        console.error('Keyword tracking error:', keywordError)
+      }
     }
 
     // Handle enterprise manager mode
@@ -44,12 +72,24 @@ export async function POST(request: NextRequest) {
     const { data: courses, error: coursesError } = await supabase
       .from('courses')
       .select('*')
-      .or(`title.ilike.%${query}%,description.ilike.%${query}%,category.ilike.%${query}%,tags.cs.{${query}}`)
+      .or(`title.ilike.%${query}%,description.ilike.%${query}%,category.ilike.%${query}%`)
       .limit(5)
 
     if (coursesError) {
       console.error('Courses search error:', coursesError)
       return NextResponse.json({ error: 'Failed to search courses' }, { status: 500 })
+    }
+
+    // Update the search record with results count
+    if (searchRecord) {
+      const { error: updateError } = await supabase
+        .from('course_search_analytics')
+        .update({ results_count: courses?.length || 0 })
+        .eq('id', searchRecord.id)
+
+      if (updateError) {
+        console.error('Error updating search results count:', updateError)
+      }
     }
 
     return NextResponse.json({

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import EmailAnalytics from '@/components/EmailAnalytics'
 import ChatAnalytics from '@/components/ChatAnalytics'
+import CourseKeywordsAnalytics from '@/components/CourseKeywordsAnalytics'
 
 const AdminDashboard = () => {
   const router = useRouter()
@@ -243,6 +244,9 @@ const AdminDashboard = () => {
 
         {/* Chat Analytics */}
         <ChatAnalytics className="mb-8" />
+
+        {/* Course Keywords Analytics */}
+        <CourseKeywordsAnalytics className="mb-8" />
 
         {/* Course Search Analytics */}
         <div className="bg-white rounded-lg shadow-lg p-6">

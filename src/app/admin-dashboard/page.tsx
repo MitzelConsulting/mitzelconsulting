@@ -9,7 +9,8 @@ const AdminDashboard = () => {
   const router = useRouter()
   const [stats, setStats] = useState({
     totalCourses: 0,
-    totalStudents: 0,
+    totalUsers: 0,
+    digitalClients: 0,
     totalRevenue: 0,
     pendingApprovals: 0,
     courseSearches: 0,
@@ -60,22 +61,25 @@ const AdminDashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
-      // Fetch course analytics
-      const [courseSearchRes, coursesRes] = await Promise.all([
+      // Fetch all dashboard data
+      const [courseSearchRes, coursesRes, analyticsRes] = await Promise.all([
         fetch('/api/course-search'),
-        fetch('/api/courses')
+        fetch('/api/courses'),
+        fetch('/api/analytics/dashboard')
       ])
       
       const courseSearchData = await courseSearchRes.json()
       const coursesData = await coursesRes.json()
+      const analyticsData = await analyticsRes.json()
 
       setStats({
         totalCourses: coursesData?.courses?.length || 0,
-        totalStudents: 0, // Placeholder for student count
-        totalRevenue: 0, // Placeholder for revenue
-        pendingApprovals: 0, // Placeholder for pending approvals
+        totalUsers: analyticsData?.analytics?.totalUsers || 0,
+        digitalClients: analyticsData?.analytics?.digitalClients || 0,
+        totalRevenue: analyticsData?.analytics?.totalRevenue || 0,
+        pendingApprovals: analyticsData?.analytics?.pendingApprovals || 0,
         courseSearches: courseSearchData?.analytics?.length || 0,
-        totalInquiries: 0 // Placeholder for inquiries
+        totalInquiries: analyticsData?.analytics?.totalInquiries || 0
       })
     } catch (error) {
       console.error('Error fetching dashboard data:', error)
@@ -157,11 +161,25 @@ const AdminDashboard = () => {
                     </svg>
                   </div>
                   <div className="ml-4">
-                <p className="text-2xl font-semibold text-gray-900">{stats.totalStudents}</p>
-                <p className="text-gray-600">Registered Students</p>
+                <p className="text-2xl font-semibold text-gray-900">{stats.totalUsers}</p>
+                <p className="text-gray-600">Registered Users</p>
                   </div>
                 </div>
               </div>
+
+          <div className="bg-white rounded-lg shadow-lg p-6">
+                <div className="flex items-center">
+              <div className="p-3 bg-indigo-100 rounded-full">
+                <svg className="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div className="ml-4">
+                <p className="text-2xl font-semibold text-gray-900">{stats.digitalClients}</p>
+                <p className="text-gray-600">Digital Clients</p>
+              </div>
+            </div>
+          </div>
 
           <div className="bg-white rounded-lg shadow-lg p-6">
                 <div className="flex items-center">

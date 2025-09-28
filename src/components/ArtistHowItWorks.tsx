@@ -50,7 +50,7 @@ const SafetyTrainingHowItWorks = () => {
   const handleAISafetyAssistantClick = () => {
     console.log('AI Safety Assistant card clicked!')
     setIsChatbotOpen(true)
-    setChatbotMode('safety')
+    setChatbotMode('default')
   }
 
   return (

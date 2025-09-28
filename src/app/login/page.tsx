@@ -13,7 +13,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
-  const [userType, setUserType] = useState<'artist' | 'admin' | null>(null)
+  const [userType, setUserType] = useState<'artist' | 'admin' | 'client' | null>(null)
   const [showForgotPassword, setShowForgotPassword] = useState(false)
   const [resetEmailSent, setResetEmailSent] = useState(false)
 

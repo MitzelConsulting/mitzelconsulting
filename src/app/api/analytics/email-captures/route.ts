@@ -1,40 +1,54 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabaseClient';
+import { createClient } from '@supabase/supabase-js';
+
+// Create a Supabase client with service role key for admin operations
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder_key'
+
+// Only create the client if we have real credentials
+const supabase = supabaseUrl !== 'https://placeholder.supabase.co' && supabaseServiceKey !== 'placeholder_key'
+  ? createClient(supabaseUrl, supabaseServiceKey)
+  : null
 
 export async function GET(request: NextRequest) {
   try {
+    // If we don't have a valid Supabase client, return an error
+    if (!supabase) {
+      return NextResponse.json(
+        { success: false, error: 'Database connection not available' },
+        { status: 503 }
+      )
+    }
+
     // Get all email captures with session details
     const { data: emailCaptures, error } = await supabase
       .from('email_captures')
       .select(`
         *,
-        chat_sessions!inner(
+        chat_sessions(
           id,
-          session_id,
           created_at,
-          total_messages
+          message_count
         )
       `)
       .order('captured_at', { ascending: false });
 
     if (error) {
       console.error('Error fetching email captures:', error);
-      return NextResponse.json({ error: 'Failed to fetch email captures' }, { status: 500 });
+      return NextResponse.json({ 
+        success: false,
+        error: 'Failed to fetch email captures',
+        details: error.message 
+      }, { status: 500 });
     }
 
-    // Get summary statistics
-    const { data: stats, error: statsError } = await supabase
-      .from('email_captures')
-      .select('captured_at, total_messages');
-
-    if (statsError) {
-      console.error('Error fetching stats:', statsError);
-      return NextResponse.json({ error: 'Failed to fetch statistics' }, { status: 500 });
-    }
-
-    // Calculate statistics
-    const totalCaptures = stats?.length || 0;
-    const totalMessages = stats?.reduce((sum, capture) => sum + (capture.total_messages || 0), 0) || 0;
+    // Calculate statistics from the email captures data
+    const totalCaptures = emailCaptures?.length || 0;
+    const totalMessages = emailCaptures?.reduce((sum, capture) => {
+      // Get message count from the related chat session
+      const chatSession = capture.chat_sessions;
+      return sum + (chatSession?.message_count || 0);
+    }, 0) || 0;
     const avgMessagesPerCapture = totalCaptures > 0 ? Math.round(totalMessages / totalCaptures) : 0;
 
     // Get captures by day for the last 30 days

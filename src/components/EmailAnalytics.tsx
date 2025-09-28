@@ -34,6 +34,27 @@ export default function EmailAnalytics({ className = '' }: EmailAnalyticsProps) 
   const [selectedCapture, setSelectedCapture] = useState<EmailCapture | null>(null)
   const [chatHistory, setChatHistory] = useState<any[]>([])
 
+  // Tooltip component
+  const Tooltip = ({ children, content }: { children: React.ReactNode; content: string }) => {
+    const [showTooltip, setShowTooltip] = useState(false)
+
+    return (
+      <div 
+        className="relative"
+        onMouseEnter={() => setShowTooltip(true)}
+        onMouseLeave={() => setShowTooltip(false)}
+      >
+        {children}
+        {showTooltip && (
+          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg shadow-lg z-50 max-w-xs">
+            <div className="whitespace-pre-line">{content}</div>
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+          </div>
+        )}
+      </div>
+    )
+  }
+
   useEffect(() => {
     fetchEmailAnalytics()
   }, [])
@@ -112,18 +133,24 @@ export default function EmailAnalytics({ className = '' }: EmailAnalyticsProps) 
 
       {/* Statistics */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div className="bg-blue-50 p-4 rounded-lg">
-          <h3 className="text-sm font-medium text-blue-600">Total Email Captures</h3>
-          <p className="text-2xl font-bold text-blue-900">{statistics.totalCaptures}</p>
-        </div>
-        <div className="bg-green-50 p-4 rounded-lg">
-          <h3 className="text-sm font-medium text-green-600">Total Messages</h3>
-          <p className="text-2xl font-bold text-green-900">{statistics.totalMessages}</p>
-        </div>
-        <div className="bg-purple-50 p-4 rounded-lg">
-          <h3 className="text-sm font-medium text-purple-600">Avg Messages/Capture</h3>
-          <p className="text-2xl font-bold text-purple-900">{statistics.avgMessagesPerCapture}</p>
-        </div>
+        <Tooltip content="Total number of email addresses captured from users who provided their contact information during chat sessions or through contact forms. This count represents all unique email captures from the email_captures table.">
+          <div className="bg-blue-50 p-4 rounded-lg cursor-help">
+            <h3 className="text-sm font-medium text-blue-600">Total Email Captures</h3>
+            <p className="text-2xl font-bold text-blue-900">{statistics.totalCaptures}</p>
+          </div>
+        </Tooltip>
+        <Tooltip content="Total number of messages exchanged across all chat sessions that resulted in email captures. This count is calculated by summing the total_messages field from all email capture records.">
+          <div className="bg-green-50 p-4 rounded-lg cursor-help">
+            <h3 className="text-sm font-medium text-green-600">Total Messages</h3>
+            <p className="text-2xl font-bold text-green-900">{statistics.totalMessages}</p>
+          </div>
+        </Tooltip>
+        <Tooltip content="Average number of messages per email capture session. This is calculated by dividing the total messages by the total number of email captures, giving insight into user engagement levels before providing contact information.">
+          <div className="bg-purple-50 p-4 rounded-lg cursor-help">
+            <h3 className="text-sm font-medium text-purple-600">Avg Messages/Capture</h3>
+            <p className="text-2xl font-bold text-purple-900">{statistics.avgMessagesPerCapture}</p>
+          </div>
+        </Tooltip>
       </div>
 
       {/* Email Captures List */}

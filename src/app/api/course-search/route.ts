@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
       // Don't fail the request if analytics fails
     } else if (searchRecord && keywords.length > 0) {
       // Store individual keywords
-      const keywordInserts = keywords.map((keyword, index) => ({
+      const keywordInserts = keywords.map((keyword: any, index: number) => ({
         keyword: keyword,
         search_id: searchRecord.id,
         position: index + 1,

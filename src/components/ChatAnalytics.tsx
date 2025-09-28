@@ -32,6 +32,27 @@ const ChatAnalytics: React.FC<{ className?: string }> = ({ className = '' }) => 
   const [error, setError] = useState<string | null>(null)
   const [showModal, setShowModal] = useState(false)
 
+  // Tooltip component
+  const Tooltip = ({ children, content }: { children: React.ReactNode; content: string }) => {
+    const [showTooltip, setShowTooltip] = useState(false)
+
+    return (
+      <div 
+        className="relative"
+        onMouseEnter={() => setShowTooltip(true)}
+        onMouseLeave={() => setShowTooltip(false)}
+      >
+        {children}
+        {showTooltip && (
+          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg shadow-lg z-50 max-w-xs">
+            <div className="whitespace-pre-line">{content}</div>
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+          </div>
+        )}
+      </div>
+    )
+  }
+
   useEffect(() => {
     fetchChatSessions()
   }, [])
@@ -135,22 +156,30 @@ const ChatAnalytics: React.FC<{ className?: string }> = ({ className = '' }) => 
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div className="bg-blue-50 p-6 rounded-lg">
-          <div className="text-2xl font-bold text-blue-600">{stats.totalSessions}</div>
-          <div className="text-sm text-gray-600">Total Sessions</div>
-        </div>
-        <div className="bg-green-50 p-6 rounded-lg">
-          <div className="text-2xl font-bold text-green-600">{stats.totalMessages}</div>
-          <div className="text-sm text-gray-600">Total Messages</div>
-        </div>
-        <div className="bg-purple-50 p-6 rounded-lg">
-          <div className="text-2xl font-bold text-purple-600">{stats.sessionsWithEmail}</div>
-          <div className="text-sm text-gray-600">With Contact Info</div>
-        </div>
-        <div className="bg-orange-50 p-6 rounded-lg">
-          <div className="text-2xl font-bold text-orange-600">{stats.averageMessages}</div>
-          <div className="text-sm text-gray-600">Avg Messages/Session</div>
-        </div>
+        <Tooltip content="Total number of chat sessions initiated by users with the AI assistant. This count represents all unique chat sessions from the chat_sessions table, regardless of whether users provided contact information.">
+          <div className="bg-blue-50 p-6 rounded-lg cursor-help">
+            <div className="text-2xl font-bold text-blue-600">{stats.totalSessions}</div>
+            <div className="text-sm text-gray-600">Total Sessions</div>
+          </div>
+        </Tooltip>
+        <Tooltip content="Total number of messages exchanged across all chat sessions. This count is calculated by summing the message_count field from all chat session records, representing total user engagement with the AI assistant.">
+          <div className="bg-green-50 p-6 rounded-lg cursor-help">
+            <div className="text-2xl font-bold text-green-600">{stats.totalMessages}</div>
+            <div className="text-sm text-gray-600">Total Messages</div>
+          </div>
+        </Tooltip>
+        <Tooltip content="Number of chat sessions where users provided their contact information (email address). This count represents sessions where user_email is not 'No email provided', indicating users who showed interest in follow-up communication.">
+          <div className="bg-purple-50 p-6 rounded-lg cursor-help">
+            <div className="text-2xl font-bold text-purple-600">{stats.sessionsWithEmail}</div>
+            <div className="text-sm text-gray-600">With Contact Info</div>
+          </div>
+        </Tooltip>
+        <Tooltip content="Average number of messages per chat session. This is calculated by dividing the total messages by the total number of sessions, providing insight into user engagement depth and conversation quality.">
+          <div className="bg-orange-50 p-6 rounded-lg cursor-help">
+            <div className="text-2xl font-bold text-orange-600">{stats.averageMessages}</div>
+            <div className="text-sm text-gray-600">Avg Messages/Session</div>
+          </div>
+        </Tooltip>
       </div>
 
       {/* Sessions Table */}

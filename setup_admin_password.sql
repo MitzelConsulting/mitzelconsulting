@@ -89,10 +89,10 @@ BEGIN
   RETURN QUERY
   SELECT 
     au.id,
-    au.email,
-    au.first_name,
-    au.last_name,
-    au.role,
+    au.email::TEXT,
+    au.first_name::TEXT,
+    au.last_name::TEXT,
+    au.role::TEXT,
     au.permissions,
     au.is_active
   FROM admin_users au

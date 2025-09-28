@@ -17,7 +17,9 @@ const Chatbot = () => {
   const [inputValue, setInputValue] = useState('')
   const [isTyping, setIsTyping] = useState(false)
   const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
   const [sessionId, setSessionId] = useState('')
+  const [userInfoProvided, setUserInfoProvided] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
   const [isResizing, setIsResizing] = useState(false)
   const [position, setPosition] = useState({ x: 20, y: 20 })
@@ -122,7 +124,7 @@ const Chatbot = () => {
     }
   }
 
-  const saveMessageToSession = async (sessionId: string, message: string, isUserMessage: boolean, email?: string) => {
+  const saveMessageToSession = async (sessionId: string, message: string, isUserMessage: boolean, email?: string, name?: string) => {
     try {
       const sourcePage = window.location.pathname
       await fetch('/api/chat-session', {
@@ -133,6 +135,7 @@ const Chatbot = () => {
         body: JSON.stringify({
           sessionId,
           email,
+          name,
           message,
           isUserMessage,
           sourcePage,
@@ -161,7 +164,7 @@ const Chatbot = () => {
 
     // Save user message to session
     if (sessionId) {
-      await saveMessageToSession(sessionId, text, true, email || undefined)
+      await saveMessageToSession(sessionId, text, true, email || undefined, name || undefined)
     }
 
     try {
@@ -208,7 +211,7 @@ const Chatbot = () => {
           
           // Save AI response to session
           if (sessionId) {
-            await saveMessageToSession(sessionId, aiResponse.text, false, email || undefined)
+            await saveMessageToSession(sessionId, aiResponse.text, false, email || undefined, name || undefined)
           }
         }, 1000)
       } else {
@@ -227,7 +230,7 @@ const Chatbot = () => {
           
           // Save AI response to session
           if (sessionId) {
-            await saveMessageToSession(sessionId, aiResponse.text, false, email || undefined)
+            await saveMessageToSession(sessionId, aiResponse.text, false, email || undefined, name || undefined)
           }
         }, 1000)
       }
@@ -247,7 +250,7 @@ const Chatbot = () => {
         
         // Save error message to session
         if (sessionId) {
-          await saveMessageToSession(sessionId, errorMessage.text, false, email || undefined)
+          await saveMessageToSession(sessionId, errorMessage.text, false, email || undefined, name || undefined)
         }
       }, 1000)
     }
@@ -260,8 +263,8 @@ const Chatbot = () => {
     }
   }
 
-  const handleEmailSubmit = async () => {
-    if (email && sessionId) {
+  const handleUserInfoSubmit = async () => {
+    if (sessionId) {
       try {
         await fetch('/api/chat-session', {
           method: 'POST',
@@ -270,14 +273,16 @@ const Chatbot = () => {
           },
           body: JSON.stringify({
             sessionId,
-            email,
+            email: email || null,
+            name: name || null,
             sourcePage: window.location.pathname,
             chatMode: chatbotMode
           })
         })
-        console.log('Email captured successfully:', email)
+        console.log('User info captured successfully:', { email, name })
+        setUserInfoProvided(true)
       } catch (error) {
-        console.error('Error capturing email:', error)
+        console.error('Error capturing user info:', error)
       }
     }
   }
@@ -286,12 +291,16 @@ const Chatbot = () => {
     const newEmail = e.target.value
     setEmail(newEmail)
     
-    // Auto-submit email when it looks valid
+    // Auto-submit user info when email looks valid
     if (newEmail && newEmail.includes('@') && newEmail.includes('.') && sessionId) {
       setTimeout(() => {
-        handleEmailSubmit()
+        handleUserInfoSubmit()
       }, 1000) // Wait 1 second after user stops typing
     }
+  }
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value)
   }
 
   const startVoiceInput = () => {
@@ -431,23 +440,47 @@ const Chatbot = () => {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Email Capture */}
+      {/* User Information Capture */}
       <div className="p-4 border-t border-gray-200">
-        <label className="block text-xl font-medium text-gray-700 mb-2">
-          {email ? 'Email captured ✓' : 'Provide your email address'}
+        <label className="block text-lg font-medium text-gray-700 mb-3">
+          {userInfoProvided ? 'Contact information captured ✓' : 'Help us follow up with you (optional)'}
         </label>
-        <input
-          type="email"
-          value={email}
-          onChange={handleEmailChange}
-          placeholder="your.email@company.com"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          disabled={!!email}
-        />
-        {email && (
-          <p className="text-sm text-green-600 mt-1">
-            Thank you! We'll follow up with you soon.
-          </p>
+        
+        {!userInfoProvided ? (
+          <div className="space-y-3">
+            <div>
+              <label className="block text-sm font-medium text-gray-600 mb-1">
+                Name (optional)
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={handleNameChange}
+                placeholder="Your name"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-600 mb-1">
+                Email (optional)
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={handleEmailChange}
+                placeholder="your.email@company.com"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+              />
+            </div>
+            <p className="text-xs text-gray-500">
+              Providing your information helps us follow up with relevant training opportunities.
+            </p>
+          </div>
+        ) : (
+          <div className="text-sm text-green-600">
+            <p>Thank you{name ? `, ${name}` : ''}! We'll follow up with you soon.</p>
+            {email && <p>Email: {email}</p>}
+          </div>
         )}
       </div>
 

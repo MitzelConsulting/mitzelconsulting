@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabaseClient';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { sessionId, email, message, isUserMessage, sourcePage, chatMode } = body;
+    const { sessionId, email, name, message, isUserMessage, sourcePage, chatMode } = body;
 
     if (!sessionId) {
       return NextResponse.json({ error: 'Session ID is required' }, { status: 400 });
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     let { data: session, error: sessionError } = await supabase
       .from('chat_sessions')
       .select('*')
-      .eq('session_id', sessionId)
+      .eq('id', sessionId)
       .single();
 
     if (sessionError && sessionError.code !== 'PGRST116') {
@@ -27,10 +27,12 @@ export async function POST(request: NextRequest) {
       const { data: newSession, error: createError } = await supabase
         .from('chat_sessions')
         .insert({
-          session_id: sessionId,
-          email: email || null,
-          is_email_captured: !!email,
-          total_messages: 1
+          id: sessionId,
+          user_email: email || null,
+          user_name: name || null,
+          source_page: sourcePage || null,
+          chat_mode: chatMode || 'default',
+          message_count: message ? 1 : 0
         })
         .select()
         .single();
@@ -41,24 +43,26 @@ export async function POST(request: NextRequest) {
       }
       session = newSession;
     } else {
-      // Update existing session
-      const updateData: any = {
-        total_messages: session.total_messages + 1
-      };
+      // Update existing session with user info if provided
+      const updateData: any = {};
 
-      if (email && !session.email) {
-        updateData.email = email;
-        updateData.is_email_captured = true;
+      if (email && !session.user_email) {
+        updateData.user_email = email;
+      }
+      if (name && !session.user_name) {
+        updateData.user_name = name;
       }
 
-      const { error: updateError } = await supabase
-        .from('chat_sessions')
-        .update(updateData)
-        .eq('session_id', sessionId);
+      if (Object.keys(updateData).length > 0) {
+        const { error: updateError } = await supabase
+          .from('chat_sessions')
+          .update(updateData)
+          .eq('id', sessionId);
 
-      if (updateError) {
-        console.error('Error updating session:', updateError);
-        return NextResponse.json({ error: 'Failed to update session' }, { status: 500 });
+        if (updateError) {
+          console.error('Error updating session:', updateError);
+          return NextResponse.json({ error: 'Failed to update session' }, { status: 500 });
+        }
       }
     }
 
@@ -68,7 +72,7 @@ export async function POST(request: NextRequest) {
         .from('chat_messages')
         .insert({
           session_id: sessionId,
-          message_text: message,
+          message: message,
           is_user_message: isUserMessage
         });
 
@@ -79,15 +83,17 @@ export async function POST(request: NextRequest) {
     }
 
     // If email was captured, create email capture record
-    if (email && !session.email) {
+    if (email) {
       const { error: emailError } = await supabase
         .from('email_captures')
-        .insert({
-          email: email,
+        .upsert({
           session_id: sessionId,
+          email: email,
+          name: name || null,
           source_page: sourcePage || 'unknown',
-          chat_mode: chatMode || 'default',
-          total_messages: session.total_messages + 1
+          chat_mode: chatMode || 'default'
+        }, {
+          onConflict: 'session_id,email'
         });
 
       if (emailError) {
@@ -95,18 +101,17 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'Failed to save email capture' }, { status: 500 });
       }
 
-      // Send notification to admin (you can implement this with your preferred notification system)
-      console.log(`New email captured: ${email} from session ${sessionId}`);
+      // Send notification to admin
+      console.log(`New email captured: ${email} (${name || 'No name'}) from session ${sessionId}`);
     }
 
     return NextResponse.json({ 
       success: true, 
       session: {
-        id: session.id,
-        session_id: sessionId,
-        email: email || session.email,
-        is_email_captured: !!email || session.is_email_captured,
-        total_messages: session.total_messages + 1
+        id: sessionId,
+        user_email: email || session.user_email,
+        user_name: name || session.user_name,
+        message_count: session.message_count + (message ? 1 : 0)
       }
     });
 
@@ -125,33 +130,31 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Session ID is required' }, { status: 400 });
     }
 
-    // Get session with messages
-    const { data: session, error: sessionError } = await supabase
-      .from('chat_sessions')
-      .select('*')
-      .eq('session_id', sessionId)
-      .single();
+    // Get session with messages using the function
+    const { data: sessionData, error: sessionError } = await supabase
+      .rpc('get_chat_session_with_messages', { p_session_id: sessionId });
 
     if (sessionError) {
       console.error('Error fetching session:', sessionError);
       return NextResponse.json({ error: 'Session not found' }, { status: 404 });
     }
 
-    const { data: messages, error: messagesError } = await supabase
-      .from('chat_messages')
-      .select('*')
-      .eq('session_id', sessionId)
-      .order('created_at', { ascending: true });
-
-    if (messagesError) {
-      console.error('Error fetching messages:', messagesError);
-      return NextResponse.json({ error: 'Failed to fetch messages' }, { status: 500 });
+    if (!sessionData || sessionData.length === 0) {
+      return NextResponse.json({ error: 'Session not found' }, { status: 404 });
     }
+
+    const session = sessionData[0];
 
     return NextResponse.json({
       success: true,
-      session,
-      messages: messages || []
+      session: {
+        id: session.session_id,
+        created_at: session.created_at,
+        user_name: session.user_name,
+        user_email: session.user_email,
+        message_count: session.message_count,
+        messages: session.messages
+      }
     });
 
   } catch (error) {

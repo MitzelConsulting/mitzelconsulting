@@ -2,7 +2,7 @@
 -- MIZEL CONSULTING - ROW LEVEL SECURITY POLICIES
 -- =====================================================
 -- Comprehensive RLS policies for safety training platform
--- Run this in Supabase SQL Editor after running mitzel_consulting_schema.sql
+-- Run this in Supabase SQL Editor after running mizel_consulting_schema.sql
 
 -- =====================================================
 -- USER ROLES AND PERMISSIONS
@@ -15,7 +15,7 @@ BEGIN
         CREATE TYPE user_role AS ENUM (
           'client_user',     -- HR directors, company employees purchasing courses
           'company_admin',   -- Company administrators managing their team's training
-          'platform_admin',  -- Kris Mitzel and platform administrators
+          'platform_admin',  -- Kris Mizel and platform administrators
           'partner_user'     -- Training partners with revenue sharing
         );
     END IF;
@@ -534,7 +534,7 @@ $$;
 -- SAMPLE ADMIN USER SETUP
 -- =====================================================
 
--- Create sample platform admin user (Kris Mitzel)
+-- Create sample platform admin user (Kris Mizel)
 -- Note: This will be updated when the actual admin user signs up and gets linked to auth.users
 INSERT INTO admin_users (
   email,
@@ -546,7 +546,7 @@ INSERT INTO admin_users (
 ) VALUES (
   'kris@mizelconsulting.com',
   'Kris',
-  'Mitzel',
+  'Mizel',
   'platform_admin',
   ARRAY['manage_courses', 'manage_blog', 'view_analytics', 'manage_users', 'manage_partnerships'],
   true

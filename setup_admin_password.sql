@@ -40,7 +40,7 @@ INSERT INTO admin_users (
   'admin@mizelconsulting.com',
   hash_password('admin123'),
   'Kris',
-  'Mitzel',
+  'Mizel',
   'super_admin',
   true,
   true,
@@ -56,26 +56,26 @@ INSERT INTO admin_users (
   updated_at = NOW();
 
 -- 5. Create a function to verify admin password
-CREATE OR REPLACE FUNCTION verify_admin_password(email TEXT, password TEXT)
+CREATE OR REPLACE FUNCTION verify_admin_password(p_email TEXT, p_password TEXT)
 RETURNS BOOLEAN AS $$
 DECLARE
   stored_hash TEXT;
 BEGIN
   SELECT password_hash INTO stored_hash 
   FROM admin_users 
-  WHERE admin_users.email = verify_admin_password.email 
+  WHERE admin_users.email = p_email 
   AND is_active = true;
   
   IF stored_hash IS NULL THEN
     RETURN FALSE;
   END IF;
   
-  RETURN stored_hash = hash_password(password);
+  RETURN stored_hash = hash_password(p_password);
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 -- 6. Create a function to get admin user by email and password
-CREATE OR REPLACE FUNCTION get_admin_by_credentials(email TEXT, password TEXT)
+CREATE OR REPLACE FUNCTION get_admin_by_credentials(p_email TEXT, p_password TEXT)
 RETURNS TABLE(
   id UUID,
   email TEXT,
@@ -96,9 +96,9 @@ BEGIN
     au.permissions,
     au.is_active
   FROM admin_users au
-  WHERE au.email = get_admin_by_credentials.email
+  WHERE au.email = p_email
   AND au.is_active = true
-  AND au.password_hash = hash_password(get_admin_by_credentials.password);
+  AND au.password_hash = hash_password(p_password);
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 

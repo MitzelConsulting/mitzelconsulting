@@ -117,7 +117,7 @@ CREATE TABLE training_sessions (
   status VARCHAR DEFAULT 'scheduled' CHECK (status IN ('scheduled', 'in_progress', 'completed', 'cancelled', 'postponed')),
   
   -- Instructor information
-  instructor_name VARCHAR DEFAULT 'Kris Mitzel',
+  instructor_name VARCHAR DEFAULT 'Kris Mizel',
   instructor_email VARCHAR,
   
   -- Pricing (can override course pricing)
@@ -355,7 +355,7 @@ CREATE TABLE blog_posts (
   featured_image_alt VARCHAR,
   
   -- Author information
-  author_name VARCHAR DEFAULT 'Kris Mitzel',
+  author_name VARCHAR DEFAULT 'Kris Mizel',
   author_bio TEXT,
   author_image_url VARCHAR,
   
@@ -667,7 +667,7 @@ The 30-hour course covers a wide range of safety topics including:
 
 ## How to Get Started
 
-Ready to begin your OSHA 30-Hour Construction Safety training? Contact Mizel Consulting today to learn about our comprehensive training programs, available in both digital and on-site formats.', 'Kris Mitzel', NOW(), 'published', (SELECT id FROM blog_categories WHERE slug = 'osha-training'), ARRAY['OSHA', 'Construction Safety', 'Training', 'Certification'], 'OSHA 30-Hour Construction Safety Training Guide | Mizel Consulting', 'Complete guide to OSHA 30-Hour Construction Safety certification. Learn requirements, benefits, and how to get started with professional safety training.'),
+Ready to begin your OSHA 30-Hour Construction Safety training? Contact Mizel Consulting today to learn about our comprehensive training programs, available in both digital and on-site formats.', 'Kris Mizel', NOW(), 'published', (SELECT id FROM blog_categories WHERE slug = 'osha-training'), ARRAY['OSHA', 'Construction Safety', 'Training', 'Certification'], 'OSHA 30-Hour Construction Safety Training Guide | Mizel Consulting', 'Complete guide to OSHA 30-Hour Construction Safety certification. Learn requirements, benefits, and how to get started with professional safety training.'),
 ('5 Essential Workplace Safety Tips for HR Directors', 'workplace-safety-tips-hr-directors', 'As an HR Director, workplace safety is your responsibility. Here are 5 essential tips to create a safer work environment and protect your employees.', 'As an HR Director, you play a crucial role in ensuring workplace safety. Your responsibilities extend beyond hiring and employee relations to include creating and maintaining a safe work environment. Here are five essential workplace safety tips that every HR Director should implement.
 
 ## 1. Develop a Comprehensive Safety Program
@@ -724,10 +724,10 @@ OSHA regulations and safety standards are constantly evolving:
 
 Working with experienced safety training providers like Mizel Consulting can help you implement these strategies effectively. We offer comprehensive safety training programs, consultation services, and ongoing support to help you maintain a safe workplace.
 
-Ready to enhance your workplace safety program? Contact us today to learn how we can help protect your employees and ensure regulatory compliance.', 'Kris Mitzel', NOW(), 'published', (SELECT id FROM blog_categories WHERE slug = 'workplace-safety'), ARRAY['HR', 'Workplace Safety', 'Safety Management', 'OSHA Compliance'], 'Workplace Safety Tips for HR Directors | Mizel Consulting', 'Essential workplace safety tips for HR Directors. Learn how to create a safer work environment and protect your employees with expert guidance.');
+Ready to enhance your workplace safety program? Contact us today to learn how we can help protect your employees and ensure regulatory compliance.', 'Kris Mizel', NOW(), 'published', (SELECT id FROM blog_categories WHERE slug = 'workplace-safety'), ARRAY['HR', 'Workplace Safety', 'Safety Management', 'OSHA Compliance'], 'Workplace Safety Tips for HR Directors | Mizel Consulting', 'Essential workplace safety tips for HR Directors. Learn how to create a safer work environment and protect your employees with expert guidance.');
 
--- Insert sample admin user (Kris Mitzel)
+-- Insert sample admin user (Kris Mizel)
 INSERT INTO admin_users (email, first_name, last_name, role, is_active, email_verified) VALUES
-('kris@mizelconsulting.com', 'Kris', 'Mitzel', 'super_admin', true, true);
+('kris@mizelconsulting.com', 'Kris', 'Mizel', 'super_admin', true, true);
 
 COMMIT;

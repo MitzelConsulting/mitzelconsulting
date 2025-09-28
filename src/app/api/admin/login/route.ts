@@ -13,8 +13,8 @@ export async function POST(request: NextRequest) {
     // Verify admin credentials using our custom function
     const { data: adminUser, error } = await supabase
       .rpc('get_admin_by_credentials', {
-        email: email,
-        password: password
+        p_email: email,
+        p_password: password
       });
 
     if (error) {

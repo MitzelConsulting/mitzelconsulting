@@ -1,0 +1,155 @@
+2025-10-04 08:21:11,690 - INFO - 🚀 Starting minimal ingestion test
+2025-10-04 08:21:11,690 - INFO - 🔧 Setting up clients...
+2025-10-04 08:21:11,690 - INFO - 📁 Initializing Google Drive client...
+2025-10-04 08:21:11,692 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 08:21:11,693 - INFO - ✅ Google Drive client ready
+2025-10-04 08:21:11,693 - INFO - 🧠 Initializing OpenAI client...
+2025-10-04 08:21:11,717 - INFO - ✅ OpenAI client ready
+2025-10-04 08:21:11,717 - INFO - 📊 Initializing Pinecone client...
+2025-10-04 08:21:12,002 - INFO - ✅ Pinecone client ready
+2025-10-04 08:21:12,003 - INFO - 📁 Getting DOCX files from folder: 1ixMpE1ZjrnCradre2iNQcHZB0C39rVOT
+2025-10-04 08:21:12,005 - DEBUG - URL being requested: GET https://www.googleapis.com/drive/v3/files?q=%271ixMpE1ZjrnCradre2iNQcHZB0C39rVOT%27+in+parents+and+trashed%3Dfalse+and+mimeType%3D%27application%2Fvnd.openxmlformats-officedocument.wordprocessingml.document%27&fields=files%28id%2C+name%2C+mimeType%2C+modifiedTime%2C+size%29&alt=json
+2025-10-04 08:21:12,039 - DEBUG - Making request: POST https://oauth2.googleapis.com/token
+2025-10-04 08:21:12,840 - INFO - 📊 Found 7 DOCX files
+2025-10-04 08:21:12,841 - INFO -   - Process Safety Management Quiz.docx (1okqxOemjd8YG3dsmkniSrPLEH2fTWINZ)
+2025-10-04 08:21:12,841 - INFO -   - Rigging Basics Quiz.docx (1w1Mx9WIISr1Wg1Pr78OdZ1FsF5nrx3ki)
+2025-10-04 08:21:12,841 - INFO -   - Intro to Radiation Quiz.docx (1PNdjo0GNX1exgUNhJvBv9uFmHjxlhfgS)
+2025-10-04 08:21:12,841 - INFO -   - PPE Quiz.docx (1qrzWvj41BJSSO3ei1E2VIrQSfeYU0sde)
+2025-10-04 08:21:12,841 - INFO -   - Electrical Safety Quiz.docx (1tDoYqIldvQfhCgpTofZdyGR7fId4A4r2)
+2025-10-04 08:21:12,841 - INFO -   - Walking Working Surfaces Quiz.docx (11T_z2RJRLPmO5nf3SLlGGLkV_7bPxiJ_)
+2025-10-04 08:21:12,841 - INFO -   - Safety Team Meeting Minutes Template.docx (1lZNCJtYYnwz0dA7lkJo8DGzycE5IMCpK)
+2025-10-04 08:21:12,841 - INFO - 📊 Processing 3 files
+2025-10-04 08:21:12,841 - INFO - 
+==================================================
+2025-10-04 08:21:12,841 - INFO - 📄 Processing file 1/3: Process Safety Management Quiz.docx
+2025-10-04 08:21:12,841 - INFO - ==================================================
+2025-10-04 08:21:12,842 - INFO - 🔄 Processing: Process Safety Management Quiz.docx
+2025-10-04 08:21:12,842 - INFO - 📥 Downloading Process Safety Management Quiz.docx...
+2025-10-04 08:21:12,846 - DEBUG - URL being requested: GET https://www.googleapis.com/drive/v3/files/1okqxOemjd8YG3dsmkniSrPLEH2fTWINZ?alt=media
+2025-10-04 08:21:13,432 - INFO - ✅ Downloaded 16304 bytes
+2025-10-04 08:21:13,432 - INFO - 📝 Extracting text from Process Safety Management Quiz.docx...
+2025-10-04 08:21:13,444 - INFO - ✅ Extracted 1465 characters
+2025-10-04 08:21:13,444 - INFO - 📄 Created chunk with 503 characters
+2025-10-04 08:21:13,444 - INFO - 🧠 Generating embedding for text of length 503...
+2025-10-04 08:21:13,563 - DEBUG - Request options: {'method': 'post', 'url': '/embeddings', 'files': None, 'idempotency_key': 'stainless-python-retry-0d027863-6e82-4dc9-8270-19f75c3a5081', 'post_parser': <function Embeddings.create.<locals>.parser at 0x1078a47c0>, 'json_data': {'input': 'Process Safety Management Quiz\n\n1. What is the primary goal of Process Safety Management (PSM)?\na) To maximize production efficiency\xa0\nb) To prevent accidental releases of highly hazardous chemicals\xa0\nc) To ensure compliance with all industry-specific regulations\xa0\nd) To lower the cost of doing business\xa0\n\n2. What is the purpose of conducting an incident investigation in a PSM system?\na) To establish procedures for emergency response\xa0\nb) To determine the causes of an incident and prevent recurrence\xa0...', 'model': 'text-embedding-3-small', 'encoding_format': 'base64'}}
+2025-10-04 08:21:13,576 - DEBUG - Sending HTTP Request: POST https://api.openai.com/v1/embeddings
+2025-10-04 08:21:13,577 - DEBUG - connect_tcp.started host='api.openai.com' port=443 local_address=None timeout=5.0 socket_options=None
+2025-10-04 08:21:13,682 - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x1085931d0>
+2025-10-04 08:21:13,683 - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x10753b6e0> server_hostname='api.openai.com' timeout=5.0
+2025-10-04 08:21:13,722 - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x108593290>
+2025-10-04 08:21:13,722 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-10-04 08:21:13,723 - DEBUG - send_request_headers.complete
+2025-10-04 08:21:13,723 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-10-04 08:21:13,723 - DEBUG - send_request_body.complete
+2025-10-04 08:21:13,723 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-10-04 08:21:13,872 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sat, 04 Oct 2025 12:21:13 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-Request-ID'), (b'openai-model', b'text-embedding-3-small'), (b'openai-organization', b'sudden-impact-labs'), (b'openai-processing-ms', b'57'), (b'openai-project', b'proj_Aa5KxWcnaG4jpPj8u6FImUIU'), (b'openai-version', b'2020-10-01'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'via', b'envoy-router-54d6dcb7b9-95zx4'), (b'x-envoy-upstream-service-time', b'74'), (b'x-ratelimit-limit-requests', b'3000'), (b'x-ratelimit-limit-tokens', b'1000000'), (b'x-ratelimit-remaining-requests', b'2999'), (b'x-ratelimit-remaining-tokens', b'999873'), (b'x-ratelimit-reset-requests', b'20ms'), (b'x-ratelimit-reset-tokens', b'7ms'), (b'x-request-id', b'req_e18ceed9235847c2884b5805e4cd3feb'), (b'x-openai-proxy-wasm', b'v0.1'), (b'cf-cache-status', b'DYNAMIC'), (b'Set-Cookie', b'__cf_bm=JGhMEafRxKo9fs.i6ysF.VzU7arsEkLcPzAxweCD2Fg-1759580473-1.0.1.1-Ct8lz81ctqD5n6gAEBrIcFBtw6hSCV1kzoCCA.cz4ysjXxV0xgKyH4EahUqtpF6k_M3Lty1UsS_p694.CzFGomVMnVI.ViKyiVm4EEU.7D8; path=/; expires=Sat, 04-Oct-25 12:51:13 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'X-Content-Type-Options', b'nosniff'), (b'Set-Cookie', b'_cfuvid=2c4WwySkhV6ejmSgt941IfuyovZUKNZE3OAcZBgEiHk-1759580473866-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9894a348fa54233f-ORD'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-10-04 08:21:13,875 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:21:13,876 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-10-04 08:21:13,876 - DEBUG - receive_response_body.complete
+2025-10-04 08:21:13,877 - DEBUG - response_closed.started
+2025-10-04 08:21:13,877 - DEBUG - response_closed.complete
+2025-10-04 08:21:13,877 - DEBUG - HTTP Response: POST https://api.openai.com/v1/embeddings "200 OK" Headers([('date', 'Sat, 04 Oct 2025 12:21:13 GMT'), ('content-type', 'application/json'), ('transfer-encoding', 'chunked'), ('connection', 'keep-alive'), ('access-control-allow-origin', '*'), ('access-control-expose-headers', 'X-Request-ID'), ('openai-model', 'text-embedding-3-small'), ('openai-organization', 'sudden-impact-labs'), ('openai-processing-ms', '57'), ('openai-project', 'proj_Aa5KxWcnaG4jpPj8u6FImUIU'), ('openai-version', '2020-10-01'), ('strict-transport-security', 'max-age=31536000; includeSubDomains; preload'), ('via', 'envoy-router-54d6dcb7b9-95zx4'), ('x-envoy-upstream-service-time', '74'), ('x-ratelimit-limit-requests', '3000'), ('x-ratelimit-limit-tokens', '1000000'), ('x-ratelimit-remaining-requests', '2999'), ('x-ratelimit-remaining-tokens', '999873'), ('x-ratelimit-reset-requests', '20ms'), ('x-ratelimit-reset-tokens', '7ms'), ('x-request-id', 'req_e18ceed9235847c2884b5805e4cd3feb'), ('x-openai-proxy-wasm', 'v0.1'), ('cf-cache-status', 'DYNAMIC'), ('set-cookie', '__cf_bm=JGhMEafRxKo9fs.i6ysF.VzU7arsEkLcPzAxweCD2Fg-1759580473-1.0.1.1-Ct8lz81ctqD5n6gAEBrIcFBtw6hSCV1kzoCCA.cz4ysjXxV0xgKyH4EahUqtpF6k_M3Lty1UsS_p694.CzFGomVMnVI.ViKyiVm4EEU.7D8; path=/; expires=Sat, 04-Oct-25 12:51:13 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), ('x-content-type-options', 'nosniff'), ('set-cookie', '_cfuvid=2c4WwySkhV6ejmSgt941IfuyovZUKNZE3OAcZBgEiHk-1759580473866-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None'), ('server', 'cloudflare'), ('cf-ray', '9894a348fa54233f-ORD'), ('content-encoding', 'gzip'), ('alt-svc', 'h3=":443"; ma=86400')])
+2025-10-04 08:21:13,878 - DEBUG - request_id: req_e18ceed9235847c2884b5805e4cd3feb
+2025-10-04 08:21:13,946 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:21:13,946 - INFO - 📤 Upserting vector to Pinecone...
+2025-10-04 08:21:13,946 - INFO -    Vector ID: 1okqxOemjd8YG3dsmkniSrPLEH2fTWINZ_minimal
+2025-10-04 08:21:13,946 - INFO -    Metadata keys: ['text', 'file_id', 'file_name', 'folder_path', 'mime_type', 'modified_time']
+2025-10-04 08:21:14,350 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:21:14,350 - INFO - ✅ Successfully processed Process Safety Management Quiz.docx
+2025-10-04 08:21:14,350 - INFO - 
+==================================================
+2025-10-04 08:21:14,350 - INFO - 📄 Processing file 2/3: Rigging Basics Quiz.docx
+2025-10-04 08:21:14,350 - INFO - ==================================================
+2025-10-04 08:21:14,350 - INFO - 🔄 Processing: Rigging Basics Quiz.docx
+2025-10-04 08:21:14,350 - INFO - 📥 Downloading Rigging Basics Quiz.docx...
+2025-10-04 08:21:14,354 - DEBUG - URL being requested: GET https://www.googleapis.com/drive/v3/files/1w1Mx9WIISr1Wg1Pr78OdZ1FsF5nrx3ki?alt=media
+2025-10-04 08:21:15,089 - INFO - ✅ Downloaded 14196 bytes
+2025-10-04 08:21:15,090 - INFO - 📝 Extracting text from Rigging Basics Quiz.docx...
+2025-10-04 08:21:15,096 - INFO - ✅ Extracted 914 characters
+2025-10-04 08:21:15,096 - INFO - 📄 Created chunk with 503 characters
+2025-10-04 08:21:15,096 - INFO - 🧠 Generating embedding for text of length 503...
+2025-10-04 08:21:15,097 - DEBUG - Request options: {'method': 'post', 'url': '/embeddings', 'files': None, 'idempotency_key': 'stainless-python-retry-6c71ab09-00e7-4989-8afa-b9d174cb80aa', 'post_parser': <function Embeddings.create.<locals>.parser at 0x10c8da660>, 'json_data': {'input': 'Rigging Basics Quiz\n1. Which of the following is NOT a common rigging hazard?\nA) Falls\nB) Struck-by or crushing incidents\nC) Exposure to loud noise\nD) Electrical hazards\n2. To prevent struck-by hazards, workers should avoid:\nA) Standing under or close to suspended loads\nB) Wearing high-visibility clothing\nC) Using hand signals\nD) Conducting pre-shift inspections\n3. Rigging equipment such as slings must be inspected:\nA) Daily\nB) Weekly\nC) Monthly\nD) Before Each Use\n4. Which information must be pe...', 'model': 'text-embedding-3-small', 'encoding_format': 'base64'}}
+2025-10-04 08:21:15,098 - DEBUG - Sending HTTP Request: POST https://api.openai.com/v1/embeddings
+2025-10-04 08:21:15,099 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-10-04 08:21:15,099 - DEBUG - send_request_headers.complete
+2025-10-04 08:21:15,099 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-10-04 08:21:15,100 - DEBUG - send_request_body.complete
+2025-10-04 08:21:15,100 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-10-04 08:21:15,604 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sat, 04 Oct 2025 12:21:15 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-Request-ID'), (b'openai-model', b'text-embedding-3-small'), (b'openai-organization', b'sudden-impact-labs'), (b'openai-processing-ms', b'157'), (b'openai-project', b'proj_Aa5KxWcnaG4jpPj8u6FImUIU'), (b'openai-version', b'2020-10-01'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'via', b'envoy-router-846bbc6b9-b8x8v'), (b'x-envoy-upstream-service-time', b'283'), (b'x-ratelimit-limit-requests', b'3000'), (b'x-ratelimit-limit-tokens', b'1000000'), (b'x-ratelimit-remaining-requests', b'2999'), (b'x-ratelimit-remaining-tokens', b'999875'), (b'x-ratelimit-reset-requests', b'20ms'), (b'x-ratelimit-reset-tokens', b'7ms'), (b'x-request-id', b'req_bf7df9b27bb34a5ba6ba19e2307c7c1a'), (b'x-openai-proxy-wasm', b'v0.1'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9894a3518a49233f-ORD'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-10-04 08:21:15,605 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:21:15,605 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-10-04 08:21:15,606 - DEBUG - receive_response_body.complete
+2025-10-04 08:21:15,606 - DEBUG - response_closed.started
+2025-10-04 08:21:15,606 - DEBUG - response_closed.complete
+2025-10-04 08:21:15,607 - DEBUG - HTTP Response: POST https://api.openai.com/v1/embeddings "200 OK" Headers({'date': 'Sat, 04 Oct 2025 12:21:15 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-Request-ID', 'openai-model': 'text-embedding-3-small', 'openai-organization': 'sudden-impact-labs', 'openai-processing-ms': '157', 'openai-project': 'proj_Aa5KxWcnaG4jpPj8u6FImUIU', 'openai-version': '2020-10-01', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'via': 'envoy-router-846bbc6b9-b8x8v', 'x-envoy-upstream-service-time': '283', 'x-ratelimit-limit-requests': '3000', 'x-ratelimit-limit-tokens': '1000000', 'x-ratelimit-remaining-requests': '2999', 'x-ratelimit-remaining-tokens': '999875', 'x-ratelimit-reset-requests': '20ms', 'x-ratelimit-reset-tokens': '7ms', 'x-request-id': 'req_bf7df9b27bb34a5ba6ba19e2307c7c1a', 'x-openai-proxy-wasm': 'v0.1', 'cf-cache-status': 'DYNAMIC', 'x-content-type-options': 'nosniff', 'server': 'cloudflare', 'cf-ray': '9894a3518a49233f-ORD', 'content-encoding': 'gzip', 'alt-svc': 'h3=":443"; ma=86400'})
+2025-10-04 08:21:15,607 - DEBUG - request_id: req_bf7df9b27bb34a5ba6ba19e2307c7c1a
+2025-10-04 08:21:15,608 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:21:15,608 - INFO - 📤 Upserting vector to Pinecone...
+2025-10-04 08:21:15,608 - INFO -    Vector ID: 1w1Mx9WIISr1Wg1Pr78OdZ1FsF5nrx3ki_minimal
+2025-10-04 08:21:15,608 - INFO -    Metadata keys: ['text', 'file_id', 'file_name', 'folder_path', 'mime_type', 'modified_time']
+2025-10-04 08:21:15,788 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:21:15,788 - INFO - ✅ Successfully processed Rigging Basics Quiz.docx
+2025-10-04 08:21:15,788 - INFO - 
+==================================================
+2025-10-04 08:21:15,788 - INFO - 📄 Processing file 3/3: Intro to Radiation Quiz.docx
+2025-10-04 08:21:15,788 - INFO - ==================================================
+2025-10-04 08:21:15,788 - INFO - 🔄 Processing: Intro to Radiation Quiz.docx
+2025-10-04 08:21:15,788 - INFO - 📥 Downloading Intro to Radiation Quiz.docx...
+2025-10-04 08:21:15,792 - DEBUG - URL being requested: GET https://www.googleapis.com/drive/v3/files/1PNdjo0GNX1exgUNhJvBv9uFmHjxlhfgS?alt=media
+2025-10-04 08:21:16,723 - INFO - ✅ Downloaded 15256 bytes
+2025-10-04 08:21:16,724 - INFO - 📝 Extracting text from Intro to Radiation Quiz.docx...
+2025-10-04 08:21:16,727 - INFO - ✅ Extracted 1355 characters
+2025-10-04 08:21:16,727 - INFO - 📄 Created chunk with 503 characters
+2025-10-04 08:21:16,727 - INFO - 🧠 Generating embedding for text of length 503...
+2025-10-04 08:21:16,728 - DEBUG - Request options: {'method': 'post', 'url': '/embeddings', 'files': None, 'idempotency_key': 'stainless-python-retry-62ff667c-146c-4762-ac29-091ec210d1de', 'post_parser': <function Embeddings.create.<locals>.parser at 0x10c8d9e40>, 'json_data': {'input': 'Radiation Safety Training Quiz\n1. What is radiation?\na) Energy emitted from a source in the form of electromagnetic waves or particles\nb) A type of heat emitted from nuclear reactions\nc) A form of sound energy\nd) Only visible light emitted by certain materials\n2. Which of the following types of radiation is considered ionizing?\na) Ultraviolet (UV )radiation\nb) Radio waves\nc) Gamma rays\nd) Visible light\n3. What is the primary reason for radiation protection measures?\na) To increase radiation expo...', 'model': 'text-embedding-3-small', 'encoding_format': 'base64'}}
+2025-10-04 08:21:16,735 - DEBUG - Sending HTTP Request: POST https://api.openai.com/v1/embeddings
+2025-10-04 08:21:16,736 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-10-04 08:21:16,736 - DEBUG - send_request_headers.complete
+2025-10-04 08:21:16,736 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-10-04 08:21:16,736 - DEBUG - send_request_body.complete
+2025-10-04 08:21:16,736 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-10-04 08:21:17,546 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sat, 04 Oct 2025 12:21:17 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-Request-ID'), (b'openai-model', b'text-embedding-3-small'), (b'openai-organization', b'sudden-impact-labs'), (b'openai-processing-ms', b'136'), (b'openai-project', b'proj_Aa5KxWcnaG4jpPj8u6FImUIU'), (b'openai-version', b'2020-10-01'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'via', b'envoy-router-5c7977d565-wt2rq'), (b'x-envoy-upstream-service-time', b'265'), (b'x-ratelimit-limit-requests', b'3000'), (b'x-ratelimit-limit-tokens', b'1000000'), (b'x-ratelimit-remaining-requests', b'2999'), (b'x-ratelimit-remaining-tokens', b'999875'), (b'x-ratelimit-reset-requests', b'20ms'), (b'x-ratelimit-reset-tokens', b'7ms'), (b'x-request-id', b'req_39814edfcf1a4310a1540141377476e5'), (b'x-openai-proxy-wasm', b'v0.1'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9894a35bcbe1233f-ORD'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-10-04 08:21:17,547 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:21:17,547 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-10-04 08:21:17,547 - DEBUG - receive_response_body.complete
+2025-10-04 08:21:17,548 - DEBUG - response_closed.started
+2025-10-04 08:21:17,548 - DEBUG - response_closed.complete
+2025-10-04 08:21:17,548 - DEBUG - HTTP Response: POST https://api.openai.com/v1/embeddings "200 OK" Headers({'date': 'Sat, 04 Oct 2025 12:21:17 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-Request-ID', 'openai-model': 'text-embedding-3-small', 'openai-organization': 'sudden-impact-labs', 'openai-processing-ms': '136', 'openai-project': 'proj_Aa5KxWcnaG4jpPj8u6FImUIU', 'openai-version': '2020-10-01', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'via': 'envoy-router-5c7977d565-wt2rq', 'x-envoy-upstream-service-time': '265', 'x-ratelimit-limit-requests': '3000', 'x-ratelimit-limit-tokens': '1000000', 'x-ratelimit-remaining-requests': '2999', 'x-ratelimit-remaining-tokens': '999875', 'x-ratelimit-reset-requests': '20ms', 'x-ratelimit-reset-tokens': '7ms', 'x-request-id': 'req_39814edfcf1a4310a1540141377476e5', 'x-openai-proxy-wasm': 'v0.1', 'cf-cache-status': 'DYNAMIC', 'x-content-type-options': 'nosniff', 'server': 'cloudflare', 'cf-ray': '9894a35bcbe1233f-ORD', 'content-encoding': 'gzip', 'alt-svc': 'h3=":443"; ma=86400'})
+2025-10-04 08:21:17,548 - DEBUG - request_id: req_39814edfcf1a4310a1540141377476e5
+2025-10-04 08:21:17,549 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:21:17,549 - INFO - 📤 Upserting vector to Pinecone...
+2025-10-04 08:21:17,549 - INFO -    Vector ID: 1PNdjo0GNX1exgUNhJvBv9uFmHjxlhfgS_minimal
+2025-10-04 08:21:17,549 - INFO -    Metadata keys: ['text', 'file_id', 'file_name', 'folder_path', 'mime_type', 'modified_time']
+2025-10-04 08:21:17,692 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:21:17,693 - INFO - ✅ Successfully processed Intro to Radiation Quiz.docx
+2025-10-04 08:21:17,693 - INFO - 
+==================================================
+2025-10-04 08:21:17,693 - INFO - 🧪 Testing query functionality
+2025-10-04 08:21:17,693 - INFO - ==================================================
+2025-10-04 08:21:17,693 - INFO - 🔍 Testing query...
+2025-10-04 08:21:17,694 - DEBUG - Request options: {'method': 'post', 'url': '/embeddings', 'files': None, 'idempotency_key': 'stainless-python-retry-cec66387-b490-44c5-9f83-aeb28e3f1172', 'post_parser': <function Embeddings.create.<locals>.parser at 0x1070e6ca0>, 'json_data': {'input': 'process safety', 'model': 'text-embedding-3-small', 'encoding_format': 'base64'}}
+2025-10-04 08:21:17,695 - DEBUG - Sending HTTP Request: POST https://api.openai.com/v1/embeddings
+2025-10-04 08:21:17,695 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-10-04 08:21:17,696 - DEBUG - send_request_headers.complete
+2025-10-04 08:21:17,696 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-10-04 08:21:17,696 - DEBUG - send_request_body.complete
+2025-10-04 08:21:17,696 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-10-04 08:21:18,370 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Sat, 04 Oct 2025 12:21:18 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'access-control-allow-origin', b'*'), (b'access-control-expose-headers', b'X-Request-ID'), (b'openai-model', b'text-embedding-3-small'), (b'openai-organization', b'sudden-impact-labs'), (b'openai-processing-ms', b'53'), (b'openai-project', b'proj_Aa5KxWcnaG4jpPj8u6FImUIU'), (b'openai-version', b'2020-10-01'), (b'strict-transport-security', b'max-age=31536000; includeSubDomains; preload'), (b'via', b'envoy-router-7fd8cfc6fd-mh8qq'), (b'x-envoy-upstream-service-time', b'197'), (b'x-ratelimit-limit-requests', b'3000'), (b'x-ratelimit-limit-tokens', b'1000000'), (b'x-ratelimit-remaining-requests', b'2999'), (b'x-ratelimit-remaining-tokens', b'999997'), (b'x-ratelimit-reset-requests', b'20ms'), (b'x-ratelimit-reset-tokens', b'0s'), (b'x-request-id', b'req_4da81fc5fb43417a80a92ab86a1565aa'), (b'x-openai-proxy-wasm', b'v0.1'), (b'cf-cache-status', b'DYNAMIC'), (b'X-Content-Type-Options', b'nosniff'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9894a361c995233f-ORD'), (b'Content-Encoding', b'gzip'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2025-10-04 08:21:18,371 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:21:18,371 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-10-04 08:21:18,372 - DEBUG - receive_response_body.complete
+2025-10-04 08:21:18,372 - DEBUG - response_closed.started
+2025-10-04 08:21:18,372 - DEBUG - response_closed.complete
+2025-10-04 08:21:18,372 - DEBUG - HTTP Response: POST https://api.openai.com/v1/embeddings "200 OK" Headers({'date': 'Sat, 04 Oct 2025 12:21:18 GMT', 'content-type': 'application/json', 'transfer-encoding': 'chunked', 'connection': 'keep-alive', 'access-control-allow-origin': '*', 'access-control-expose-headers': 'X-Request-ID', 'openai-model': 'text-embedding-3-small', 'openai-organization': 'sudden-impact-labs', 'openai-processing-ms': '53', 'openai-project': 'proj_Aa5KxWcnaG4jpPj8u6FImUIU', 'openai-version': '2020-10-01', 'strict-transport-security': 'max-age=31536000; includeSubDomains; preload', 'via': 'envoy-router-7fd8cfc6fd-mh8qq', 'x-envoy-upstream-service-time': '197', 'x-ratelimit-limit-requests': '3000', 'x-ratelimit-limit-tokens': '1000000', 'x-ratelimit-remaining-requests': '2999', 'x-ratelimit-remaining-tokens': '999997', 'x-ratelimit-reset-requests': '20ms', 'x-ratelimit-reset-tokens': '0s', 'x-request-id': 'req_4da81fc5fb43417a80a92ab86a1565aa', 'x-openai-proxy-wasm': 'v0.1', 'cf-cache-status': 'DYNAMIC', 'x-content-type-options': 'nosniff', 'server': 'cloudflare', 'cf-ray': '9894a361c995233f-ORD', 'content-encoding': 'gzip', 'alt-svc': 'h3=":443"; ma=86400'})
+2025-10-04 08:21:18,373 - DEBUG - request_id: req_4da81fc5fb43417a80a92ab86a1565aa
+2025-10-04 08:21:18,512 - INFO - 🔍 Query returned 1 results
+2025-10-04 08:21:18,512 - INFO -   - Process Safety Management Quiz.docx (Score: 0.5645)
+2025-10-04 08:21:18,512 - INFO - 
+==================================================
+2025-10-04 08:21:18,513 - INFO - 📊 MINIMAL INGESTION SUMMARY
+2025-10-04 08:21:18,513 - INFO - ==================================================
+2025-10-04 08:21:18,513 - INFO - 📁 Files attempted: 3
+2025-10-04 08:21:18,513 - INFO - ✅ Files successful: 3
+2025-10-04 08:21:18,513 - INFO - ❌ Files failed: 0
+2025-10-04 08:21:18,553 - DEBUG - close.started
+2025-10-04 08:21:18,553 - DEBUG - close.complete

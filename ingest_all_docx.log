@@ -1,0 +1,15 @@
+2025-10-04 08:22:46,694 - INFO - 🚀 Starting DOCX ingestion
+2025-10-04 08:22:46,694 - INFO - 🔧 Setting up clients...
+2025-10-04 08:22:46,696 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 08:22:50,118 - INFO - ✅ Clients initialized
+2025-10-04 08:22:50,121 - INFO - 📁 Getting all DOCX files from folder: 1ixMpE1ZjrnCradre2iNQcHZB0C39rVOT
+2025-10-04 08:22:50,838 - INFO - 📊 Found 7 DOCX files
+2025-10-04 08:22:50,838 - INFO - 
+============================================================
+2025-10-04 08:22:50,838 - INFO - 📄 Processing file 1/7: Process Safety Management Quiz.docx
+2025-10-04 08:22:50,838 - INFO - ============================================================
+2025-10-04 08:22:50,839 - INFO - 🔄 Processing: Process Safety Management Quiz.docx
+2025-10-04 08:22:51,591 - INFO - ✅ Downloaded 16304 bytes
+2025-10-04 08:22:51,601 - INFO - ✅ Extracted 1465 characters
+2:51,591 - INFO - ✅ Downloaded 16304 bytes
+2025-10-04 08:22:51,601 - INFO - ✅ Extracted 1465 characters

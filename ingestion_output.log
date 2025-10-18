@@ -1,0 +1,22 @@
+2025-10-04 07:38:05,716 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 07:38:05,717 - INFO - ✅ Google Drive API client initialized
+2025-10-04 07:38:05,750 - INFO - ✅ OpenAI client initialized
+2025-10-04 07:38:05,751 - INFO - 🔗 Connecting to index: mizelconsulting
+2025-10-04 07:38:06,379 - INFO - ✅ Successfully connected to index: mizelconsulting
+2025-10-04 07:38:06,382 - INFO - 📊 Index stats: {'dimension': 1536,
+ 'index_fullness': 0.0,
+ 'metric': 'cosine',
+ 'namespaces': {},
+ 'total_vector_count': 0,
+ 'vector_type': 'dense'}
+2025-10-04 07:38:06,382 - INFO - ✅ Pinecone client initialized - Index: mizelconsulting, Namespace: site
+2025-10-04 07:38:06,576 - INFO - 🚀 Starting ingestion pipeline for folder: 1ixMpE1ZjrnCradre2iNQcHZB0C39rVOT
+2025-10-04 07:38:06,577 - INFO - 📊 Namespace: site
+2025-10-04 07:38:33,051 - INFO - 📁 Found 42 files to process
+2025-10-04 07:38:33,052 - INFO - 🔄 Processing: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:38:33,052 - WARNING - ⚠️ Unsupported file type: application/vnd.ms-powerpoint for Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:38:33,052 - WARNING - ⚠️ No text extracted from: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:38:33,052 - INFO - 🔄 Processing: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:38:33,052 - WARNING - ⚠️ Unsupported file type: application/vnd.openxmlformats-officedocument.presentationml.presentation for Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:38:33,052 - WARNING - ⚠️ No text extracted from: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:38:33,052 - INFO - 🔄 Processing: Process Safety Management Quiz.docx

@@ -1,0 +1,123 @@
+2025-10-04 08:26:49,718 - INFO - 🚀 Starting one-chunk-per-file ingestion
+2025-10-04 08:26:49,718 - INFO - 🔧 Setting up clients...
+2025-10-04 08:26:49,720 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 08:26:52,643 - INFO - ✅ Clients initialized
+2025-10-04 08:26:52,645 - INFO - 📁 Getting all DOCX files from folder: 1ixMpE1ZjrnCradre2iNQcHZB0C39rVOT
+2025-10-04 08:26:53,300 - INFO - 📊 Found 7 DOCX files
+2025-10-04 08:26:53,300 - INFO - 
+============================================================
+2025-10-04 08:26:53,300 - INFO - 📄 Processing file 1/7: Process Safety Management Quiz.docx
+2025-10-04 08:26:53,300 - INFO - ============================================================
+2025-10-04 08:26:53,300 - INFO - 🔄 Processing: Process Safety Management Quiz.docx
+2025-10-04 08:26:53,834 - INFO - ✅ Downloaded 16304 bytes
+2025-10-04 08:26:53,844 - INFO - ✅ Extracted 1465 characters
+2025-10-04 08:26:53,844 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:26:53,844 - INFO - 🧠 Generating embedding...
+2025-10-04 08:26:55,448 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:26:55,561 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:26:55,561 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:26:55,935 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:26:55,935 - INFO - ✅ Successfully processed Process Safety Management Quiz.docx
+2025-10-04 08:26:55,936 - INFO - 
+============================================================
+2025-10-04 08:26:55,936 - INFO - 📄 Processing file 2/7: Rigging Basics Quiz.docx
+2025-10-04 08:26:55,936 - INFO - ============================================================
+2025-10-04 08:26:55,936 - INFO - 🔄 Processing: Rigging Basics Quiz.docx
+2025-10-04 08:26:56,473 - INFO - ✅ Downloaded 14196 bytes
+2025-10-04 08:26:56,479 - INFO - ✅ Extracted 914 characters
+2025-10-04 08:26:56,479 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:26:56,479 - INFO - 🧠 Generating embedding...
+2025-10-04 08:26:57,192 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:26:57,194 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:26:57,194 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:26:57,347 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:26:57,347 - INFO - ✅ Successfully processed Rigging Basics Quiz.docx
+2025-10-04 08:26:57,347 - INFO - 
+============================================================
+2025-10-04 08:26:57,347 - INFO - 📄 Processing file 3/7: Intro to Radiation Quiz.docx
+2025-10-04 08:26:57,347 - INFO - ============================================================
+2025-10-04 08:26:57,347 - INFO - 🔄 Processing: Intro to Radiation Quiz.docx
+2025-10-04 08:26:58,523 - INFO - ✅ Downloaded 15256 bytes
+2025-10-04 08:26:58,528 - INFO - ✅ Extracted 1355 characters
+2025-10-04 08:26:58,528 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:26:58,528 - INFO - 🧠 Generating embedding...
+2025-10-04 08:26:58,822 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:26:58,824 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:26:58,824 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:26:58,954 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:26:58,954 - INFO - ✅ Successfully processed Intro to Radiation Quiz.docx
+2025-10-04 08:26:58,954 - INFO - 
+============================================================
+2025-10-04 08:26:58,954 - INFO - 📄 Processing file 4/7: PPE Quiz.docx
+2025-10-04 08:26:58,954 - INFO - ============================================================
+2025-10-04 08:26:58,954 - INFO - 🔄 Processing: PPE Quiz.docx
+2025-10-04 08:27:00,053 - INFO - ✅ Downloaded 16391 bytes
+2025-10-04 08:27:00,061 - INFO - ✅ Extracted 1532 characters
+2025-10-04 08:27:00,062 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:27:00,062 - INFO - 🧠 Generating embedding...
+2025-10-04 08:27:00,284 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:27:00,287 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:27:00,287 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:27:00,426 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:27:00,426 - INFO - ✅ Successfully processed PPE Quiz.docx
+2025-10-04 08:27:00,426 - INFO - 
+============================================================
+2025-10-04 08:27:00,427 - INFO - 📄 Processing file 5/7: Electrical Safety Quiz.docx
+2025-10-04 08:27:00,427 - INFO - ============================================================
+2025-10-04 08:27:00,427 - INFO - 🔄 Processing: Electrical Safety Quiz.docx
+2025-10-04 08:27:01,282 - INFO - ✅ Downloaded 17808 bytes
+2025-10-04 08:27:01,289 - INFO - ✅ Extracted 1588 characters
+2025-10-04 08:27:01,289 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:27:01,289 - INFO - 🧠 Generating embedding...
+2025-10-04 08:27:01,896 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:27:01,897 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:27:01,897 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:27:02,019 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:27:02,019 - INFO - ✅ Successfully processed Electrical Safety Quiz.docx
+2025-10-04 08:27:02,019 - INFO - 
+============================================================
+2025-10-04 08:27:02,019 - INFO - 📄 Processing file 6/7: Walking Working Surfaces Quiz.docx
+2025-10-04 08:27:02,019 - INFO - ============================================================
+2025-10-04 08:27:02,019 - INFO - 🔄 Processing: Walking Working Surfaces Quiz.docx
+2025-10-04 08:27:02,915 - INFO - ✅ Downloaded 14845 bytes
+2025-10-04 08:27:02,921 - INFO - ✅ Extracted 2054 characters
+2025-10-04 08:27:02,921 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:27:02,921 - INFO - 🧠 Generating embedding...
+2025-10-04 08:27:03,144 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:27:03,145 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:27:03,146 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:27:03,257 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:27:03,257 - INFO - ✅ Successfully processed Walking Working Surfaces Quiz.docx
+2025-10-04 08:27:03,257 - INFO - 
+============================================================
+2025-10-04 08:27:03,257 - INFO - 📄 Processing file 7/7: Safety Team Meeting Minutes Template.docx
+2025-10-04 08:27:03,257 - INFO - ============================================================
+2025-10-04 08:27:03,257 - INFO - 🔄 Processing: Safety Team Meeting Minutes Template.docx
+2025-10-04 08:27:04,073 - INFO - ✅ Downloaded 28451 bytes
+2025-10-04 08:27:04,083 - INFO - ✅ Extracted 471 characters
+2025-10-04 08:27:04,083 - INFO - 📄 Created chunk with 471 characters
+2025-10-04 08:27:04,083 - INFO - 🧠 Generating embedding...
+2025-10-04 08:27:04,450 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:27:04,453 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:27:04,453 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:27:04,575 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:27:04,575 - INFO - ✅ Successfully processed Safety Team Meeting Minutes Template.docx
+2025-10-04 08:27:04,575 - INFO - 
+============================================================
+2025-10-04 08:27:04,575 - INFO - 🧪 Testing query functionality
+2025-10-04 08:27:04,575 - INFO - ============================================================
+2025-10-04 08:27:04,575 - INFO - 🔍 Testing query...
+2025-10-04 08:27:04,761 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:27:04,900 - INFO - 🔍 Query returned 4 results:
+2025-10-04 08:27:04,900 - INFO -   - Rigging Basics Quiz.docx (Score: 0.3660)
+2025-10-04 08:27:04,900 - INFO -   - Process Safety Management Quiz.docx (Score: 0.3458)
+2025-10-04 08:27:04,900 - INFO -   - Intro to Radiation Quiz.docx (Score: 0.3388)
+2025-10-04 08:27:04,901 - INFO -   - Process Safety Management Quiz.docx (Score: 0.3388)
+2025-10-04 08:27:04,901 - INFO - 
+============================================================
+2025-10-04 08:27:04,901 - INFO - 📊 ONE-CHUNK INGESTION SUMMARY
+2025-10-04 08:27:04,901 - INFO - ============================================================
+2025-10-04 08:27:04,901 - INFO - 📁 Files attempted: 7
+2025-10-04 08:27:04,901 - INFO - ✅ Files successful: 7
+2025-10-04 08:27:04,901 - INFO - ❌ Files failed: 0
+2025-10-04 08:27:04,901 - INFO - ============================================================

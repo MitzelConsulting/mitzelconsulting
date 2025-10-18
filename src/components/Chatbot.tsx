@@ -2,6 +2,8 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { useChatbot } from '@/context/ChatbotContext'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 interface Message {
   id: string
@@ -64,7 +66,7 @@ const Chatbot = () => {
       const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
       setSessionId(newSessionId)
 
-      let welcomeText = "Welcome to your Mizel Course and Safety Training Advisor! I can help you search the entire site for training courses, understand safety requirements and which courses may fit your needs best, while ensuring your team gets the proper trainings and certifications. I'm loaded up with thousands of proprietary course materials, documents, and experiences in safety situations and trainings, so how can I support?"
+      let welcomeText = "Welcome to your Mizel Safety Training Advisor! I'm powered by AI and have deep knowledge from our comprehensive training materials, safety documents, and industry expertise. I can help you understand safety requirements, OSHA regulations, best practices, and guide you to the right training solutions. How can I help you today?"
       
       if (chatbotMode === 'manager') {
         welcomeText = "Welcome! I'm your Enterprise Training Solutions Advisor. I can help you explore our comprehensive enterprise training programs, including custom training solutions, Learning Management System integration, and bulk pricing options. What type of enterprise training solutions are you looking for? Are you interested in custom programs, LMS integration, or volume training for your organization?"
@@ -168,8 +170,8 @@ const Chatbot = () => {
     }
 
     try {
-      // Send search query to API for course search and analytics
-      const response = await fetch('/api/course-search', {
+      // Track course search for analytics
+      fetch('/api/course-search', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -179,61 +181,64 @@ const Chatbot = () => {
           email: email || null,
           mode: chatbotMode
         })
+      }).catch(err => console.error('Analytics tracking error:', err))
+
+      // Use OpenAI with Pinecone RAG for intelligent responses
+      const chatMessages = messages.map(msg => ({
+        role: msg.isUser ? 'user' : 'assistant',
+        content: msg.text
+      }))
+
+      // Add the current user message
+      chatMessages.push({
+        role: 'user',
+        content: text
+      })
+
+      const response = await fetch('/api/openai-chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: chatMessages,
+          query: text
+        })
       })
 
       const data = await response.json()
 
-      if (data.success && data.courses && data.courses.length > 0) {
-        // Build AI response with course recommendations
-        let aiResponseText = `I found ${data.courses.length} course${data.courses.length !== 1 ? 's' : ''} that match your search for "${text}":\n\n`
-        
-        data.courses.forEach((course: any, index: number) => {
-          aiResponseText += `${index + 1}. **${course.title}**\n`
-          aiResponseText += `   - Category: ${course.category}\n`
-          aiResponseText += `   - Duration: ${course.duration_hours} hours\n`
-          aiResponseText += `   - Price: $${course.price}\n`
-          aiResponseText += `   - ${course.short_description}\n\n`
-        })
-
-        aiResponseText += `These courses are designed to meet your safety training needs. Would you like me to provide more details about any specific course, or would you like to discuss your training requirements further?`
-
-        const aiResponse: Message = {
-          id: (Date.now() + 1).toString(),
-          text: aiResponseText,
-          isUser: false,
-          timestamp: new Date()
-        }
-
-        setTimeout(async () => {
-          setMessages(prev => [...prev, aiResponse])
-          setIsTyping(false)
-          speak(aiResponse.text)
-          
-          // Save AI response to session
-          if (sessionId) {
-            await saveMessageToSession(sessionId, aiResponse.text, false, email || undefined, name || undefined)
-          }
-        }, 1000)
-      } else {
-        // Fallback response if no courses found
-        const aiResponse: Message = {
-          id: (Date.now() + 1).toString(),
-          text: `I understand you're looking for "${text}". While I didn't find exact matches, I can help you find the right safety training. Our courses cover Construction Safety, Environmental Safety, General Safety, and Specialized Training. What specific safety requirements do you need to meet?`,
-          isUser: false,
-          timestamp: new Date()
-        }
-
-        setTimeout(async () => {
-          setMessages(prev => [...prev, aiResponse])
-          setIsTyping(false)
-          speak(aiResponse.text)
-          
-          // Save AI response to session
-          if (sessionId) {
-            await saveMessageToSession(sessionId, aiResponse.text, false, email || undefined, name || undefined)
-          }
-        }, 1000)
+      if (data.error) {
+        throw new Error(data.error)
       }
+
+      let aiResponseText = data.reply || "I'm sorry, I couldn't generate a response."
+
+      // Add source information if available
+      if (data.sources && data.sources.length > 0) {
+        const uniqueSources = Array.from(new Set(data.sources.map((s: any) => s.fileName)))
+        if (uniqueSources.length > 0 && uniqueSources.length <= 3) {
+          aiResponseText += `\n\n*Reference materials: ${uniqueSources.slice(0, 3).join(', ')}*`
+        }
+      }
+
+      const aiResponse: Message = {
+        id: (Date.now() + 1).toString(),
+        text: aiResponseText,
+        isUser: false,
+        timestamp: new Date()
+      }
+
+      setTimeout(async () => {
+        setMessages(prev => [...prev, aiResponse])
+        setIsTyping(false)
+        speak(aiResponse.text)
+        
+        // Save AI response to session
+        if (sessionId) {
+          await saveMessageToSession(sessionId, aiResponse.text, false, email || undefined, name || undefined)
+        }
+      }, 1000)
 
     } catch (error) {
       console.error('Error sending message:', error)
@@ -395,7 +400,7 @@ const Chatbot = () => {
         onMouseDown={handleMouseDown}
       >
         <div>
-          <h3 className="text-2xl font-bold">Mizel AI Advisor</h3>
+          <h3 className="text-2xl font-bold">Mizel Safety Advisor</h3>
         </div>
         <button
           onClick={() => setIsChatbotOpen(false)}
@@ -421,7 +426,26 @@ const Chatbot = () => {
                   : 'bg-gray-100 text-gray-900'
               }`}
             >
-              <div className="text-xl">{message.text}</div>
+              <div className={`text-base leading-relaxed ${message.isUser ? 'text-white' : 'text-gray-900'} markdown-content`}>
+                <ReactMarkdown 
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    p: ({children}) => <p className="mb-3 last:mb-0">{children}</p>,
+                    ul: ({children}) => <ul className="list-disc ml-5 mb-3 space-y-1">{children}</ul>,
+                    ol: ({children}) => <ol className="list-decimal ml-5 mb-3 space-y-1">{children}</ol>,
+                    li: ({children}) => <li className="mb-1">{children}</li>,
+                    strong: ({children}) => <strong className="font-semibold">{children}</strong>,
+                    em: ({children}) => <em className="italic">{children}</em>,
+                    h1: ({children}) => <h1 className="text-xl font-bold mb-2 mt-4 first:mt-0">{children}</h1>,
+                    h2: ({children}) => <h2 className="text-lg font-bold mb-2 mt-3 first:mt-0">{children}</h2>,
+                    h3: ({children}) => <h3 className="text-base font-semibold mb-2 mt-2 first:mt-0">{children}</h3>,
+                    code: ({children}) => <code className={`${message.isUser ? 'bg-blue-700' : 'bg-gray-200'} px-1 rounded text-sm`}>{children}</code>,
+                    blockquote: ({children}) => <blockquote className="border-l-4 border-gray-400 pl-3 italic my-2">{children}</blockquote>,
+                  }}
+                >
+                  {message.text}
+                </ReactMarkdown>
+              </div>
             </div>
           </div>
         ))}

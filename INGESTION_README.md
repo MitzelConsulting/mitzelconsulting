@@ -97,9 +97,10 @@ python ingest.py
 
 The pipeline uses these settings for text chunking:
 
-- **Chunk Size**: 700 tokens
+- **Chunk Size**: 700 tokens (approximately 800 characters)
 - **Overlap**: 150 tokens
-- **Model**: `text-embedding-3-large` (3072 dimensions)
+- **Embedding Model**: `text-embedding-3-small` (1536 dimensions)
+- **Chat Model**: `gpt-4.1-mini` (NOT gpt-4o-mini)
 
 ## 📁 Supported File Types
 
@@ -119,7 +120,7 @@ The pipeline uses these settings for text chunking:
 2. **File Discovery**: Recursively walks the shared folder
 3. **Text Extraction**: Exports Google files or downloads and processes documents
 4. **Chunking**: Splits text into overlapping segments (~700 tokens)
-5. **Embedding**: Generates embeddings using OpenAI's `text-embedding-3-large`
+5. **Embedding**: Generates embeddings using OpenAI's `text-embedding-3-small`
 6. **Storage**: Upserts vectors to Pinecone with rich metadata
 7. **Tracking**: Maintains `manifest.json` for incremental processing
 
@@ -178,7 +179,7 @@ openai_client = OpenAI(api_key="your-openai-key")
 # Generate query embedding
 query = "OSHA 30 hour construction safety training requirements"
 response = openai_client.embeddings.create(
-    model="text-embedding-3-large",
+    model="text-embedding-3-small",
     input=query
 )
 query_embedding = response.data[0].embedding
@@ -224,7 +225,7 @@ def get_relevant_content(query: str, namespace: str = "site") -> List[Dict]:
     
     # Generate embedding
     response = openai_client.embeddings.create(
-        model="text-embedding-3-large",
+        model="text-embedding-3-small",
         input=query
     )
     query_embedding = response.data[0].embedding

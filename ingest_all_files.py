@@ -9,6 +9,9 @@ Comprehensive ingestion script for all supported file types:
 
 import os
 import logging
+import subprocess
+import tempfile
+import re
 from dotenv import load_dotenv
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
@@ -150,27 +153,157 @@ def extract_text_from_ppt(content, mime_type):
     try:
         if 'presentationml' in mime_type:  # PPTX files
             prs = Presentation(io.BytesIO(content))
+            text = ""
+            for slide_num, slide in enumerate(prs.slides, 1):
+                for shape in slide.shapes:
+                    if hasattr(shape, "text") and shape.text.strip():
+                        text += f"Slide {slide_num}: {shape.text.strip()}\n"
+            return text.strip()
         else:  # PPT files (older format)
-            logger.warning(f"⚠️ Old PPT format not supported, only PPTX files can be processed")
-            return ""
+            # Try LibreOffice first, then fall back to binary extraction
+            text = extract_text_from_old_ppt(content)
+            if not text:
+                text = extract_text_from_ppt_binary(content)
+            return text
         
-        text = ""
-        for slide_num, slide in enumerate(prs.slides, 1):
-            for shape in slide.shapes:
-                if hasattr(shape, "text") and shape.text.strip():
-                    text += f"Slide {slide_num}: {shape.text.strip()}\n"
-        
-        return text.strip()
     except Exception as e:
         logger.error(f"❌ Error extracting PPT text: {e}")
         return ""
 
+def extract_text_from_old_ppt(content):
+    """Extract text from old PPT files using LibreOffice command line."""
+    try:
+        # Create a temporary file for the PPT content
+        with tempfile.NamedTemporaryFile(suffix='.ppt', delete=False) as temp_file:
+            temp_file.write(content)
+            temp_file.flush()
+            temp_ppt_path = temp_file.name
+        
+        try:
+            # Use LibreOffice to convert PPT to text
+            # LibreOffice command: soffice --headless --convert-to txt
+            result = subprocess.run([
+                '/Applications/LibreOffice.app/Contents/MacOS/soffice', '--headless', '--convert-to', 'txt', 
+                temp_ppt_path
+            ], capture_output=True, text=True, timeout=60)
+            
+            if result.returncode == 0:
+                # LibreOffice creates the converted file in the current working directory
+                # Extract just the filename from the temp path
+                temp_filename = os.path.basename(temp_ppt_path)
+                txt_filename = temp_filename.replace('.ppt', '.txt')
+                txt_path = os.path.join(os.getcwd(), txt_filename)
+                
+                if os.path.exists(txt_path):
+                    with open(txt_path, 'r', encoding='utf-8') as f:
+                        text = f.read()
+                    # Clean up the text file
+                    os.unlink(txt_path)
+                    return text.strip()
+                else:
+                    logger.warning("⚠️ LibreOffice conversion succeeded but no text file found")
+                    return ""
+            else:
+                logger.warning(f"⚠️ LibreOffice conversion failed: {result.stderr}")
+                return ""
+                
+        finally:
+            # Clean up the temporary PPT file
+            if os.path.exists(temp_ppt_path):
+                os.unlink(temp_ppt_path)
+                
+    except subprocess.TimeoutExpired:
+        logger.warning("⚠️ LibreOffice conversion timed out")
+        return ""
+    except Exception as e:
+        logger.warning(f"⚠️ Error with LibreOffice conversion: {e}")
+        return ""
+
+def extract_text_from_ppt_binary(content):
+    """Extract readable text directly from PPT binary content."""
+    try:
+        logger.info("🧪 Trying binary text extraction for PPT...")
+        
+        # Convert to string and look for readable text patterns
+        text_content = content.decode('latin-1', errors='ignore')
+        
+        # Look for common text patterns in PPT files
+        patterns = [
+            r'[\x20-\x7E]{15,}',  # Printable ASCII characters, at least 15 chars
+            r'[A-Za-z\s]{25,}',   # Letters and spaces, at least 25 chars
+        ]
+        
+        extracted_text = []
+        for pattern in patterns:
+            matches = re.findall(pattern, text_content)
+            for match in matches:
+                # Clean up the match
+                clean_match = match.strip()
+                # Filter out binary noise and keep meaningful text
+                if (len(clean_match) > 15 and 
+                    not any(char in clean_match for char in ['\x00', '\x01', '\x02', '\x03']) and
+                    any(c.isalpha() for c in clean_match) and  # Must contain letters
+                    len([c for c in clean_match if c.isalpha()]) > 5):  # At least 5 letters
+                    extracted_text.append(clean_match)
+        
+        if extracted_text:
+            # Join and deduplicate
+            unique_text = []
+            seen = set()
+            for text in extracted_text:
+                # Skip very similar text to avoid duplicates
+                text_lower = text.lower()
+                if not any(text_lower in seen_text for seen_text in seen):
+                    unique_text.append(text)
+                    seen.add(text_lower)
+            
+            result = ' '.join(unique_text)
+            if len(result) > 100:
+                logger.info(f"✅ Binary extraction found {len(result)} characters")
+                return result
+        
+        logger.warning("⚠️ Binary extraction found no meaningful text")
+        return ""
+        
+    except Exception as e:
+        logger.warning(f"⚠️ Binary extraction failed: {e}")
+        return ""
+
 def extract_text_from_doc(content):
-    """Extract text from DOC files."""
-    # For now, we'll skip DOC files as they require additional libraries
-    # This is a placeholder for future implementation
-    logger.warning("⚠️ DOC text extraction not yet implemented")
-    return ""
+    """Extract text from DOC files using antiword."""
+    try:
+        # Create a temporary file for the DOC content
+        with tempfile.NamedTemporaryFile(suffix='.doc', delete=False) as temp_file:
+            temp_file.write(content)
+            temp_file.flush()
+            temp_doc_path = temp_file.name
+        
+        try:
+            # Use antiword to extract text from DOC file
+            result = subprocess.run([
+                'antiword', temp_doc_path
+            ], capture_output=True, text=True, timeout=30)
+            
+            if result.returncode == 0:
+                return result.stdout.strip()
+            else:
+                logger.warning(f"⚠️ Antiword extraction failed: {result.stderr}")
+                return ""
+                
+        finally:
+            # Clean up the temporary DOC file
+            if os.path.exists(temp_doc_path):
+                os.unlink(temp_doc_path)
+                
+    except subprocess.TimeoutExpired:
+        logger.warning("⚠️ Antiword extraction timed out")
+        return ""
+    except FileNotFoundError:
+        logger.warning("⚠️ Antiword not found - please install with: brew install antiword")
+        return ""
+    except Exception as e:
+        logger.warning(f"⚠️ Error with antiword extraction: {e}")
+        return ""
 
 def extract_text_from_file(content, mime_type):
     """Extract text from file content based on MIME type."""

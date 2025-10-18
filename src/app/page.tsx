@@ -362,32 +362,87 @@ export default function Home() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                { name: 'Construction Safety', color: 'bg-blue-600', courses: ['OSHA 30-Hour Construction', 'Scaffold Safety', 'Fall Protection', 'Excavation Safety'] },
-                { name: 'Environmental Safety', color: 'bg-blue-600', courses: ['HAZWOPER 40-Hour', 'Environmental Compliance', 'Waste Management', 'Spill Response'] },
-                { name: 'General Industry', color: 'bg-blue-600', courses: ['OSHA 10-Hour General', 'Workplace Safety', 'Emergency Response', 'Safety Management'] },
-                { name: 'Healthcare Safety', color: 'bg-blue-600', courses: ['Bloodborne Pathogens', 'Infection Control', 'Healthcare Ergonomics', 'Patient Safety'] },
-                { name: 'Manufacturing', color: 'bg-blue-600', courses: ['Machine Safety', 'Chemical Safety', 'Quality Control', 'Process Safety'] },
-                { name: 'Specialized Training', color: 'bg-blue-600', courses: ['Confined Space Entry', 'Lockout/Tagout', 'Respiratory Protection', 'Hearing Conservation'] }
+                { 
+                  name: 'Construction Safety', 
+                  gradient: 'from-orange-500 to-red-600',
+                  icon: '🏗️',
+                  courses: ['OSHA 30-Hour Construction', 'Scaffold Safety', 'Fall Protection', 'Excavation Safety'] 
+                },
+                { 
+                  name: 'Environmental Safety', 
+                  gradient: 'from-green-500 to-emerald-600',
+                  icon: '🌱',
+                  courses: ['HAZWOPER 40-Hour', 'Environmental Compliance', 'Waste Management', 'Spill Response'] 
+                },
+                { 
+                  name: 'General Industry', 
+                  gradient: 'from-blue-500 to-indigo-600',
+                  icon: '🏭',
+                  courses: ['OSHA 10-Hour General', 'Workplace Safety', 'Emergency Response', 'Safety Management'] 
+                },
+                { 
+                  name: 'Healthcare Safety', 
+                  gradient: 'from-pink-500 to-rose-600',
+                  icon: '🏥',
+                  courses: ['Bloodborne Pathogens', 'Infection Control', 'Healthcare Ergonomics', 'Patient Safety'] 
+                },
+                { 
+                  name: 'Manufacturing', 
+                  gradient: 'from-purple-500 to-violet-600',
+                  icon: '⚙️',
+                  courses: ['Machine Safety', 'Chemical Safety', 'Quality Control', 'Process Safety'] 
+                },
+                { 
+                  name: 'Specialized Training', 
+                  gradient: 'from-teal-500 to-cyan-600',
+                  icon: '🎯',
+                  courses: ['Confined Space Entry', 'Lockout/Tagout', 'Respiratory Protection', 'Hearing Conservation'] 
+                }
               ].map((category, index) => (
-                <div key={index} className="bg-black rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                  <div className={`h-32 ${category.color} flex items-center justify-center`}>
-                    <div className="text-white text-center">
-                      <h3 className="text-xl font-bold">{category.name}</h3>
+                <div key={index} className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1">
+                  {/* Header with gradient */}
+                  <div className={`h-24 bg-gradient-to-r ${category.gradient} relative overflow-hidden`}>
+                    <div className="absolute inset-0 bg-black/10"></div>
+                    <div className="relative h-full flex items-center justify-center">
+                      <div className="text-center text-white">
+                        <div className="text-3xl mb-1">{category.icon}</div>
+                        <h3 className="text-lg font-semibold tracking-wide">{category.name}</h3>
+                      </div>
+                    </div>
+                    {/* Subtle pattern overlay */}
+                    <div className="absolute inset-0 opacity-10">
+                      <div className="absolute inset-0" style={{
+                        backgroundImage: `radial-gradient(circle at 25% 25%, white 2px, transparent 2px)`,
+                        backgroundSize: '20px 20px'
+                      }}></div>
                     </div>
                   </div>
+                  
+                  {/* Content area */}
                   <div className="p-6">
-                    <ul className="space-y-2">
+                    <ul className="space-y-3 mb-6">
                       {category.courses.map((course, courseIndex) => (
-                        <li key={courseIndex} className="text-gray-300 flex items-center">
-                          <span className="text-blue-400 mr-2">&gt;</span>
-                          {course}
+                        <li key={courseIndex} className="flex items-start group/item">
+                          <div className="flex-shrink-0 w-2 h-2 bg-gradient-to-r from-gray-300 to-gray-400 rounded-full mt-2 mr-3 group-hover/item:from-blue-500 group-hover/item:to-blue-600 transition-all duration-200"></div>
+                          <span className="text-gray-700 text-sm leading-relaxed group-hover/item:text-gray-900 transition-colors duration-200">{course}</span>
                         </li>
                       ))}
                     </ul>
-                    <button className="w-full mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
-                      View All {category.name}
+                    
+                    {/* CTA Button */}
+                    <button className="w-full group/btn relative overflow-hidden bg-gradient-to-r from-gray-50 to-gray-100 hover:from-gray-100 hover:to-gray-200 text-gray-800 font-medium py-3 px-4 rounded-xl border border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-md">
+                      <span className="relative z-10 flex items-center justify-center">
+                        View All {category.name}
+                        <svg className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-indigo-500/5 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                     </button>
                   </div>
+                  
+                  {/* Subtle border accent */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
                 </div>
               ))}
             </div>

@@ -17,7 +17,7 @@
 - ✅ Recursive folder walking
 - ✅ File type support: Google Docs, Slides, Sheets, PDFs, DOCX, TXT
 - ✅ Smart text chunking (700 tokens, 150 overlap)
-- ✅ OpenAI text-embedding-3-large embeddings
+- ✅ OpenAI text-embedding-3-small embeddings (1536 dimensions)
 - ✅ Pinecone v3 client with batch upserts
 - ✅ Manifest-based change detection
 - ✅ Namespace support (default: 'site')

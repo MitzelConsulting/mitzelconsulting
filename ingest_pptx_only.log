@@ -1,0 +1,696 @@
+2025-10-04 08:34:44,539 - INFO - 🚀 Starting PPTX-only ingestion
+2025-10-04 08:34:44,539 - INFO - 🔧 Setting up clients...
+2025-10-04 08:34:44,541 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 08:34:48,884 - INFO - ✅ Clients initialized
+2025-10-04 08:34:48,887 - INFO - 📁 Getting PPTX files from folder: 1ixMpE1ZjrnCradre2iNQcHZB0C39rVOT
+2025-10-04 08:34:49,662 - INFO - 📊 Found 23 PPTX files
+2025-10-04 08:34:49,662 - INFO - 
+============================================================
+2025-10-04 08:34:49,663 - INFO - 📄 Processing file 1/23: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 08:34:49,663 - INFO - ============================================================
+2025-10-04 08:34:49,663 - INFO - 🔄 Processing: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 08:34:58,323 - INFO - ✅ Downloaded 12742642 bytes
+2025-10-04 08:34:58,341 - INFO - ✅ Extracted 7360 characters
+2025-10-04 08:34:58,341 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:34:58,341 - INFO - 🧠 Generating embedding...
+2025-10-04 08:34:58,728 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:34:58,768 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:34:58,768 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:34:59,143 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:34:59,144 - INFO - ✅ Successfully processed Crane and Rigging Safety in General Industry.pptx
+2025-10-04 08:34:59,144 - INFO - 
+============================================================
+2025-10-04 08:34:59,144 - INFO - 📄 Processing file 2/23: PPE Training.pptx
+2025-10-04 08:34:59,144 - INFO - ============================================================
+2025-10-04 08:34:59,144 - INFO - 🔄 Processing: PPE Training.pptx
+2025-10-04 08:35:04,843 - INFO - ✅ Downloaded 5429448 bytes
+2025-10-04 08:35:04,914 - INFO - ✅ Extracted 14724 characters
+2025-10-04 08:35:04,914 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:35:04,914 - INFO - 🧠 Generating embedding...
+2025-10-04 08:35:05,836 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:35:05,837 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:35:05,837 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:35:06,018 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:35:06,019 - INFO - ✅ Successfully processed PPE Training.pptx
+2025-10-04 08:35:06,019 - INFO - 
+============================================================
+2025-10-04 08:35:06,019 - INFO - 📄 Processing file 3/23: Walking-Working_Surfaces 03192025.pptx
+2025-10-04 08:35:06,019 - INFO - ============================================================
+2025-10-04 08:35:06,019 - INFO - 🔄 Processing: Walking-Working_Surfaces 03192025.pptx
+2025-10-04 08:35:12,089 - INFO - ✅ Downloaded 12708655 bytes
+2025-10-04 08:35:12,139 - INFO - ✅ Extracted 14571 characters
+2025-10-04 08:35:12,139 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:35:12,139 - INFO - 🧠 Generating embedding...
+2025-10-04 08:35:12,453 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:35:12,454 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:35:12,454 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:35:12,628 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:35:12,628 - INFO - ✅ Successfully processed Walking-Working_Surfaces 03192025.pptx
+2025-10-04 08:35:12,628 - INFO - 
+============================================================
+2025-10-04 08:35:12,628 - INFO - 📄 Processing file 4/23: Heat Stress Training .pptx
+2025-10-04 08:35:12,628 - INFO - ============================================================
+2025-10-04 08:35:12,628 - INFO - 🔄 Processing: Heat Stress Training .pptx
+2025-10-04 08:35:16,163 - INFO - ✅ Downloaded 5424944 bytes
+2025-10-04 08:35:16,179 - INFO - ✅ Extracted 2370 characters
+2025-10-04 08:35:16,179 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:35:16,179 - INFO - 🧠 Generating embedding...
+2025-10-04 08:35:16,485 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:35:16,487 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:35:16,487 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:35:16,612 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:35:16,613 - INFO - ✅ Successfully processed Heat Stress Training .pptx
+2025-10-04 08:35:16,613 - INFO - 
+============================================================
+2025-10-04 08:35:16,613 - INFO - 📄 Processing file 5/23: 02142024 hazcom updates.pptx
+2025-10-04 08:35:16,613 - INFO - ============================================================
+2025-10-04 08:35:16,613 - INFO - 🔄 Processing: 02142024 hazcom updates.pptx
+2025-10-04 08:35:47,950 - INFO - 🚀 Starting PPTX-only ingestion
+2025-10-04 08:35:47,950 - INFO - 🔧 Setting up clients...
+2025-10-04 08:35:47,951 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 08:35:53,545 - INFO - ✅ Clients initialized
+2025-10-04 08:35:53,547 - INFO - 📁 Getting PPTX files from folder: 1ixMpE1ZjrnCradre2iNQcHZB0C39rVOT
+2025-10-04 08:35:54,288 - INFO - 📊 Found 23 PPTX files
+2025-10-04 08:35:54,288 - INFO - 
+============================================================
+2025-10-04 08:35:54,288 - INFO - 📄 Processing file 1/23: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 08:35:54,288 - INFO - ============================================================
+2025-10-04 08:35:54,288 - INFO - 🔄 Processing: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 08:36:01,269 - INFO - ✅ Downloaded 12742642 bytes
+2025-10-04 08:36:01,303 - INFO - ✅ Extracted 7360 characters
+2025-10-04 08:36:01,303 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:36:01,303 - INFO - 🧠 Generating embedding...
+2025-10-04 08:36:01,691 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:36:01,736 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:36:01,736 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:36:02,542 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:36:02,543 - INFO - ✅ Successfully processed Crane and Rigging Safety in General Industry.pptx
+2025-10-04 08:36:02,543 - INFO - 
+============================================================
+2025-10-04 08:36:02,543 - INFO - 📄 Processing file 2/23: PPE Training.pptx
+2025-10-04 08:36:02,543 - INFO - ============================================================
+2025-10-04 08:36:02,543 - INFO - 🔄 Processing: PPE Training.pptx
+2025-10-04 08:36:04,362 - INFO - ✅ Downloaded 127105915 bytes
+2025-10-04 08:36:04,435 - INFO - ✅ Extracted 13440 characters
+2025-10-04 08:36:04,435 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:36:04,435 - INFO - 🧠 Generating embedding...
+2025-10-04 08:36:04,682 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:36:04,684 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:36:04,684 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:36:04,822 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:36:04,822 - INFO - ✅ Successfully processed 02142024 hazcom updates.pptx
+2025-10-04 08:36:04,822 - INFO - 
+============================================================
+2025-10-04 08:36:04,822 - INFO - 📄 Processing file 6/23: Fire Exits and Extinguishers - ASTG.pptx
+2025-10-04 08:36:04,822 - INFO - ============================================================
+2025-10-04 08:36:04,822 - INFO - 🔄 Processing: Fire Exits and Extinguishers - ASTG.pptx
+2025-10-04 08:36:06,375 - INFO - ✅ Downloaded 5429448 bytes
+2025-10-04 08:36:06,443 - INFO - ✅ Extracted 14724 characters
+2025-10-04 08:36:06,443 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:36:06,443 - INFO - 🧠 Generating embedding...
+2025-10-04 08:36:06,658 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:36:06,660 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:36:06,660 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:36:06,828 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:36:06,829 - INFO - ✅ Successfully processed PPE Training.pptx
+2025-10-04 08:36:06,829 - INFO - 
+============================================================
+2025-10-04 08:36:06,829 - INFO - 📄 Processing file 3/23: Walking-Working_Surfaces 03192025.pptx
+2025-10-04 08:36:06,829 - INFO - ============================================================
+2025-10-04 08:36:06,829 - INFO - 🔄 Processing: Walking-Working_Surfaces 03192025.pptx
+2025-10-04 08:36:11,850 - INFO - ✅ Downloaded 11091824 bytes
+2025-10-04 08:36:11,921 - INFO - ✅ Extracted 11749 characters
+2025-10-04 08:36:11,921 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:36:11,921 - INFO - 🧠 Generating embedding...
+2025-10-04 08:36:12,191 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:36:12,192 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:36:12,193 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:36:12,324 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:36:12,324 - INFO - ✅ Successfully processed Fire Exits and Extinguishers - ASTG.pptx
+2025-10-04 08:36:12,325 - INFO - 
+============================================================
+2025-10-04 08:36:12,325 - INFO - 📄 Processing file 7/23: Exits_EAP_FPP_FireProtection_PPT_v-03-01-17.pptx
+2025-10-04 08:36:12,325 - INFO - ============================================================
+2025-10-04 08:36:12,325 - INFO - 🔄 Processing: Exits_EAP_FPP_FireProtection_PPT_v-03-01-17.pptx
+2025-10-04 08:36:13,377 - INFO - ✅ Downloaded 12708655 bytes
+2025-10-04 08:36:13,436 - INFO - ✅ Extracted 14571 characters
+2025-10-04 08:36:13,436 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:36:13,436 - INFO - 🧠 Generating embedding...
+2025-10-04 08:36:14,240 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:36:14,242 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:36:14,242 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:36:14,360 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:36:14,360 - INFO - ✅ Successfully processed Walking-Working_Surfaces 03192025.pptx
+2025-10-04 08:36:14,360 - INFO - 
+============================================================
+2025-10-04 08:36:14,361 - INFO - 📄 Processing file 4/23: Heat Stress Training .pptx
+2025-10-04 08:36:14,361 - INFO - ============================================================
+2025-10-04 08:36:14,361 - INFO - 🔄 Processing: Heat Stress Training .pptx
+2025-10-04 08:36:16,497 - INFO - ✅ Downloaded 5424944 bytes
+2025-10-04 08:36:16,513 - INFO - ✅ Extracted 2370 characters
+2025-10-04 08:36:16,513 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:36:16,513 - INFO - 🧠 Generating embedding...
+2025-10-04 08:36:16,678 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:36:16,681 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:36:16,681 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:36:16,802 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:36:16,802 - INFO - ✅ Successfully processed Heat Stress Training .pptx
+2025-10-04 08:36:16,802 - INFO - 
+============================================================
+2025-10-04 08:36:16,802 - INFO - 📄 Processing file 5/23: 02142024 hazcom updates.pptx
+2025-10-04 08:36:16,802 - INFO - ============================================================
+2025-10-04 08:36:16,802 - INFO - 🔄 Processing: 02142024 hazcom updates.pptx
+2025-10-04 08:36:24,297 - INFO - ✅ Downloaded 11091824 bytes
+2025-10-04 08:36:24,367 - INFO - ✅ Extracted 11749 characters
+2025-10-04 08:36:24,367 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:36:24,367 - INFO - 🧠 Generating embedding...
+2025-10-04 08:36:24,634 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:36:24,636 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:36:24,636 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:36:24,765 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:36:24,765 - INFO - ✅ Successfully processed Exits_EAP_FPP_FireProtection_PPT_v-03-01-17.pptx
+2025-10-04 08:36:24,765 - INFO - 
+============================================================
+2025-10-04 08:36:24,765 - INFO - 📄 Processing file 8/23: Walking-Working_Surfaces.pptx
+2025-10-04 08:36:24,766 - INFO - ============================================================
+2025-10-04 08:36:24,766 - INFO - 🔄 Processing: Walking-Working_Surfaces.pptx
+2025-10-04 08:36:38,008 - INFO - ✅ Downloaded 11681469 bytes
+2025-10-04 08:36:38,079 - INFO - ✅ Extracted 14406 characters
+2025-10-04 08:36:38,079 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:36:38,080 - INFO - 🧠 Generating embedding...
+2025-10-04 08:36:38,372 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:36:38,374 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:36:38,374 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:36:38,511 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:36:38,511 - INFO - ✅ Successfully processed Walking-Working_Surfaces.pptx
+2025-10-04 08:36:38,511 - INFO - 
+============================================================
+2025-10-04 08:36:38,511 - INFO - 📄 Processing file 9/23: E07.6 EMS Overview 12212023.pptx
+2025-10-04 08:36:38,511 - INFO - ============================================================
+2025-10-04 08:36:38,511 - INFO - 🔄 Processing: E07.6 EMS Overview 12212023.pptx
+2025-10-04 08:36:55,323 - INFO - ✅ Downloaded 16396996 bytes
+2025-10-04 08:36:55,384 - INFO - ✅ Extracted 11181 characters
+2025-10-04 08:36:55,384 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:36:55,384 - INFO - 🧠 Generating embedding...
+2025-10-04 08:36:55,811 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:36:55,812 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:36:55,813 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:36:55,949 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:36:55,950 - INFO - ✅ Successfully processed E07.6 EMS Overview 12212023.pptx
+2025-10-04 08:36:55,950 - INFO - 
+============================================================
+2025-10-04 08:36:55,950 - INFO - 📄 Processing file 10/23: Spill Control and Containment (1).pptx
+2025-10-04 08:36:55,950 - INFO - ============================================================
+2025-10-04 08:36:55,950 - INFO - 🔄 Processing: Spill Control and Containment (1).pptx
+2025-10-04 08:36:59,434 - INFO - ✅ Downloaded 127105915 bytes
+2025-10-04 08:36:59,514 - INFO - ✅ Extracted 13440 characters
+2025-10-04 08:36:59,514 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:36:59,514 - INFO - 🧠 Generating embedding...
+2025-10-04 08:36:59,784 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:36:59,786 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:36:59,786 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:36:59,920 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:36:59,921 - INFO - ✅ Successfully processed 02142024 hazcom updates.pptx
+2025-10-04 08:36:59,921 - INFO - 
+============================================================
+2025-10-04 08:36:59,921 - INFO - 📄 Processing file 6/23: Fire Exits and Extinguishers - ASTG.pptx
+2025-10-04 08:36:59,921 - INFO - ============================================================
+2025-10-04 08:36:59,921 - INFO - 🔄 Processing: Fire Exits and Extinguishers - ASTG.pptx
+2025-10-04 08:37:03,896 - INFO - ✅ Downloaded 8674191 bytes
+2025-10-04 08:37:03,977 - INFO - ✅ Extracted 19302 characters
+2025-10-04 08:37:03,977 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:03,977 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:04,262 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:04,264 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:04,264 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:04,380 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:04,380 - INFO - ✅ Successfully processed Spill Control and Containment (1).pptx
+2025-10-04 08:37:04,380 - INFO - 
+============================================================
+2025-10-04 08:37:04,380 - INFO - 📄 Processing file 11/23: Hazardous_Materials_PPT_v-03-01-17 (1).pptx
+2025-10-04 08:37:04,380 - INFO - ============================================================
+2025-10-04 08:37:04,380 - INFO - 🔄 Processing: Hazardous_Materials_PPT_v-03-01-17 (1).pptx
+2025-10-04 08:37:06,306 - INFO - ✅ Downloaded 11091824 bytes
+2025-10-04 08:37:06,380 - INFO - ✅ Extracted 11749 characters
+2025-10-04 08:37:06,380 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:06,381 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:06,688 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:06,692 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:06,693 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:06,812 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:06,812 - INFO - ✅ Successfully processed Fire Exits and Extinguishers - ASTG.pptx
+2025-10-04 08:37:06,812 - INFO - 
+============================================================
+2025-10-04 08:37:06,812 - INFO - 📄 Processing file 7/23: Exits_EAP_FPP_FireProtection_PPT_v-03-01-17.pptx
+2025-10-04 08:37:06,812 - INFO - ============================================================
+2025-10-04 08:37:06,812 - INFO - 🔄 Processing: Exits_EAP_FPP_FireProtection_PPT_v-03-01-17.pptx
+2025-10-04 08:37:11,045 - INFO - ✅ Downloaded 9232934 bytes
+2025-10-04 08:37:11,091 - INFO - ✅ Extracted 10286 characters
+2025-10-04 08:37:11,091 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:11,091 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:11,351 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:11,352 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:11,352 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:11,498 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:11,498 - INFO - ✅ Successfully processed Hazardous_Materials_PPT_v-03-01-17 (1).pptx
+2025-10-04 08:37:11,498 - INFO - 
+============================================================
+2025-10-04 08:37:11,498 - INFO - 📄 Processing file 12/23: Overhead Crane Safety.pptx
+2025-10-04 08:37:11,498 - INFO - ============================================================
+2025-10-04 08:37:11,498 - INFO - 🔄 Processing: Overhead Crane Safety.pptx
+2025-10-04 08:37:12,041 - INFO - ✅ Downloaded 11091824 bytes
+2025-10-04 08:37:12,107 - INFO - ✅ Extracted 11749 characters
+2025-10-04 08:37:12,107 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:12,107 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:12,609 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:12,614 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:12,614 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:12,731 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:12,731 - INFO - ✅ Successfully processed Exits_EAP_FPP_FireProtection_PPT_v-03-01-17.pptx
+2025-10-04 08:37:12,731 - INFO - 
+============================================================
+2025-10-04 08:37:12,731 - INFO - 📄 Processing file 8/23: Walking-Working_Surfaces.pptx
+2025-10-04 08:37:12,732 - INFO - ============================================================
+2025-10-04 08:37:12,732 - INFO - 🔄 Processing: Walking-Working_Surfaces.pptx
+2025-10-04 08:37:17,979 - INFO - ✅ Downloaded 4542170 bytes
+2025-10-04 08:37:18,032 - INFO - ✅ Extracted 10234 characters
+2025-10-04 08:37:18,032 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:18,032 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:18,359 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:18,361 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:18,361 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:18,498 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:18,499 - INFO - ✅ Successfully processed Overhead Crane Safety.pptx
+2025-10-04 08:37:18,499 - INFO - 
+============================================================
+2025-10-04 08:37:18,499 - INFO - 📄 Processing file 13/23: Incident Investigation.pptx
+2025-10-04 08:37:18,499 - INFO - ============================================================
+2025-10-04 08:37:18,499 - INFO - 🔄 Processing: Incident Investigation.pptx
+2025-10-04 08:37:19,096 - INFO - ✅ Downloaded 11681469 bytes
+2025-10-04 08:37:19,164 - INFO - ✅ Extracted 14406 characters
+2025-10-04 08:37:19,164 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:19,164 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:19,405 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:19,407 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:19,407 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:19,548 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:19,548 - INFO - ✅ Successfully processed Walking-Working_Surfaces.pptx
+2025-10-04 08:37:19,548 - INFO - 
+============================================================
+2025-10-04 08:37:19,548 - INFO - 📄 Processing file 9/23: E07.6 EMS Overview 12212023.pptx
+2025-10-04 08:37:19,548 - INFO - ============================================================
+2025-10-04 08:37:19,548 - INFO - 🔄 Processing: E07.6 EMS Overview 12212023.pptx
+2025-10-04 08:37:21,073 - INFO - ✅ Downloaded 160022 bytes
+2025-10-04 08:37:21,111 - INFO - ✅ Extracted 14819 characters
+2025-10-04 08:37:21,111 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:21,111 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:21,454 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:21,457 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:21,457 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:21,574 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:21,574 - INFO - ✅ Successfully processed Incident Investigation.pptx
+2025-10-04 08:37:21,574 - INFO - 
+============================================================
+2025-10-04 08:37:21,574 - INFO - 📄 Processing file 14/23: Intro to Hazwoper 3-16-23.pptx
+2025-10-04 08:37:21,574 - INFO - ============================================================
+2025-10-04 08:37:21,574 - INFO - 🔄 Processing: Intro to Hazwoper 3-16-23.pptx
+2025-10-04 08:37:27,644 - INFO - ✅ Downloaded 16396996 bytes
+2025-10-04 08:37:27,704 - INFO - ✅ Extracted 11181 characters
+2025-10-04 08:37:27,704 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:27,705 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:27,938 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:27,940 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:27,940 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:28,126 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:28,127 - INFO - ✅ Successfully processed E07.6 EMS Overview 12212023.pptx
+2025-10-04 08:37:28,127 - INFO - 
+============================================================
+2025-10-04 08:37:28,127 - INFO - 📄 Processing file 10/23: Spill Control and Containment (1).pptx
+2025-10-04 08:37:28,127 - INFO - ============================================================
+2025-10-04 08:37:28,127 - INFO - 🔄 Processing: Spill Control and Containment (1).pptx
+2025-10-04 08:37:30,403 - INFO - ✅ Downloaded 4146819 bytes
+2025-10-04 08:37:30,546 - INFO - ✅ Extracted 18910 characters
+2025-10-04 08:37:30,546 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:30,546 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:30,796 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:30,798 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:30,799 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:30,943 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:30,943 - INFO - ✅ Successfully processed Intro to Hazwoper 3-16-23.pptx
+2025-10-04 08:37:30,943 - INFO - 
+============================================================
+2025-10-04 08:37:30,944 - INFO - 📄 Processing file 15/23: Hearing-Conservation-Training.pptx
+2025-10-04 08:37:30,944 - INFO - ============================================================
+2025-10-04 08:37:30,944 - INFO - 🔄 Processing: Hearing-Conservation-Training.pptx
+2025-10-04 08:37:32,370 - INFO - ✅ Downloaded 957121 bytes
+2025-10-04 08:37:32,396 - INFO - ✅ Extracted 4383 characters
+2025-10-04 08:37:32,396 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:32,396 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:32,557 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:32,559 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:32,560 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:32,711 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:32,712 - INFO - ✅ Successfully processed Hearing-Conservation-Training.pptx
+2025-10-04 08:37:32,712 - INFO - 
+============================================================
+2025-10-04 08:37:32,712 - INFO - 📄 Processing file 16/23: Hazard_Communications_PPT_v-03-01-17.pptx
+2025-10-04 08:37:32,712 - INFO - ============================================================
+2025-10-04 08:37:32,712 - INFO - 🔄 Processing: Hazard_Communications_PPT_v-03-01-17.pptx
+2025-10-04 08:37:38,644 - INFO - ✅ Downloaded 7593447 bytes
+2025-10-04 08:37:38,703 - INFO - ✅ Extracted 12635 characters
+2025-10-04 08:37:38,703 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:38,703 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:38,953 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:38,955 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:38,955 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:39,084 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:39,084 - INFO - ✅ Successfully processed Hazard_Communications_PPT_v-03-01-17.pptx
+2025-10-04 08:37:39,084 - INFO - 
+============================================================
+2025-10-04 08:37:39,084 - INFO - 📄 Processing file 17/23: Effective Safety Committees.pptx
+2025-10-04 08:37:39,084 - INFO - ============================================================
+2025-10-04 08:37:39,084 - INFO - 🔄 Processing: Effective Safety Committees.pptx
+2025-10-04 08:37:39,953 - INFO - ✅ Downloaded 8674191 bytes
+2025-10-04 08:37:40,034 - INFO - ✅ Extracted 19302 characters
+2025-10-04 08:37:40,034 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:40,034 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:40,328 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:40,330 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:40,331 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:40,452 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:40,452 - INFO - ✅ Successfully processed Spill Control and Containment (1).pptx
+2025-10-04 08:37:40,452 - INFO - 
+============================================================
+2025-10-04 08:37:40,452 - INFO - 📄 Processing file 11/23: Hazardous_Materials_PPT_v-03-01-17 (1).pptx
+2025-10-04 08:37:40,452 - INFO - ============================================================
+2025-10-04 08:37:40,452 - INFO - 🔄 Processing: Hazardous_Materials_PPT_v-03-01-17 (1).pptx
+2025-10-04 08:37:42,419 - INFO - ✅ Downloaded 1239863 bytes
+2025-10-04 08:37:42,458 - INFO - ✅ Extracted 8725 characters
+2025-10-04 08:37:42,458 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:42,458 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:42,667 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:42,670 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:42,670 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:42,788 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:42,788 - INFO - ✅ Successfully processed Effective Safety Committees.pptx
+2025-10-04 08:37:42,788 - INFO - 
+============================================================
+2025-10-04 08:37:42,789 - INFO - 📄 Processing file 18/23: Exits_EAP_FPP_FireProtection_PPT 2023.pptx
+2025-10-04 08:37:42,789 - INFO - ============================================================
+2025-10-04 08:37:42,789 - INFO - 🔄 Processing: Exits_EAP_FPP_FireProtection_PPT 2023.pptx
+2025-10-04 08:37:45,595 - INFO - ✅ Downloaded 9232934 bytes
+2025-10-04 08:37:45,642 - INFO - ✅ Extracted 10286 characters
+2025-10-04 08:37:45,642 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:45,642 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:45,870 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:45,873 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:45,874 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:46,017 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:46,017 - INFO - ✅ Successfully processed Hazardous_Materials_PPT_v-03-01-17 (1).pptx
+2025-10-04 08:37:46,017 - INFO - 
+============================================================
+2025-10-04 08:37:46,017 - INFO - 📄 Processing file 12/23: Overhead Crane Safety.pptx
+2025-10-04 08:37:46,017 - INFO - ============================================================
+2025-10-04 08:37:46,018 - INFO - 🔄 Processing: Overhead Crane Safety.pptx
+2025-10-04 08:37:46,847 - INFO - ✅ Downloaded 4564595 bytes
+2025-10-04 08:37:46,908 - INFO - ✅ Extracted 14212 characters
+2025-10-04 08:37:46,908 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:46,908 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:47,289 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:47,295 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:47,295 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:47,432 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:47,432 - INFO - ✅ Successfully processed Exits_EAP_FPP_FireProtection_PPT 2023.pptx
+2025-10-04 08:37:47,432 - INFO - 
+============================================================
+2025-10-04 08:37:47,432 - INFO - 📄 Processing file 19/23: Workplace Violence.pptx
+2025-10-04 08:37:47,432 - INFO - ============================================================
+2025-10-04 08:37:47,432 - INFO - 🔄 Processing: Workplace Violence.pptx
+2025-10-04 08:37:47,731 - INFO - ✅ Downloaded 4542170 bytes
+2025-10-04 08:37:47,783 - INFO - ✅ Extracted 10234 characters
+2025-10-04 08:37:47,783 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:47,783 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:48,022 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:48,026 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:48,026 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:48,137 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:48,138 - INFO - ✅ Successfully processed Overhead Crane Safety.pptx
+2025-10-04 08:37:48,138 - INFO - 
+============================================================
+2025-10-04 08:37:48,138 - INFO - 📄 Processing file 13/23: Incident Investigation.pptx
+2025-10-04 08:37:48,138 - INFO - ============================================================
+2025-10-04 08:37:48,138 - INFO - 🔄 Processing: Incident Investigation.pptx
+2025-10-04 08:37:50,283 - INFO - ✅ Downloaded 160022 bytes
+2025-10-04 08:37:50,314 - INFO - ✅ Extracted 14819 characters
+2025-10-04 08:37:50,314 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:50,314 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:50,426 - INFO - ✅ Downloaded 2005565 bytes
+2025-10-04 08:37:50,457 - INFO - ✅ Extracted 6263 characters
+2025-10-04 08:37:50,457 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:50,457 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:50,528 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:50,529 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:50,529 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:50,675 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:50,677 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:50,677 - INFO - ✅ Successfully processed Incident Investigation.pptx
+2025-10-04 08:37:50,677 - INFO - 
+============================================================
+2025-10-04 08:37:50,677 - INFO - 📄 Processing file 14/23: Intro to Hazwoper 3-16-23.pptx
+2025-10-04 08:37:50,677 - INFO - ============================================================
+2025-10-04 08:37:50,678 - INFO - 🔄 Processing: Intro to Hazwoper 3-16-23.pptx
+2025-10-04 08:37:50,679 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:50,679 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:50,797 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:50,797 - INFO - ✅ Successfully processed Workplace Violence.pptx
+2025-10-04 08:37:50,797 - INFO - 
+============================================================
+2025-10-04 08:37:50,797 - INFO - 📄 Processing file 20/23: Materials_Handling_PPT_v-03-01-17.pptx
+2025-10-04 08:37:50,797 - INFO - ============================================================
+2025-10-04 08:37:50,798 - INFO - 🔄 Processing: Materials_Handling_PPT_v-03-01-17.pptx
+2025-10-04 08:37:55,100 - INFO - ✅ Downloaded 4171620 bytes
+2025-10-04 08:37:55,145 - INFO - ✅ Extracted 7769 characters
+2025-10-04 08:37:55,145 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:55,145 - INFO - 🧠 Generating embedding...
+2025-10-04 08:37:55,355 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:37:55,357 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:37:55,357 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:37:55,493 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:37:55,493 - INFO - ✅ Successfully processed Materials_Handling_PPT_v-03-01-17.pptx
+2025-10-04 08:37:55,494 - INFO - 
+============================================================
+2025-10-04 08:37:55,494 - INFO - 📄 Processing file 21/23: JHA JSA Training .pptx
+2025-10-04 08:37:55,494 - INFO - ============================================================
+2025-10-04 08:37:55,494 - INFO - 🔄 Processing: JHA JSA Training .pptx
+2025-10-04 08:37:59,458 - INFO - ✅ Downloaded 4146819 bytes
+2025-10-04 08:37:59,589 - INFO - ✅ Extracted 18910 characters
+2025-10-04 08:37:59,589 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:37:59,589 - INFO - 🧠 Generating embedding...
+2025-10-04 08:38:00,015 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:38:00,017 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:38:00,017 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:38:00,138 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:38:00,138 - INFO - ✅ Successfully processed Intro to Hazwoper 3-16-23.pptx
+2025-10-04 08:38:00,138 - INFO - 
+============================================================
+2025-10-04 08:38:00,138 - INFO - 📄 Processing file 15/23: Hearing-Conservation-Training.pptx
+2025-10-04 08:38:00,139 - INFO - ============================================================
+2025-10-04 08:38:00,139 - INFO - 🔄 Processing: Hearing-Conservation-Training.pptx
+2025-10-04 08:38:02,308 - INFO - ✅ Downloaded 957121 bytes
+2025-10-04 08:38:02,339 - INFO - ✅ Extracted 4383 characters
+2025-10-04 08:38:02,339 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:38:02,339 - INFO - 🧠 Generating embedding...
+2025-10-04 08:38:02,636 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:38:02,638 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:38:02,638 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:38:02,659 - INFO - ✅ Downloaded 3038756 bytes
+2025-10-04 08:38:02,725 - INFO - ✅ Extracted 17139 characters
+2025-10-04 08:38:02,725 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:38:02,725 - INFO - 🧠 Generating embedding...
+2025-10-04 08:38:02,790 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:38:02,790 - INFO - ✅ Successfully processed Hearing-Conservation-Training.pptx
+2025-10-04 08:38:02,790 - INFO - 
+============================================================
+2025-10-04 08:38:02,790 - INFO - 📄 Processing file 16/23: Hazard_Communications_PPT_v-03-01-17.pptx
+2025-10-04 08:38:02,790 - INFO - ============================================================
+2025-10-04 08:38:02,790 - INFO - 🔄 Processing: Hazard_Communications_PPT_v-03-01-17.pptx
+2025-10-04 08:38:03,201 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:38:03,203 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:38:03,203 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:38:03,321 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:38:03,322 - INFO - ✅ Successfully processed JHA JSA Training .pptx
+2025-10-04 08:38:03,322 - INFO - 
+============================================================
+2025-10-04 08:38:03,322 - INFO - 📄 Processing file 22/23: Electrical Safety.pptx
+2025-10-04 08:38:03,322 - INFO - ============================================================
+2025-10-04 08:38:03,322 - INFO - 🔄 Processing: Electrical Safety.pptx
+2025-10-04 08:38:05,391 - INFO - ✅ Downloaded 2338666 bytes
+2025-10-04 08:38:05,438 - INFO - ✅ Extracted 11459 characters
+2025-10-04 08:38:05,438 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:38:05,438 - INFO - 🧠 Generating embedding...
+2025-10-04 08:38:05,595 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:38:05,597 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:38:05,597 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:38:05,714 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:38:05,714 - INFO - ✅ Successfully processed Electrical Safety.pptx
+2025-10-04 08:38:05,714 - INFO - 
+============================================================
+2025-10-04 08:38:05,714 - INFO - 📄 Processing file 23/23: Bloodborne Pathogens Training.pptx
+2025-10-04 08:38:05,714 - INFO - ============================================================
+2025-10-04 08:38:05,714 - INFO - 🔄 Processing: Bloodborne Pathogens Training.pptx
+2025-10-04 08:38:07,490 - INFO - ✅ Downloaded 7593447 bytes
+2025-10-04 08:38:07,548 - INFO - ✅ Extracted 12635 characters
+2025-10-04 08:38:07,548 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:38:07,548 - INFO - 🧠 Generating embedding...
+2025-10-04 08:38:07,769 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:38:07,770 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:38:07,770 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:38:07,897 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:38:07,897 - INFO - ✅ Successfully processed Hazard_Communications_PPT_v-03-01-17.pptx
+2025-10-04 08:38:07,897 - INFO - 
+============================================================
+2025-10-04 08:38:07,897 - INFO - 📄 Processing file 17/23: Effective Safety Committees.pptx
+2025-10-04 08:38:07,897 - INFO - ============================================================
+2025-10-04 08:38:07,897 - INFO - 🔄 Processing: Effective Safety Committees.pptx
+2025-10-04 08:38:09,836 - INFO - ✅ Downloaded 1239863 bytes
+2025-10-04 08:38:09,875 - INFO - ✅ Extracted 8725 characters
+2025-10-04 08:38:09,875 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:38:09,875 - INFO - 🧠 Generating embedding...
+2025-10-04 08:38:10,084 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:38:10,086 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:38:10,086 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:38:10,204 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:38:10,204 - INFO - ✅ Successfully processed Effective Safety Committees.pptx
+2025-10-04 08:38:10,204 - INFO - 
+============================================================
+2025-10-04 08:38:10,204 - INFO - 📄 Processing file 18/23: Exits_EAP_FPP_FireProtection_PPT 2023.pptx
+2025-10-04 08:38:10,204 - INFO - ============================================================
+2025-10-04 08:38:10,204 - INFO - 🔄 Processing: Exits_EAP_FPP_FireProtection_PPT 2023.pptx
+2025-10-04 08:38:10,403 - INFO - ✅ Downloaded 3606355 bytes
+2025-10-04 08:38:10,445 - INFO - ✅ Extracted 10235 characters
+2025-10-04 08:38:10,445 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:38:10,445 - INFO - 🧠 Generating embedding...
+2025-10-04 08:38:10,879 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:38:10,881 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:38:10,881 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:38:11,000 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:38:11,000 - INFO - ✅ Successfully processed Bloodborne Pathogens Training.pptx
+2025-10-04 08:38:11,000 - INFO - 
+============================================================
+2025-10-04 08:38:11,000 - INFO - 🧪 Testing query functionality
+2025-10-04 08:38:11,000 - INFO - ============================================================
+2025-10-04 08:38:11,000 - INFO - 🔍 Testing query...
+2025-10-04 08:38:11,190 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:38:11,313 - INFO - 🔍 Query returned 5 results:
+2025-10-04 08:38:11,313 - INFO -   - Workplace Violence.pptx (Score: 0.5941)
+2025-10-04 08:38:11,313 - INFO -   - Fire Exits and Extinguishers - ASTG.pptx (Score: 0.5474)
+2025-10-04 08:38:11,313 - INFO -   - Exits_EAP_FPP_FireProtection_PPT_v-03-01-17.pptx (Score: 0.5474)
+2025-10-04 08:38:11,313 - INFO -   - Hazardous_Materials_PPT_v-03-01-17 (1).pptx (Score: 0.5465)
+2025-10-04 08:38:11,313 - INFO -   - Hazard_Communications_PPT_v-03-01-17.pptx (Score: 0.5461)
+2025-10-04 08:38:11,313 - INFO - 
+============================================================
+2025-10-04 08:38:11,314 - INFO - 📊 PPTX INGESTION SUMMARY
+2025-10-04 08:38:11,314 - INFO - ============================================================
+2025-10-04 08:38:11,314 - INFO - 📁 Files attempted: 23
+2025-10-04 08:38:11,314 - INFO - ✅ Files successful: 23
+2025-10-04 08:38:11,314 - INFO - ❌ Files failed: 0
+2025-10-04 08:38:11,314 - INFO - ============================================================
+2025-10-04 08:38:13,019 - INFO - ✅ Downloaded 4564595 bytes
+2025-10-04 08:38:13,084 - INFO - ✅ Extracted 14212 characters
+2025-10-04 08:38:13,084 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:38:13,084 - INFO - 🧠 Generating embedding...
+2025-10-04 08:38:13,433 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:38:13,435 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:38:13,436 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:38:13,558 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:38:13,558 - INFO - ✅ Successfully processed Exits_EAP_FPP_FireProtection_PPT 2023.pptx
+2025-10-04 08:38:13,558 - INFO - 
+============================================================
+2025-10-04 08:38:13,558 - INFO - 📄 Processing file 19/23: Workplace Violence.pptx
+2025-10-04 08:38:13,558 - INFO - ============================================================
+2025-10-04 08:38:13,558 - INFO - 🔄 Processing: Workplace Violence.pptx
+2025-10-04 08:38:17,508 - INFO - ✅ Downloaded 2005565 bytes
+2025-10-04 08:38:17,563 - INFO - ✅ Extracted 6263 characters
+2025-10-04 08:38:17,563 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:38:17,563 - INFO - 🧠 Generating embedding...
+2025-10-04 08:38:17,724 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:38:17,727 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:38:17,727 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:38:17,898 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:38:17,899 - INFO - ✅ Successfully processed Workplace Violence.pptx
+2025-10-04 08:38:17,899 - INFO - 
+============================================================
+2025-10-04 08:38:17,899 - INFO - 📄 Processing file 20/23: Materials_Handling_PPT_v-03-01-17.pptx
+2025-10-04 08:38:17,899 - INFO - ============================================================
+2025-10-04 08:38:17,899 - INFO - 🔄 Processing: Materials_Handling_PPT_v-03-01-17.pptx
+2025-10-04 08:38:23,475 - INFO - ✅ Downloaded 4171620 bytes
+2025-10-04 08:38:23,522 - INFO - ✅ Extracted 7769 characters
+2025-10-04 08:38:23,522 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:38:23,522 - INFO - 🧠 Generating embedding...
+2025-10-04 08:38:23,826 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:38:23,828 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:38:23,829 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:38:23,948 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:38:23,949 - INFO - ✅ Successfully processed Materials_Handling_PPT_v-03-01-17.pptx
+2025-10-04 08:38:23,949 - INFO - 
+============================================================
+2025-10-04 08:38:23,949 - INFO - 📄 Processing file 21/23: JHA JSA Training .pptx
+2025-10-04 08:38:23,949 - INFO - ============================================================
+2025-10-04 08:38:23,949 - INFO - 🔄 Processing: JHA JSA Training .pptx
+2025-10-04 08:38:30,366 - INFO - ✅ Downloaded 3038756 bytes
+2025-10-04 08:38:30,433 - INFO - ✅ Extracted 17139 characters
+2025-10-04 08:38:30,433 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:38:30,433 - INFO - 🧠 Generating embedding...
+2025-10-04 08:38:30,721 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:38:30,726 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:38:30,726 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:38:30,872 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:38:30,872 - INFO - ✅ Successfully processed JHA JSA Training .pptx
+2025-10-04 08:38:30,872 - INFO - 
+============================================================
+2025-10-04 08:38:30,872 - INFO - 📄 Processing file 22/23: Electrical Safety.pptx
+2025-10-04 08:38:30,872 - INFO - ============================================================
+2025-10-04 08:38:30,872 - INFO - 🔄 Processing: Electrical Safety.pptx
+2025-10-04 08:38:34,732 - INFO - ✅ Downloaded 2338666 bytes
+2025-10-04 08:38:34,776 - INFO - ✅ Extracted 11459 characters
+2025-10-04 08:38:34,776 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:38:34,776 - INFO - 🧠 Generating embedding...
+2025-10-04 08:38:35,147 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:38:35,149 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:38:35,149 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:38:35,289 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:38:35,289 - INFO - ✅ Successfully processed Electrical Safety.pptx
+2025-10-04 08:38:35,289 - INFO - 
+============================================================
+2025-10-04 08:38:35,289 - INFO - 📄 Processing file 23/23: Bloodborne Pathogens Training.pptx
+2025-10-04 08:38:35,289 - INFO - ============================================================
+2025-10-04 08:38:35,289 - INFO - 🔄 Processing: Bloodborne Pathogens Training.pptx
+2025-10-04 08:38:39,279 - INFO - ✅ Downloaded 3606355 bytes
+2025-10-04 08:38:39,318 - INFO - ✅ Extracted 10235 characters
+2025-10-04 08:38:39,318 - INFO - 📄 Created chunk with 803 characters
+2025-10-04 08:38:39,318 - INFO - 🧠 Generating embedding...
+2025-10-04 08:38:39,527 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:38:39,529 - INFO - ✅ Generated embedding with 1536 dimensions
+2025-10-04 08:38:39,529 - INFO - 📤 Upserting to Pinecone...
+2025-10-04 08:38:39,673 - INFO - ✅ Successfully upserted to Pinecone
+2025-10-04 08:38:39,673 - INFO - ✅ Successfully processed Bloodborne Pathogens Training.pptx
+2025-10-04 08:38:39,673 - INFO - 
+============================================================
+2025-10-04 08:38:39,673 - INFO - 🧪 Testing query functionality
+2025-10-04 08:38:39,673 - INFO - ============================================================
+2025-10-04 08:38:39,673 - INFO - 🔍 Testing query...
+2025-10-04 08:38:39,897 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-10-04 08:38:40,036 - INFO - 🔍 Query returned 5 results:
+2025-10-04 08:38:40,037 - INFO -   - Workplace Violence.pptx (Score: 0.5941)
+2025-10-04 08:38:40,037 - INFO -   - Exits_EAP_FPP_FireProtection_PPT_v-03-01-17.pptx (Score: 0.5474)
+2025-10-04 08:38:40,037 - INFO -   - Fire Exits and Extinguishers - ASTG.pptx (Score: 0.5474)
+2025-10-04 08:38:40,037 - INFO -   - Hazardous_Materials_PPT_v-03-01-17 (1).pptx (Score: 0.5465)
+2025-10-04 08:38:40,037 - INFO -   - 02142024 hazcom updates.pptx (Score: 0.5461)
+2025-10-04 08:38:40,037 - INFO - 
+============================================================
+2025-10-04 08:38:40,037 - INFO - 📊 PPTX INGESTION SUMMARY
+2025-10-04 08:38:40,037 - INFO - ============================================================
+2025-10-04 08:38:40,037 - INFO - 📁 Files attempted: 23
+2025-10-04 08:38:40,037 - INFO - ✅ Files successful: 23
+2025-10-04 08:38:40,037 - INFO - ❌ Files failed: 0
+2025-10-04 08:38:40,037 - INFO - ============================================================

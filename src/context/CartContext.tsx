@@ -13,12 +13,22 @@ export type VoiceComment = {
 }
 
 export type CartItem = {
-  songId: string
-  songTitle: string
-  artistId: string
-  voteCount: number
-  votePrice: number
+  // Song-related fields (for existing functionality)
+  songId?: string
+  songTitle?: string
+  artistId?: string
+  voteCount?: number
+  votePrice?: number
   voiceComment?: VoiceComment
+  
+  // Course-related fields (for new functionality)
+  courseId?: string
+  courseTitle?: string
+  coursePrice?: number
+  courseSlug?: string
+  courseImage?: string
+  courseDuration?: number
+  courseCategory?: string
 }
 
 type CartContextType = {
@@ -82,22 +92,43 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const addToCart = (item: CartItem) => {
     setCartItems(prev => {
       const currentItems = Array.isArray(prev) ? prev : []
-      const existing = currentItems.find(i => i.songId === item.songId)
+      
+      // Check for existing song or course
+      const existing = currentItems.find(i => 
+        (item.songId && i.songId === item.songId) || 
+        (item.courseId && i.courseId === item.courseId)
+      )
+      
       if (existing) {
-        return currentItems.map(i =>
-          i.songId === item.songId
-            ? { ...i, voteCount: i.voteCount + (item.voteCount || 1) }
-            : i
-        )
+        return currentItems.map(i => {
+          if (item.songId && i.songId === item.songId) {
+            return { ...i, voteCount: (i.voteCount || 0) + (item.voteCount || 1) }
+          }
+          // For courses, we don't increment quantity, just return existing
+          if (item.courseId && i.courseId === item.courseId) {
+            return i
+          }
+          return i
+        })
       }
-      return [...currentItems, { ...item, voteCount: item.voteCount || 1 }]
+      
+      return [...currentItems, { 
+        ...item, 
+        voteCount: item.voteCount || (item.songId ? 1 : undefined) 
+      }]
     })
   }
 
-  const removeFromCart = (songId: string) => {
+  const removeFromCart = (id: string, type: 'song' | 'course' = 'song') => {
     setCartItems(prev => {
       const currentItems = Array.isArray(prev) ? prev : []
-      return currentItems.filter(i => i.songId !== songId)
+      return currentItems.filter(i => {
+        if (type === 'song') {
+          return i.songId !== id
+        } else {
+          return i.courseId !== id
+        }
+      })
     })
   }
 

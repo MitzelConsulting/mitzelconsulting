@@ -1,82 +1,139 @@
 import { NextRequest, NextResponse } from 'next/server'
+import OpenAI from 'openai'
+import { Pinecone } from '@pinecone-database/pinecone'
 
 export async function POST(req: NextRequest) {
-  const { messages } = await req.json()
+  const { messages, query } = await req.json()
   const apiKey = process.env.OPENAI_API_KEY
-  // Use the provided Assistant ID
-  const assistantId = process.env.OPENAI_ASSISTANT_ID || 'asst_m1BZ2M66g9Lanh7iYMtJZcOX'
+  const pineconeApiKey = process.env.PINECONE_API_KEY
 
   // If no API key, return a demo response
   if (!apiKey) {
     const lastMessage = messages[messages.length - 1]?.content || ''
-    const demoResponse = `🎵 **Demo Mode** - This is a demo response since OpenAI API key is not configured.
+    const demoResponse = `🛡️ **Demo Mode** - This is a demo response since OpenAI API key is not configured.
     
 Your message: "${lastMessage}"
 
-In the live version, this would connect to the AI Music Manager to help you discover and support artists! 🚀`
+In the live version, this would connect to our AI Safety Training Assistant to help you with OSHA compliance and safety training questions! 🚀`
     
     return NextResponse.json({ reply: demoResponse })
   }
 
   try {
-    // Create a new thread for each conversation (stateless, or you can persist thread_id for stateful)
-    const threadRes = await fetch('https://api.openai.com/v1/threads', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'OpenAI-Beta': 'assistants=v2'
-      },
-      body: JSON.stringify({ messages: [{ role: 'user', content: messages[messages.length-1].content }] })
+    const openai = new OpenAI({
+      apiKey: apiKey,
     })
-    const thread = await threadRes.json()
-    if (!thread.id) {
-      console.error('OpenAI thread creation failed:', thread);
-      throw new Error('Failed to create thread')
-    }
 
-    // Run the assistant on the thread
-    const runRes = await fetch(`https://api.openai.com/v1/threads/${thread.id}/runs`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'OpenAI-Beta': 'assistants=v2'
-      },
-      body: JSON.stringify({ assistant_id: assistantId })
-    })
-    const run = await runRes.json()
-    if (!run.id) throw new Error('Failed to start assistant run')
+    // Get the user's latest query
+    const userQuery = query || messages[messages.length - 1]?.content || ''
+    
+    let contextFromDocuments = ''
+    let relevantSources: any[] = []
 
-    // Poll for completion
-    let status = run.status
-    let runResult = run
-    while (status !== 'completed' && status !== 'failed' && status !== 'cancelled') {
-      await new Promise(res => setTimeout(res, 1000))
-      const pollRes = await fetch(`https://api.openai.com/v1/threads/${thread.id}/runs/${run.id}`, {
-        headers: { 
-          'Authorization': `Bearer ${apiKey}`,
-          'OpenAI-Beta': 'assistants=v2'
+    // Query Pinecone for relevant training content if API key is available
+    if (pineconeApiKey && userQuery) {
+      try {
+        // Initialize Pinecone
+        const pc = new Pinecone({
+          apiKey: pineconeApiKey
+        })
+        
+        const index = pc.index('mizelconsulting')
+        
+        // Generate embedding for the user's query
+        const embeddingResponse = await openai.embeddings.create({
+          model: "text-embedding-3-small",
+          input: userQuery
+        })
+        
+        const queryEmbedding = embeddingResponse.data[0].embedding
+        
+        // Query Pinecone for relevant documents
+        const queryResponse = await index.namespace('site').query({
+          vector: queryEmbedding,
+          topK: 5,
+          includeMetadata: true
+        })
+        
+        // Extract relevant content from matches
+        if (queryResponse.matches && queryResponse.matches.length > 0) {
+          const relevantTexts = queryResponse.matches
+            .filter(match => match.score && match.score > 0.35) // Use matches with reasonable confidence
+            .map(match => {
+              if (match.metadata) {
+                relevantSources.push({
+                  fileName: match.metadata.file_name,
+                  score: match.score
+                })
+                return match.metadata.text
+              }
+              return ''
+            })
+            .filter(text => text.length > 0)
+          
+          if (relevantTexts.length > 0) {
+            contextFromDocuments = relevantTexts.join('\n\n---\n\n')
+          }
         }
-      })
-      runResult = await pollRes.json()
-      status = runResult.status
-    }
-    if (status !== 'completed') throw new Error('Assistant run failed')
-
-    // Get the messages from the thread
-    const msgRes = await fetch(`https://api.openai.com/v1/threads/${thread.id}/messages`, {
-      headers: { 
-        'Authorization': `Bearer ${apiKey}`,
-        'OpenAI-Beta': 'assistants=v2'
+      } catch (pineconeError) {
+        console.error('Error querying Pinecone:', pineconeError)
+        // Continue without Pinecone context if there's an error
       }
+    }
+
+    // Build the system message with context if available
+    let systemContent = `You are an expert AI assistant for Mizel Consulting, a professional safety training company. You have deep expertise in OSHA compliance, workplace safety, and training programs.
+
+Your knowledge includes:
+- OSHA 10-hour and 30-hour training requirements
+- Construction safety standards and best practices
+- General industry safety protocols
+- HAZWOPER training and hazardous materials handling
+- Fall protection systems and requirements
+- Electrical safety regulations
+- PPE (Personal Protective Equipment) requirements
+- Confined space entry procedures
+- Fire safety and emergency response
+- Incident investigation and reporting
+- Safety committee management
+- Job Hazard Analysis (JHA/JSA)
+- Machine guarding and lockout/tagout
+- And many other safety topics`
+
+    if (contextFromDocuments) {
+      systemContent += `\n\n**IMPORTANT: You have access to specific training materials and documents. Use this information to provide accurate, detailed answers:**\n\n${contextFromDocuments}\n\n**Instructions:**
+- Use the training materials above to answer the user's questions with specific, accurate information
+- Reference relevant safety standards, procedures, and requirements from the materials
+- If the materials contain specific course information, mention relevant courses
+- Be professional, thorough, and educational
+- If the user asks about training they might need, guide them based on the materials and recommend they explore specific courses
+- Always prioritize safety and compliance`
+    } else {
+      systemContent += `\n\nBe professional, accurate, and helpful. Provide detailed safety guidance and recommend appropriate training when relevant.`
+    }
+
+    // Use GPT-4.1 for chat completions
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4.1-mini",
+      messages: [
+        {
+          role: "system",
+          content: systemContent
+        },
+        ...messages
+      ],
+      max_tokens: 1500,
+      temperature: 0.7,
     })
-    const msgData = await msgRes.json()
-    const lastMsg = msgData.data && (msgData.data as any[]).reverse().find((m: any) => m.role === 'assistant')
-    const reply = lastMsg?.content?.[0]?.text?.value || 'Sorry, no response.'
-    return NextResponse.json({ reply })
+
+    const reply = completion.choices[0]?.message?.content || 'Sorry, I could not generate a response.'
+    
+    return NextResponse.json({ 
+      reply,
+      sources: relevantSources.length > 0 ? relevantSources : undefined
+    })
   } catch (err: any) {
-    console.error('OpenAI Assistant API error:', err);
-    return NextResponse.json({ error: err.message || 'OpenAI Assistants API error' }, { status: 500 })
+    console.error('OpenAI Chat API error:', err);
+    return NextResponse.json({ error: err.message || 'OpenAI Chat API error' }, { status: 500 })
   }
 } 

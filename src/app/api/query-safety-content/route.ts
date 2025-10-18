@@ -23,9 +23,9 @@ export async function POST(request: NextRequest) {
     const indexName = process.env.PINECONE_INDEX || 'mizel-consulting';
     const index = pc.index(indexName);
 
-    // Generate query embedding
+    // Generate query embedding (must match the model used for ingestion)
     const embeddingResponse = await openai.embeddings.create({
-      model: 'text-embedding-3-large',
+      model: 'text-embedding-3-small',
       input: query,
     });
 

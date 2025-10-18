@@ -1,0 +1,268 @@
+2025-10-04 06:35:32,451 - ERROR - ❌ Pipeline failed: GDRIVE_FOLDER_ID not found in environment
+2025-10-04 06:35:42,035 - ERROR - ❌ Pipeline failed: GDRIVE_FOLDER_ID not found in environment
+2025-10-04 06:36:15,411 - ERROR - ❌ Pipeline failed: GDRIVE_FOLDER_ID not found in environment
+2025-10-04 06:37:00,905 - ERROR - ❌ Pipeline failed: GDRIVE_FOLDER_ID not found in environment
+2025-10-04 06:37:17,236 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 06:37:17,237 - INFO - ✅ Google Drive API client initialized
+2025-10-04 06:37:17,256 - INFO - ✅ OpenAI client initialized
+2025-10-04 06:37:18,023 - INFO - Creating Pinecone index: mizelconsulting
+2025-10-04 06:37:18,597 - ERROR - ❌ Failed to initialize clients: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'content-type': 'text/plain; charset=utf-8', 'access-control-allow-origin': '*', 'vary': 'origin,access-control-request-method,access-control-request-headers', 'access-control-expose-headers': '*', 'x-pinecone-api-version': '2024-04', 'x-cloud-trace-context': '242a8709ce9328ecdae5ef6ea5b00148', 'date': 'Sat, 04 Oct 2025 10:37:18 GMT', 'server': 'Google Frontend', 'Content-Length': '67', 'Via': '1.1 google', 'Alt-Svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000'})
+HTTP response body: Request failed. You have no pod quota available in project Default.
+
+2025-10-04 06:37:18,597 - ERROR - ❌ Pipeline failed: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'content-type': 'text/plain; charset=utf-8', 'access-control-allow-origin': '*', 'vary': 'origin,access-control-request-method,access-control-request-headers', 'access-control-expose-headers': '*', 'x-pinecone-api-version': '2024-04', 'x-cloud-trace-context': '242a8709ce9328ecdae5ef6ea5b00148', 'date': 'Sat, 04 Oct 2025 10:37:18 GMT', 'server': 'Google Frontend', 'Content-Length': '67', 'Via': '1.1 google', 'Alt-Svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000'})
+HTTP response body: Request failed. You have no pod quota available in project Default.
+
+2025-10-04 06:37:29,416 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 06:37:29,417 - INFO - ✅ Google Drive API client initialized
+2025-10-04 06:37:29,438 - INFO - ✅ OpenAI client initialized
+2025-10-04 06:37:30,272 - INFO - Available indexes: []
+2025-10-04 06:37:30,272 - ERROR - ❌ Index 'mizelconsulting' not found in available indexes: []
+2025-10-04 06:37:30,272 - ERROR - ❌ Failed to initialize clients: Index 'mizelconsulting' does not exist. Please create it manually in Pinecone console or use an existing index.
+2025-10-04 06:37:30,272 - ERROR - ❌ Pipeline failed: Index 'mizelconsulting' does not exist. Please create it manually in Pinecone console or use an existing index.
+2025-10-04 06:42:16,436 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 06:42:16,438 - INFO - ✅ Google Drive API client initialized
+2025-10-04 06:42:16,458 - INFO - ✅ OpenAI client initialized
+2025-10-04 06:42:16,631 - INFO - 🔗 Attempting to connect to index: mizelconsulting
+2025-10-04 06:42:16,939 - ERROR - ❌ Failed to connect to index 'mizelconsulting': Failed to connect; did you specify the correct index name?
+2025-10-04 06:42:16,939 - ERROR - ❌ Failed to initialize clients: Cannot connect to index 'mizelconsulting'. Please verify it exists and is accessible.
+2025-10-04 06:42:16,940 - ERROR - ❌ Pipeline failed: Cannot connect to index 'mizelconsulting'. Please verify it exists and is accessible.
+2025-10-04 06:45:22,531 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 06:45:22,532 - INFO - ✅ Google Drive API client initialized
+2025-10-04 06:45:22,553 - INFO - ✅ OpenAI client initialized
+2025-10-04 06:45:22,553 - INFO - 🔗 Connecting to index: mizelconsulting
+2025-10-04 06:45:23,203 - INFO - ✅ Successfully connected to index: mizelconsulting
+2025-10-04 06:45:23,204 - INFO - 📊 Index stats: {'dimension': 1024,
+ 'index_fullness': 0.0,
+ 'metric': 'cosine',
+ 'namespaces': {},
+ 'total_vector_count': 0,
+ 'vector_type': 'dense'}
+2025-10-04 06:45:23,204 - INFO - ✅ Pinecone client initialized - Index: mizelconsulting, Namespace: site
+2025-10-04 06:45:23,370 - INFO - 🚀 Starting ingestion pipeline for folder: 1ixMpE1ZjrnCradre2iNQcHZB0C39rVOT
+2025-10-04 06:45:23,370 - INFO - 📊 Namespace: site
+2025-10-04 06:45:51,300 - INFO - 📁 Found 42 files to process
+2025-10-04 06:45:51,302 - ERROR - ❌ Pipeline failed: 'processed_files'
+2025-10-04 06:46:14,253 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 06:46:14,254 - INFO - ✅ Google Drive API client initialized
+2025-10-04 06:46:14,280 - INFO - ✅ OpenAI client initialized
+2025-10-04 06:46:14,280 - INFO - 🔗 Connecting to index: mizelconsulting
+2025-10-04 06:46:18,487 - INFO - ✅ Successfully connected to index: mizelconsulting
+2025-10-04 06:46:18,487 - INFO - 📊 Index stats: {'dimension': 1024,
+ 'index_fullness': 0.0,
+ 'metric': 'cosine',
+ 'namespaces': {},
+ 'total_vector_count': 0,
+ 'vector_type': 'dense'}
+2025-10-04 06:46:18,487 - INFO - ✅ Pinecone client initialized - Index: mizelconsulting, Namespace: site
+2025-10-04 06:46:18,694 - INFO - 🚀 Starting ingestion pipeline for folder: 1ixMpE1ZjrnCradre2iNQcHZB0C39rVOT
+2025-10-04 06:46:18,694 - INFO - 📊 Namespace: site
+2025-10-04 06:46:45,166 - INFO - 📁 Found 42 files to process
+2025-10-04 06:46:45,168 - INFO - 🔄 Processing: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 06:46:45,168 - WARNING - ⚠️ Unsupported file type: application/vnd.ms-powerpoint for Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 06:46:45,168 - WARNING - ⚠️ No text extracted from: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 06:46:45,168 - INFO - 🔄 Processing: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 06:46:45,168 - WARNING - ⚠️ Unsupported file type: application/vnd.openxmlformats-officedocument.presentationml.presentation for Crane and Rigging Safety in General Industry.pptx
+2025-10-04 06:46:45,168 - WARNING - ⚠️ No text extracted from: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 06:46:45,168 - ERROR - ❌ Pipeline failed: 'hash'
+2025-10-04 06:46:52,191 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 06:46:52,192 - INFO - ✅ Google Drive API client initialized
+2025-10-04 06:46:52,215 - INFO - ✅ OpenAI client initialized
+2025-10-04 06:46:52,215 - INFO - 🔗 Connecting to index: mizelconsulting
+2025-10-04 06:46:53,179 - INFO - ✅ Successfully connected to index: mizelconsulting
+2025-10-04 06:46:53,180 - INFO - 📊 Index stats: {'dimension': 1024,
+ 'index_fullness': 0.0,
+ 'metric': 'cosine',
+ 'namespaces': {},
+ 'total_vector_count': 0,
+ 'vector_type': 'dense'}
+2025-10-04 06:46:53,180 - INFO - ✅ Pinecone client initialized - Index: mizelconsulting, Namespace: site
+2025-10-04 06:46:53,335 - INFO - 🚀 Starting ingestion pipeline for folder: 1ixMpE1ZjrnCradre2iNQcHZB0C39rVOT
+2025-10-04 06:46:53,335 - INFO - 📊 Namespace: site
+2025-10-04 06:47:18,177 - INFO - 📁 Found 42 files to process
+2025-10-04 06:47:18,178 - INFO - 🔄 Processing: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 06:47:18,178 - WARNING - ⚠️ Unsupported file type: application/vnd.ms-powerpoint for Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 06:47:18,178 - WARNING - ⚠️ No text extracted from: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 06:47:18,178 - INFO - 🔄 Processing: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 06:47:18,178 - WARNING - ⚠️ Unsupported file type: application/vnd.openxmlformats-officedocument.presentationml.presentation for Crane and Rigging Safety in General Industry.pptx
+2025-10-04 06:47:18,178 - WARNING - ⚠️ No text extracted from: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 06:47:18,178 - INFO - 🔄 Processing: Process Safety Management Quiz.docx
+2025-10-04 06:57:27,670 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 06:57:27,671 - INFO - ✅ Google Drive API client initialized
+2025-10-04 06:57:27,701 - INFO - ✅ OpenAI client initialized
+2025-10-04 06:57:27,702 - INFO - 🔗 Connecting to index: mizelconsulting
+2025-10-04 06:57:28,576 - INFO - ✅ Successfully connected to index: mizelconsulting
+2025-10-04 06:57:28,576 - INFO - 📊 Index stats: {'dimension': 1024,
+ 'index_fullness': 0.0,
+ 'metric': 'cosine',
+ 'namespaces': {},
+ 'total_vector_count': 0,
+ 'vector_type': 'dense'}
+2025-10-04 06:57:28,576 - INFO - ✅ Pinecone client initialized - Index: mizelconsulting, Namespace: site
+2025-10-04 06:57:28,729 - INFO - 🚀 Starting ingestion pipeline for folder: 1ixMpE1ZjrnCradre2iNQcHZB0C39rVOT
+2025-10-04 06:57:28,729 - INFO - 📊 Namespace: site
+2025-10-04 06:57:57,887 - INFO - 📁 Found 42 files to process
+2025-10-04 06:57:57,888 - INFO - 🔄 Processing: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 06:57:57,888 - WARNING - ⚠️ Unsupported file type: application/vnd.ms-powerpoint for Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 06:57:57,888 - WARNING - ⚠️ No text extracted from: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 06:57:57,888 - INFO - 🔄 Processing: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 06:57:57,888 - WARNING - ⚠️ Unsupported file type: application/vnd.openxmlformats-officedocument.presentationml.presentation for Crane and Rigging Safety in General Industry.pptx
+2025-10-04 06:57:57,888 - WARNING - ⚠️ No text extracted from: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 06:57:57,888 - INFO - 🔄 Processing: Process Safety Management Quiz.docx
+2025-10-04 07:10:11,313 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 07:10:11,315 - INFO - ✅ Google Drive API client initialized
+2025-10-04 07:10:11,339 - INFO - ✅ OpenAI client initialized
+2025-10-04 07:10:11,339 - INFO - 🔗 Connecting to index: mizelconsulting
+2025-10-04 07:10:14,422 - INFO - ✅ Successfully connected to index: mizelconsulting
+2025-10-04 07:10:14,422 - INFO - 📊 Index stats: {'dimension': 1024,
+ 'index_fullness': 0.0,
+ 'metric': 'cosine',
+ 'namespaces': {},
+ 'total_vector_count': 0,
+ 'vector_type': 'dense'}
+2025-10-04 07:10:14,422 - INFO - ✅ Pinecone client initialized - Index: mizelconsulting, Namespace: site
+2025-10-04 07:10:14,622 - INFO - 🚀 Starting ingestion pipeline for folder: 1ixMpE1ZjrnCradre2iNQcHZB0C39rVOT
+2025-10-04 07:10:14,622 - INFO - 📊 Namespace: site
+2025-10-04 07:10:41,404 - INFO - 📁 Found 42 files to process
+2025-10-04 07:10:41,404 - INFO - 🔄 Processing: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:10:41,405 - WARNING - ⚠️ Unsupported file type: application/vnd.ms-powerpoint for Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:10:41,405 - WARNING - ⚠️ No text extracted from: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:10:41,405 - INFO - 🔄 Processing: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:10:41,405 - WARNING - ⚠️ Unsupported file type: application/vnd.openxmlformats-officedocument.presentationml.presentation for Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:10:41,405 - WARNING - ⚠️ No text extracted from: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:10:41,405 - INFO - 🔄 Processing: Process Safety Management Quiz.docx
+2025-10-04 07:16:10,467 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 07:16:10,471 - INFO - ✅ Google Drive API client initialized
+2025-10-04 07:16:10,577 - INFO - ✅ OpenAI client initialized
+2025-10-04 07:16:10,577 - INFO - 🔗 Connecting to index: mizelconsulting
+2025-10-04 07:16:11,369 - INFO - ✅ Successfully connected to index: mizelconsulting
+2025-10-04 07:16:11,369 - INFO - 📊 Index stats: {'dimension': 1024,
+ 'index_fullness': 0.0,
+ 'metric': 'cosine',
+ 'namespaces': {},
+ 'total_vector_count': 0,
+ 'vector_type': 'dense'}
+2025-10-04 07:16:11,369 - INFO - ✅ Pinecone client initialized - Index: mizelconsulting, Namespace: site
+2025-10-04 07:16:11,601 - INFO - 🚀 Starting ingestion pipeline for folder: 1ixMpE1ZjrnCradre2iNQcHZB0C39rVOT
+2025-10-04 07:16:11,601 - INFO - 📊 Namespace: site
+2025-10-04 07:16:39,284 - INFO - 📁 Found 42 files to process
+2025-10-04 07:16:39,285 - INFO - 🔄 Processing: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:16:39,286 - WARNING - ⚠️ Unsupported file type: application/vnd.ms-powerpoint for Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:16:39,286 - WARNING - ⚠️ No text extracted from: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:16:39,286 - INFO - 🔄 Processing: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:16:39,286 - WARNING - ⚠️ Unsupported file type: application/vnd.openxmlformats-officedocument.presentationml.presentation for Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:16:39,286 - WARNING - ⚠️ No text extracted from: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:16:39,286 - INFO - 🔄 Processing: Process Safety Management Quiz.docx
+2025-10-04 07:24:09,158 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 07:24:09,159 - INFO - ✅ Google Drive API client initialized
+2025-10-04 07:24:09,184 - INFO - ✅ OpenAI client initialized
+2025-10-04 07:24:09,185 - INFO - 🔗 Connecting to index: mizelconsulting
+2025-10-04 07:24:09,798 - ERROR - ❌ Failed to connect to index 'mizelconsulting': (404)
+Reason: Not Found
+HTTP response headers: HTTPHeaderDict({'content-type': 'text/plain; charset=utf-8', 'access-control-allow-origin': '*', 'vary': 'origin,access-control-request-method,access-control-request-headers', 'access-control-expose-headers': '*', 'x-pinecone-api-version': '2025-04', 'x-cloud-trace-context': 'b05f304f849fd89e5d258e7c5e309348', 'date': 'Sat, 04 Oct 2025 11:24:09 GMT', 'server': 'Google Frontend', 'Content-Length': '90', 'Via': '1.1 google', 'Alt-Svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000'})
+HTTP response body: {"error":{"code":"NOT_FOUND","message":"Resource mizelconsulting not found"},"status":404}
+
+2025-10-04 07:24:09,798 - ERROR - ❌ Failed to initialize clients: Cannot connect to index 'mizelconsulting'. Please verify it exists and is accessible.
+2025-10-04 07:24:09,798 - ERROR - ❌ Pipeline failed: Cannot connect to index 'mizelconsulting'. Please verify it exists and is accessible.
+2025-10-04 07:24:43,902 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 07:24:43,903 - INFO - ✅ Google Drive API client initialized
+2025-10-04 07:24:43,928 - INFO - ✅ OpenAI client initialized
+2025-10-04 07:24:43,929 - INFO - 🔗 Connecting to index: mizelconsulting
+2025-10-04 07:24:44,233 - ERROR - ❌ Failed to connect to index 'mizelconsulting': (404)
+Reason: Not Found
+HTTP response headers: HTTPHeaderDict({'content-type': 'text/plain; charset=utf-8', 'access-control-allow-origin': '*', 'vary': 'origin,access-control-request-method,access-control-request-headers', 'access-control-expose-headers': '*', 'x-pinecone-api-version': '2025-04', 'x-cloud-trace-context': '49c2bf314e247279df853b7ff868172a', 'date': 'Sat, 04 Oct 2025 11:24:44 GMT', 'server': 'Google Frontend', 'Content-Length': '90', 'Via': '1.1 google', 'Alt-Svc': 'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000'})
+HTTP response body: {"error":{"code":"NOT_FOUND","message":"Resource mizelconsulting not found"},"status":404}
+
+2025-10-04 07:24:44,233 - ERROR - ❌ Failed to initialize clients: Cannot connect to index 'mizelconsulting'. Please verify it exists and is accessible.
+2025-10-04 07:24:44,233 - ERROR - ❌ Pipeline failed: Cannot connect to index 'mizelconsulting'. Please verify it exists and is accessible.
+2025-10-04 07:26:00,117 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 07:26:00,121 - INFO - ✅ Google Drive API client initialized
+2025-10-04 07:26:00,221 - INFO - ✅ OpenAI client initialized
+2025-10-04 07:26:00,221 - INFO - 🔗 Connecting to index: mizelconsulting
+2025-10-04 07:26:04,322 - INFO - ✅ Successfully connected to index: mizelconsulting
+2025-10-04 07:26:04,322 - INFO - 📊 Index stats: {'dimension': 1536,
+ 'index_fullness': 0.0,
+ 'metric': 'cosine',
+ 'namespaces': {},
+ 'total_vector_count': 0,
+ 'vector_type': 'dense'}
+2025-10-04 07:26:04,322 - INFO - ✅ Pinecone client initialized - Index: mizelconsulting, Namespace: site
+2025-10-04 07:26:04,801 - INFO - 🚀 Starting ingestion pipeline for folder: 1ixMpE1ZjrnCradre2iNQcHZB0C39rVOT
+2025-10-04 07:26:04,801 - INFO - 📊 Namespace: site
+2025-10-04 07:26:31,462 - INFO - 📁 Found 42 files to process
+2025-10-04 07:26:31,464 - INFO - 🔄 Processing: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:26:31,464 - WARNING - ⚠️ Unsupported file type: application/vnd.ms-powerpoint for Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:26:31,464 - WARNING - ⚠️ No text extracted from: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:26:31,464 - INFO - 🔄 Processing: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:26:31,464 - WARNING - ⚠️ Unsupported file type: application/vnd.openxmlformats-officedocument.presentationml.presentation for Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:26:31,465 - WARNING - ⚠️ No text extracted from: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:26:31,465 - INFO - 🔄 Processing: Process Safety Management Quiz.docx
+2025-10-04 07:38:05,716 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 07:38:05,717 - INFO - ✅ Google Drive API client initialized
+2025-10-04 07:38:05,750 - INFO - ✅ OpenAI client initialized
+2025-10-04 07:38:05,751 - INFO - 🔗 Connecting to index: mizelconsulting
+2025-10-04 07:38:06,379 - INFO - ✅ Successfully connected to index: mizelconsulting
+2025-10-04 07:38:06,382 - INFO - 📊 Index stats: {'dimension': 1536,
+ 'index_fullness': 0.0,
+ 'metric': 'cosine',
+ 'namespaces': {},
+ 'total_vector_count': 0,
+ 'vector_type': 'dense'}
+2025-10-04 07:38:06,382 - INFO - ✅ Pinecone client initialized - Index: mizelconsulting, Namespace: site
+2025-10-04 07:38:06,576 - INFO - 🚀 Starting ingestion pipeline for folder: 1ixMpE1ZjrnCradre2iNQcHZB0C39rVOT
+2025-10-04 07:38:06,577 - INFO - 📊 Namespace: site
+2025-10-04 07:38:33,051 - INFO - 📁 Found 42 files to process
+2025-10-04 07:38:33,052 - INFO - 🔄 Processing: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:38:33,052 - WARNING - ⚠️ Unsupported file type: application/vnd.ms-powerpoint for Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:38:33,052 - WARNING - ⚠️ No text extracted from: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:38:33,052 - INFO - 🔄 Processing: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:38:33,052 - WARNING - ⚠️ Unsupported file type: application/vnd.openxmlformats-officedocument.presentationml.presentation for Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:38:33,052 - WARNING - ⚠️ No text extracted from: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:38:33,052 - INFO - 🔄 Processing: Process Safety Management Quiz.docx
+2025-10-04 07:45:03,873 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 07:45:03,874 - INFO - ✅ Google Drive API client initialized
+2025-10-04 07:45:03,899 - INFO - ✅ OpenAI client initialized
+2025-10-04 07:45:03,900 - INFO - 🔗 Connecting to index: mizelconsulting
+2025-10-04 07:45:06,226 - INFO - ✅ Successfully connected to index: mizelconsulting
+2025-10-04 07:45:06,226 - INFO - 📊 Index stats: {'dimension': 1536,
+ 'index_fullness': 0.0,
+ 'metric': 'cosine',
+ 'namespaces': {'site': {'vector_count': 1}},
+ 'total_vector_count': 1,
+ 'vector_type': 'dense'}
+2025-10-04 07:45:06,226 - INFO - ✅ Pinecone client initialized - Index: mizelconsulting, Namespace: site
+2025-10-04 07:45:06,381 - INFO - 🚀 Starting ingestion pipeline for folder: 1ixMpE1ZjrnCradre2iNQcHZB0C39rVOT
+2025-10-04 07:45:06,381 - INFO - 📊 Namespace: site
+2025-10-04 07:45:35,901 - INFO - 📁 Found 42 files to process
+2025-10-04 07:45:35,902 - INFO - 🔄 Processing: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:45:35,902 - WARNING - ⚠️ Unsupported file type: application/vnd.ms-powerpoint for Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:45:35,902 - WARNING - ⚠️ No text extracted from: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:45:35,902 - INFO - 🔄 Processing: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:45:35,902 - WARNING - ⚠️ Unsupported file type: application/vnd.openxmlformats-officedocument.presentationml.presentation for Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:45:35,902 - WARNING - ⚠️ No text extracted from: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:45:35,902 - INFO - 🔄 Processing: Process Safety Management Quiz.docx
+2025-10-04 07:52:17,979 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-10-04 07:52:17,980 - INFO - ✅ Google Drive API client initialized
+2025-10-04 07:52:18,012 - INFO - ✅ OpenAI client initialized
+2025-10-04 07:52:18,012 - INFO - 🔗 Connecting to index: mizelconsulting
+2025-10-04 07:52:18,661 - INFO - ✅ Successfully connected to index: mizelconsulting
+2025-10-04 07:52:18,662 - INFO - 📊 Index stats: {'dimension': 1536,
+ 'index_fullness': 0.0,
+ 'metric': 'cosine',
+ 'namespaces': {'site': {'vector_count': 1}},
+ 'total_vector_count': 1,
+ 'vector_type': 'dense'}
+2025-10-04 07:52:18,662 - INFO - ✅ Pinecone client initialized - Index: mizelconsulting, Namespace: site
+2025-10-04 07:52:19,933 - INFO - 🚀 Starting ingestion pipeline for folder: 1ixMpE1ZjrnCradre2iNQcHZB0C39rVOT
+2025-10-04 07:52:19,933 - INFO - 📊 Namespace: site
+2025-10-04 07:52:43,174 - INFO - 📁 Found 42 files to process
+2025-10-04 07:52:43,175 - INFO - 🔄 Processing: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:52:43,175 - WARNING - ⚠️ Unsupported file type: application/vnd.ms-powerpoint for Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:52:43,175 - WARNING - ⚠️ No text extracted from: Basic Radiation Safety Training Awareness - 9-18-25.ppt
+2025-10-04 07:52:43,175 - INFO - 🔄 Processing: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:52:43,175 - WARNING - ⚠️ Unsupported file type: application/vnd.openxmlformats-officedocument.presentationml.presentation for Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:52:43,175 - WARNING - ⚠️ No text extracted from: Crane and Rigging Safety in General Industry.pptx
+2025-10-04 07:52:43,175 - INFO - 🔄 Processing: Process Safety Management Quiz.docx

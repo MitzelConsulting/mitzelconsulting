@@ -111,4 +111,4 @@ For detailed documentation, see [INGESTION_README.md](./INGESTION_README.md).
 
 ## Contact
 
-For questions about safety training services, contact Kris Mizel at kris@mizelconsulting.com
+For questions about safety training services, contact Kris Mizel at kris@mizelconsulting.com# Deployment trigger Sat Oct 18 17:25:05 EDT 2025
